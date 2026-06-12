@@ -97,6 +97,28 @@ body::before {
   opacity: 0.4;
 }
 
+/* Copy protection */
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+}
+input,
+textarea,
+[contenteditable="true"] {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+img {
+  -webkit-user-drag: none;
+  user-drag: none;
+}
+
 /* Animations */
 @keyframes fadeInUp {
   from {
