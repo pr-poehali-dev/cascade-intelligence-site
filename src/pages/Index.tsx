@@ -1,14 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 import { TRANSLATIONS, LANGS, type Lang } from "@/data/translations";
-import Globe from "@/components/Globe";
 
 type SectionId = "home" | "about" | "services" | "report" | "agent" | "contact";
 
 const HERO_IMG =
   "https://cdn.poehali.dev/projects/b1149f1e-ccbb-4852-b138-f11cd07dfad2/files/65226e92-7c27-4591-a28d-e9eb6ad0495b.jpg";
 const PHONE = "+79133645748";
-const EMAIL = "security-davydov@yandex.ru";
+const TELEGRAM = "https://t.me/PIC_STRUNA";
 const SEND_URL = "https://functions.poehali.dev/654c4728-371c-4136-b7fe-b9e74c204df3";
 
 export default function Index() {
@@ -292,19 +291,11 @@ export default function Index() {
 
           {/* GEO */}
           <div style={{ marginTop: 80 }}>
-            <div style={{ textAlign: "center", marginBottom: 48 }}>
+            <div style={{ textAlign: "center" }}>
               <Tag>{t.geo.tag}</Tag>
               <div className="section-divider" style={{ margin: "0 auto" }} />
-              <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.3rem, 2.2vw, 2rem)", fontWeight: 600, letterSpacing: "0.08em", marginTop: 16, marginBottom: 12 }}>{t.geo.title}</h2>
-              <p style={{ color: "#6B7280", fontSize: "0.9rem", maxWidth: 600, margin: "0 auto", lineHeight: 1.7 }}>{t.geo.desc}</p>
-            </div>
-            <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 56, alignItems: "center" }}>
-              <Globe strings={t.globe} lang={lang} />
-              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: 12 }}>
-                {t.geo.zones.map((z, i) => (
-                  <div key={i} className="zone-chip">{z}</div>
-                ))}
-              </div>
+              <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.6rem, 3vw, 2.6rem)", fontWeight: 700, letterSpacing: "0.08em", marginTop: 16, marginBottom: 16 }}>{t.geo.title}</h2>
+              <p style={{ color: "#9CA3AF", fontSize: "1.05rem", maxWidth: 640, margin: "0 auto", lineHeight: 1.8 }}>{t.geo.desc}</p>
             </div>
           </div>
         </div>
@@ -439,7 +430,7 @@ export default function Index() {
           <p style={{ color: "#D1D5DB", fontSize: "1rem", lineHeight: 1.8, maxWidth: 580, margin: "0 auto 2.5rem" }}>{t.cta.desc}</p>
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
             <a href={`tel:${PHONE}`} className="btn-call cta-pulse" style={{ fontSize: "1rem", padding: "16px 36px" }}><Icon name="Phone" size={18} />{t.cta.callBtn}</a>
-            <button className="btn-cascade-outline" onClick={() => scrollTo("contact")} style={{ padding: "16px 36px" }}>{t.cta.consultBtn}</button>
+            <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail" style={{ padding: "16px 36px" }}><Icon name="Send" size={18} />{t.cta.tgBtn}</a>
           </div>
         </div>
       </section>
@@ -479,21 +470,30 @@ export default function Index() {
 
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 40 }}>
             <a href={`tel:${PHONE}`} className="btn-call"><Icon name="Phone" size={16} />{t.contact.callBtn}: +7 913 364-57-48</a>
-            <a href={`mailto:${EMAIL}`} className="btn-mail"><Icon name="Mail" size={16} />{t.contact.mailBtn}</a>
+            <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail"><Icon name="Send" size={16} />{t.contact.tgBtn}</a>
           </div>
 
           <div className="grid-services" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
-            {t.contact.info.map((item, i) => (
-              <div key={i} className="cascade-card" style={{ padding: "1.5rem", display: "flex", alignItems: "center", gap: 16 }}>
-                <div style={{ width: 44, height: 44, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.22)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <Icon name={item.icon} fallback="Circle" size={18} style={{ color: "var(--cascade-red)" }} />
-                </div>
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ fontFamily: "Oswald", fontSize: "0.7rem", color: "#4B5563", letterSpacing: "0.18em" }}>{item.label}</div>
-                  <div style={{ fontSize: "0.9rem", color: "var(--cascade-light)", marginTop: 2, wordBreak: "break-all" }}>{item.value}</div>
-                </div>
-              </div>
-            ))}
+            {t.contact.info.map((item, i) => {
+              const href = item.icon === "Phone" ? `tel:${PHONE}` : item.icon === "Send" ? TELEGRAM : undefined;
+              const Wrapper = href ? "a" : "div";
+              return (
+                <Wrapper
+                  key={i}
+                  {...(href ? { href, target: item.icon === "Send" ? "_blank" : undefined, rel: "noopener noreferrer" } : {})}
+                  className="cascade-card"
+                  style={{ padding: "1.5rem", display: "flex", alignItems: "center", gap: 16, textDecoration: "none", cursor: href ? "pointer" : "default" }}
+                >
+                  <div style={{ width: 44, height: 44, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.22)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                    <Icon name={item.icon} fallback="Circle" size={18} style={{ color: "var(--cascade-red)" }} />
+                  </div>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontFamily: "Oswald", fontSize: "0.7rem", color: "#4B5563", letterSpacing: "0.18em" }}>{item.label}</div>
+                    <div style={{ fontSize: "0.9rem", color: "var(--cascade-light)", marginTop: 2, wordBreak: "break-all" }}>{item.value}</div>
+                  </div>
+                </Wrapper>
+              );
+            })}
           </div>
         </div>
       </section>
