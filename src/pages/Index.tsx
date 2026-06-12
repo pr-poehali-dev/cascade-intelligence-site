@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 import { TRANSLATIONS, LANGS, type Lang } from "@/data/translations";
+import Globe from "@/components/Globe";
 
 type SectionId = "home" | "about" | "services" | "report" | "agent" | "contact";
 
@@ -291,16 +292,19 @@ export default function Index() {
 
           {/* GEO */}
           <div style={{ marginTop: 80 }}>
-            <div style={{ textAlign: "center", marginBottom: 36 }}>
+            <div style={{ textAlign: "center", marginBottom: 48 }}>
               <Tag>{t.geo.tag}</Tag>
               <div className="section-divider" style={{ margin: "0 auto" }} />
               <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.3rem, 2.2vw, 2rem)", fontWeight: 600, letterSpacing: "0.08em", marginTop: 16, marginBottom: 12 }}>{t.geo.title}</h2>
               <p style={{ color: "#6B7280", fontSize: "0.9rem", maxWidth: 600, margin: "0 auto", lineHeight: 1.7 }}>{t.geo.desc}</p>
             </div>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: 12 }}>
-              {t.geo.zones.map((z, i) => (
-                <div key={i} className="zone-chip">{z}</div>
-              ))}
+            <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 56, alignItems: "center" }}>
+              <Globe strings={t.globe} />
+              <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: 12 }}>
+                {t.geo.zones.map((z, i) => (
+                  <div key={i} className="zone-chip">{z}</div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
