@@ -447,7 +447,11 @@ export default function Index() {
       </section>
 
       {/* FOOTER */}
-      <footer style={{ background: "#060606", borderTop: "1px solid var(--cascade-line)", padding: "2.5rem 1.5rem" }}>
+      <footer style={{ background: "#060606", borderTop: "1px solid var(--cascade-line)", padding: "2.5rem 1.5rem 2.5rem" }}>
+        <div style={{ maxWidth: 1200, margin: "0 auto 1.75rem", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, paddingBottom: "1.75rem", borderBottom: "1px solid var(--cascade-line)", textAlign: "center" }}>
+          <Icon name="Scale" size={14} style={{ color: "var(--cascade-red)", flexShrink: 0 }} />
+          <p style={{ fontSize: "0.78rem", color: "#9CA3AF", letterSpacing: "0.02em", fontStyle: "italic", lineHeight: 1.6 }}>{t.footer.hint}</p>
+        </div>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ width: 28, height: 28, background: "var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Oswald", fontWeight: 700, fontSize: 11, color: "white" }}>ЧРК</div>
