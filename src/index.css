@@ -570,3 +570,48 @@ img {
     grid-template-columns: 1fr 1fr !important;
   }
 }
+
+/* CTA effects */
+@keyframes pulseDot {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.7);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 6px rgba(192, 57, 43, 0);
+  }
+}
+.pulse-dot {
+  animation: pulseDot 1.6s infinite;
+}
+
+@keyframes ctaPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(139, 26, 26, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(139, 26, 26, 0);
+  }
+}
+.cta-pulse {
+  animation: ctaPulse 2s infinite;
+}
+
+/* More aggressive interactions */
+.cascade-card:hover {
+  box-shadow:
+    0 0 0 1px var(--cascade-red),
+    0 12px 30px rgba(0, 0, 0, 0.5);
+}
+.btn-cascade:hover {
+  box-shadow: 0 6px 20px rgba(139, 26, 26, 0.45);
+}
+.fab-call {
+  animation: ctaPulse 2s infinite;
+}
+.zone-chip:hover {
+  transform: translateY(-2px);
+}

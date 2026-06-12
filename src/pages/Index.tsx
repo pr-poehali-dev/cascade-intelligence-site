@@ -242,8 +242,8 @@ export default function Index() {
             {t.hero.desc}
           </p>
           <div className="animate-fade-in-up" style={{ display: "flex", gap: 16, flexWrap: "wrap", animationDelay: "0.8s", opacity: 0 }}>
-            <button className="btn-cascade" onClick={() => scrollTo("services")}>{t.hero.btn1}</button>
-            <button className="btn-cascade-outline" onClick={() => scrollTo("contact")}>{t.hero.btn2}</button>
+            <a href={`tel:${PHONE}`} className="btn-call cta-pulse" style={{ padding: "14px 32px" }}><Icon name="Phone" size={17} />{t.contact.callBtn}</a>
+            <button className="btn-cascade-outline" onClick={() => scrollTo("services")}>{t.hero.btn1}</button>
           </div>
         </div>
       </section>
@@ -417,6 +417,25 @@ export default function Index() {
                 <p style={{ color: "#6B7280", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.agent.sentDesc}</p>
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section style={{ position: "relative", padding: "5.5rem 0", overflow: "hidden" }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.12) grayscale(0.5)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(139,26,26,0.35), rgba(10,10,10,0.85))" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(139,26,26,0.05) 18px, rgba(139,26,26,0.05) 19px)" }} />
+        <div className="pad-section" style={{ position: "relative", maxWidth: 820, margin: "0 auto", padding: "0 1.5rem", textAlign: "center" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 20, padding: "6px 14px", border: "1px solid var(--cascade-red)", background: "rgba(139,26,26,0.15)" }}>
+            <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--cascade-red)" }} />
+            <span style={{ fontFamily: "Oswald", fontSize: "0.68rem", letterSpacing: "0.2em", color: "var(--cascade-light)" }}>{t.cta.note}</span>
+          </div>
+          <h2 style={{ fontFamily: "Oswald", fontWeight: 700, fontSize: "clamp(1.8rem, 5vw, 3.4rem)", letterSpacing: "0.04em", lineHeight: 1.05, color: "white", marginBottom: "1.2rem" }}>{t.cta.title}</h2>
+          <p style={{ color: "#D1D5DB", fontSize: "1rem", lineHeight: 1.8, maxWidth: 580, margin: "0 auto 2.5rem" }}>{t.cta.desc}</p>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
+            <a href={`tel:${PHONE}`} className="btn-call cta-pulse" style={{ fontSize: "1rem", padding: "16px 36px" }}><Icon name="Phone" size={18} />{t.cta.callBtn}</a>
+            <button className="btn-cascade-outline" onClick={() => scrollTo("contact")} style={{ padding: "16px 36px" }}>{t.cta.consultBtn}</button>
           </div>
         </div>
       </section>
