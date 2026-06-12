@@ -1,0 +1,39 @@
+{
+  "tests": [
+    {
+      "name": "CORS preflight",
+      "method": "OPTIONS",
+      "path": "/",
+      "expectedStatus": 200
+    },
+    {
+      "name": "Anonymous report accepted",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "type": "report",
+        "category": "Терроризм и экстремизм",
+        "region": "Москва",
+        "message": "Тестовое сообщение для проверки работы канала отправки на почту."
+      },
+      "expectedStatus": 200,
+      "expectedBody": { "success": true },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Agent application accepted",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "type": "agent",
+        "alias": "Тест",
+        "contact": "signal:test",
+        "skills": "Тестовые навыки",
+        "motivation": "Проверка канала заявок"
+      },
+      "expectedStatus": 200,
+      "expectedBody": { "success": true },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

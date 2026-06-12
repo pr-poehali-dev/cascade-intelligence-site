@@ -8,6 +8,7 @@ const HERO_IMG =
   "https://cdn.poehali.dev/projects/b1149f1e-ccbb-4852-b138-f11cd07dfad2/files/65226e92-7c27-4591-a28d-e9eb6ad0495b.jpg";
 const PHONE = "+79133645748";
 const EMAIL = "security-davydov@yandex.ru";
+const SEND_URL = "https://functions.poehali.dev/654c4728-371c-4136-b7fe-b9e74c204df3";
 
 export default function Index() {
   const [lang, setLang] = useState<Lang>("ru");
@@ -25,6 +26,9 @@ export default function Index() {
   const [agentSubmitted, setAgentSubmitted] = useState(false);
   const [agentConsent, setAgentConsent] = useState(false);
   const [agentAlias, setAgentAlias] = useState("");
+  const [agentContact, setAgentContact] = useState("");
+  const [agentSkills, setAgentSkills] = useState("");
+  const [agentMotivation, setAgentMotivation] = useState("");
   const [agentEnc, setAgentEnc] = useState(false);
   const [agentEncProgress, setAgentEncProgress] = useState(0);
 
@@ -79,6 +83,18 @@ export default function Index() {
     if (reportMsg.length < 50) return;
     setEncrypting(true);
     setEncryptProgress(0);
+
+    fetch(SEND_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "report",
+        category: t.report.categories[reportCategory],
+        region: reportRegion,
+        message: reportMsg,
+      }),
+    }).catch(() => {});
+
     const interval = setInterval(() => {
       setEncryptProgress((p) => {
         if (p >= 100) {
@@ -96,6 +112,19 @@ export default function Index() {
     if (!agentConsent || agentAlias.length < 2) return;
     setAgentEnc(true);
     setAgentEncProgress(0);
+
+    fetch(SEND_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        type: "agent",
+        alias: agentAlias,
+        contact: agentContact,
+        skills: agentSkills,
+        motivation: agentMotivation,
+      }),
+    }).catch(() => {});
+
     const interval = setInterval(() => {
       setAgentEncProgress((p) => {
         if (p >= 100) {
@@ -359,9 +388,9 @@ export default function Index() {
             {!agentSubmitted ? (
               <div className="cascade-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: 14 }}>
                 <input className="cascade-input" placeholder={t.agent.fields.alias} value={agentAlias} onChange={(e) => setAgentAlias(e.target.value)} />
-                <input className="cascade-input" placeholder={t.agent.fields.contact} />
-                <input className="cascade-input" placeholder={t.agent.fields.skills} />
-                <textarea className="cascade-input" rows={4} placeholder={t.agent.fields.motivation} style={{ resize: "vertical" }} />
+                <input className="cascade-input" placeholder={t.agent.fields.contact} value={agentContact} onChange={(e) => setAgentContact(e.target.value)} />
+                <input className="cascade-input" placeholder={t.agent.fields.skills} value={agentSkills} onChange={(e) => setAgentSkills(e.target.value)} />
+                <textarea className="cascade-input" rows={4} placeholder={t.agent.fields.motivation} value={agentMotivation} onChange={(e) => setAgentMotivation(e.target.value)} style={{ resize: "vertical" }} />
                 <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer", color: "#9CA3AF", fontSize: "0.82rem", lineHeight: 1.5 }}>
                   <input type="checkbox" checked={agentConsent} onChange={(e) => setAgentConsent(e.target.checked)} style={{ accentColor: "var(--cascade-red)", marginTop: 3, flexShrink: 0 }} />
                   {t.agent.consent}
