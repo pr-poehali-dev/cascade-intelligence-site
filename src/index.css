@@ -515,8 +515,8 @@ img {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: rgba(139, 26, 26, 0.1);
-  border-bottom: 1px solid rgba(139, 26, 26, 0.25);
+  background: #120909;
+  border-bottom: 1px solid rgba(139, 26, 26, 0.4);
   padding: 6px 12px;
   font-family: "Oswald", sans-serif;
   font-size: 0.65rem;
