@@ -17,6 +17,7 @@ interface InfoItem { icon: string; label: string; value: string; }
 export interface Dict {
   nav: { home: string; about: string; services: string; report: string; agent: string; contact: string };
   secure: string;
+  elite: { tag: string; line1: string; line2: string };
   hero: { tag: string; title: string; subtitle: string; desc: string; btn1: string; btn2: string };
   about: { tag: string; title: string; p1: string; p2: string; stats: StatItem[] };
   services: { tag: string; title: string; items: ServiceItem[] };
@@ -45,6 +46,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
   ru: {
     nav: { home: "Главная", about: "Компания", services: "Услуги", report: "Сообщить", agent: "Сотрудничество", contact: "Контакты" },
     secure: "Защищённое соединение · Канал зашифрован",
+    elite: { tag: "Не для каждого", line1: "Мы беремся не за все задачи — и не для всех.", line2: "Наши услуги недёшевы. Но те, кто к нам обращается, получают результат, который невозможно купить за обычные деньги." },
     hero: { tag: "Частная Разведывательная Компания", title: "КАСКАД", subtitle: "Защита. Поддержка. Спокойствие.", desc: "Помогаем людям и компаниям решать вопросы безопасности — от проверки партнёра и поиска человека до личной защиты. Профессионально, деликатно и конфиденциально.", btn1: "Наши услуги", btn2: "Получить консультацию" },
     about: { tag: "О компании", title: "ПРОФЕССИОНАЛИЗМ. КОНФИДЕНЦИАЛЬНОСТЬ. РЕЗУЛЬТАТ.", p1: "ЧРК «Каскад» — частная разведывательная компания с присутствием в Москве, Московской области и любой точке мира. Мы помогаем людям и бизнесу чувствовать себя в безопасности.", p2: "В нашей команде — опытные специалисты с многолетней практикой. Мы одинаково внимательно относимся к каждому обращению — будь то частный человек, компания или организация, и всегда находим решение в рамках закона.", stats: [ { num: "15+", label: "Лет на рынке" }, { num: "500+", label: "Решённых задач" }, { num: "40+", label: "Стран присутствия" }, { num: "100%", label: "Конфиденциальность" } ] },
     services: { tag: "Услуги", title: "НАПРАВЛЕНИЯ ДЕЯТЕЛЬНОСТИ", items: [
@@ -67,6 +69,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
   en: {
     nav: { home: "Home", about: "Company", services: "Services", report: "Report", agent: "Cooperation", contact: "Contact" },
     secure: "Secure connection · Channel encrypted",
+    elite: { tag: "Not for everyone", line1: "We don't take on every task — nor every client.", line2: "Our services are not cheap. But those who come to us receive a result that ordinary money simply cannot buy." },
     hero: { tag: "Private Intelligence Company", title: "CASCADE", subtitle: "Protection. Support. Peace of Mind.", desc: "We help people and companies handle security matters — from partner checks and finding people to personal protection. Professional, discreet and confidential.", btn1: "Our Services", btn2: "Get a Consultation" },
     about: { tag: "About", title: "PROFESSIONALISM. CONFIDENTIALITY. RESULTS.", p1: "PIC «Cascade» is a private intelligence company with presence in Moscow, the Moscow region and anywhere in the world. We help people and businesses feel safe.", p2: "Our team consists of experienced specialists with years of practice. We give equal care to every request — whether from an individual, a company or an organization, and always find a solution within the law.", stats: [ { num: "15+", label: "Years of Experience" }, { num: "500+", label: "Tasks Resolved" }, { num: "40+", label: "Countries" }, { num: "100%", label: "Confidentiality" } ] },
     services: { tag: "Services", title: "AREAS OF OPERATIONS", items: [
@@ -89,6 +92,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
   fr: {
     nav: { home: "Accueil", about: "Société", services: "Services", report: "Signaler", agent: "Coopération", contact: "Contact" },
     secure: "Connexion sécurisée · Canal chiffré",
+    elite: { tag: "Pas pour tout le monde", line1: "Nous ne prenons pas toutes les affaires — ni tous les clients.", line2: "Nos services ne sont pas bon marché. Mais ceux qui s'adressent à nous obtiennent un résultat que l'argent ordinaire ne peut acheter." },
     hero: { tag: "Compagnie de Renseignement Privée", title: "CASCADE", subtitle: "Protection. Soutien. Sérénité.", desc: "Nous aidons les particuliers et les entreprises à gérer les questions de sécurité — de la vérification d'un partenaire et la recherche de personnes à la protection personnelle. Professionnel, discret et confidentiel.", btn1: "Nos services", btn2: "Obtenir une consultation" },
     about: { tag: "À propos", title: "PROFESSIONNALISME. CONFIDENTIALITÉ. RÉSULTATS.", p1: "CRP « Cascade » est une compagnie de renseignement privée présente à Moscou, dans la région de Moscou et partout dans le monde. Nous aidons les particuliers et les entreprises à se sentir en sécurité.", p2: "Notre équipe se compose de spécialistes expérimentés ayant des années de pratique. Nous accordons la même attention à chaque demande — qu'elle provienne d'un particulier, d'une entreprise ou d'une organisation, et trouvons toujours une solution dans le cadre de la loi.", stats: [ { num: "15+", label: "Ans d'expérience" }, { num: "500+", label: "Tâches résolues" }, { num: "40+", label: "Pays" }, { num: "100%", label: "Confidentialité" } ] },
     services: { tag: "Services", title: "DOMAINES D'ACTIVITÉ", items: [
@@ -111,6 +115,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
   ar: {
     nav: { home: "الرئيسية", about: "الشركة", services: "الخدمات", report: "إبلاغ", agent: "تعاون", contact: "اتصل بنا" },
     secure: "اتصال آمن · القناة مشفّرة",
+    elite: { tag: "ليست للجميع", line1: "نحن لا نقبل كل المهام — ولا كل العملاء.", line2: "خدماتنا ليست رخيصة. لكن من يلجأ إلينا يحصل على نتيجة لا يمكن شراؤها بالمال العادي." },
     hero: { tag: "شركة استخبارات خاصة", title: "كاسكاد", subtitle: "حماية. دعم. راحة بال.", desc: "نساعد الأفراد والشركات في حل مسائل الأمن — من التحقق من الشركاء والبحث عن الأشخاص إلى الحماية الشخصية. باحترافية وتكتم وسرية تامة.", btn1: "خدماتنا", btn2: "احصل على استشارة" },
     about: { tag: "عن الشركة", title: "احترافية. سرية. نتائج.", p1: "شركة «كاسكاد» للاستخبارات الخاصة، حاضرة في موسكو ومنطقة موسكو وفي أي مكان في العالم. نساعد الأفراد والشركات على الشعور بالأمان.", p2: "يضم فريقنا متخصصين ذوي خبرة طويلة في الميدان. نولي اهتماماً متساوياً لكل طلب — سواء من فرد أو شركة أو منظمة، ونجد دائماً حلاً في إطار القانون.", stats: [ { num: "+15", label: "سنة خبرة" }, { num: "+500", label: "مهمة منجزة" }, { num: "+40", label: "دولة" }, { num: "100%", label: "سرية تامة" } ] },
     services: { tag: "الخدمات", title: "مجالات النشاط", items: [
@@ -133,6 +138,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
   zh: {
     nav: { home: "首页", about: "公司", services: "服务", report: "举报", agent: "合作", contact: "联系" },
     secure: "安全连接 · 通道已加密",
+    elite: { tag: "并非人人可及", line1: "我们并不承接所有任务——也并非面向所有人。", line2: "我们的服务价格不菲。但选择我们的人，将获得普通金钱无法买到的结果。" },
     hero: { tag: "私人情报公司", title: "瀑布", subtitle: "保护。支持。安心。", desc: "我们帮助个人和企业处理安全事务——从背景核查、寻人到人身保护。专业、谨慎、保密。", btn1: "我们的服务", btn2: "获取咨询" },
     about: { tag: "关于", title: "专业。保密。结果。", p1: "「瀑布」私人情报公司，业务遍及莫斯科、莫斯科州及世界任何角落。我们帮助个人和企业获得安全感。", p2: "我们的团队由经验丰富、实践多年的专业人员组成。无论来自个人、企业还是机构，我们都同样用心对待每一项委托，并始终在法律框架内找到解决方案。", stats: [ { num: "15+", label: "年经验" }, { num: "500+", label: "已解决任务" }, { num: "40+", label: "覆盖国家" }, { num: "100%", label: "绝对保密" } ] },
     services: { tag: "服务", title: "业务领域", items: [
@@ -155,6 +161,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
   he: {
     nav: { home: "ראשי", about: "החברה", services: "שירותים", report: "דיווח", agent: "שיתוף פעולה", contact: "צור קשר" },
     secure: "חיבור מאובטח · הערוץ מוצפן",
+    elite: { tag: "לא לכל אחד", line1: "איננו מקבלים כל משימה — ולא כל לקוח.", line2: "השירותים שלנו אינם זולים. אך מי שפונה אלינו מקבל תוצאה שכסף רגיל פשוט אינו יכול לקנות." },
     hero: { tag: "חברת מודיעין פרטית", title: "קסקאד", subtitle: "הגנה. תמיכה. שקט נפשי.", desc: "אנו מסייעים לאנשים ולחברות בנושאי ביטחון — מבדיקת שותפים ואיתור אנשים ועד הגנה אישית. במקצועיות, בעדינות ובחיסיון מלא.", btn1: "השירותים שלנו", btn2: "קבלת ייעוץ" },
     about: { tag: "אודות", title: "מקצועיות. חיסיון. תוצאות.", p1: "חברת המודיעין הפרטית «קסקאד» פועלת במוסקבה, במחוז מוסקבה ובכל מקום בעולם. אנו עוזרים לאנשים ולעסקים להרגיש בטוחים.", p2: "הצוות שלנו מורכב ממומחים מנוסים בעלי שנות פרקטיקה רבות. אנו מקדישים תשומת לב שווה לכל פנייה — בין אם מיחיד, מחברה או מארגון, ותמיד מוצאים פתרון במסגרת החוק.", stats: [ { num: "15+", label: "שנות ניסיון" }, { num: "500+", label: "משימות שנפתרו" }, { num: "40+", label: "מדינות" }, { num: "100%", label: "חיסיון מלא" } ] },
     services: { tag: "שירותים", title: "תחומי פעילות", items: [
@@ -177,6 +184,7 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
   ja: {
     nav: { home: "ホーム", about: "会社", services: "サービス", report: "通報", agent: "協力", contact: "連絡先" },
     secure: "安全な接続 · 通信は暗号化済み",
+    elite: { tag: "万人向けではない", line1: "私たちはすべての案件を——そしてすべての依頼人を——受けるわけではありません。", line2: "私たちのサービスは安くはありません。しかし、私たちを選んだ方は、普通のお金では決して買えない結果を手にします。" },
     hero: { tag: "民間諜報会社", title: "カスケード", subtitle: "保護。サポート。安心。", desc: "個人や企業の安全に関するお悩みを解決します——取引先の確認や人探しから身辺警護まで。専門性をもって、控えめに、機密厳守で。", btn1: "サービス", btn2: "相談する" },
     about: { tag: "会社概要", title: "プロフェッショナリズム。機密保持。結果。", p1: "民間諜報会社「カスケード」は、モスクワ、モスクワ州、そして世界中で活動しています。私たちは、人々と企業が安心して過ごせるようお手伝いします。", p2: "私たちのチームは、長年の実務経験を持つ専門家で構成されています。個人、企業、組織を問わず、すべてのご依頼に等しく丁寧に向き合い、常に法の枠内で解決策を見出します。", stats: [ { num: "15+", label: "年の実績" }, { num: "500+", label: "解決した案件" }, { num: "40+", label: "活動国" }, { num: "100%", label: "機密保持" } ] },
     services: { tag: "サービス", title: "活動分野", items: [

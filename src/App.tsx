@@ -36,6 +36,28 @@ const useCopyProtection = () => {
     document.addEventListener("selectstart", prevent);
     document.addEventListener("keydown", onKeyDown);
 
+    // Anti-tracking: strip referrer & suppress console output in production
+    const meta = document.createElement("meta");
+    meta.name = "referrer";
+    meta.content = "no-referrer";
+    document.head.appendChild(meta);
+
+    let consoleTimer: number | undefined;
+    if (import.meta.env.PROD) {
+      const noop = () => undefined;
+      consoleTimer = window.setInterval(() => {
+        try {
+          console.log = noop;
+          console.warn = noop;
+          console.error = noop;
+          console.info = noop;
+          console.debug = noop;
+        } catch {
+          /* ignore */
+        }
+      }, 1000);
+    }
+
     return () => {
       document.removeEventListener("contextmenu", prevent);
       document.removeEventListener("copy", prevent);
@@ -43,6 +65,7 @@ const useCopyProtection = () => {
       document.removeEventListener("dragstart", prevent);
       document.removeEventListener("selectstart", prevent);
       document.removeEventListener("keydown", onKeyDown);
+      if (consoleTimer) window.clearInterval(consoleTimer);
     };
   }, []);
 };

@@ -215,7 +215,9 @@ export default function Index() {
       <section id="home" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", paddingTop: 88 }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.15) grayscale(0.5)" }} />
         <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(139,26,26,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139,26,26,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-        <div style={{ position: "absolute", [isRtl ? "right" : "left"]: 0, top: 0, bottom: 0, width: 4, background: "var(--cascade-red)" }} />
+        <div style={{ position: "absolute", inset: 0, background: isRtl ? "radial-gradient(circle at 80% 50%, rgba(139,26,26,0.28), transparent 55%)" : "radial-gradient(circle at 20% 50%, rgba(139,26,26,0.28), transparent 55%)" }} />
+        <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 200px rgba(0,0,0,0.9)" }} />
+        <div className="hero-edge-pulse" style={{ position: "absolute", [isRtl ? "right" : "left"]: 0, top: 0, bottom: 0, width: 4, background: "var(--cascade-red)" }} />
 
         <div className="pad-section" style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "5rem 1.5rem", width: "100%" }}>
           <div className="animate-fade-in-up" style={{ opacity: 0 }}>
@@ -269,6 +271,21 @@ export default function Index() {
         </div>
       </section>
 
+      {/* ELITE */}
+      <section style={{ position: "relative", padding: "5rem 0", background: "#080808", overflow: "hidden", borderTop: "1px solid var(--cascade-line)", borderBottom: "1px solid var(--cascade-line)" }}>
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(139,26,26,0.06) 22px, rgba(139,26,26,0.06) 24px)" }} />
+        <div style={{ position: "absolute", top: 0, bottom: 0, [isRtl ? "right" : "left"]: 0, width: 5, background: "var(--cascade-red)" }} />
+        <div className="pad-section" style={{ position: "relative", maxWidth: 1100, margin: "0 auto", padding: "0 1.5rem" }}>
+          <span className="cascade-tag" style={{ marginBottom: 24, display: "inline-block" }}>{t.elite.tag}</span>
+          <h2 style={{ fontFamily: "Oswald", fontWeight: 700, fontSize: "clamp(1.8rem, 4.5vw, 3.2rem)", lineHeight: 1.05, letterSpacing: "0.02em", color: "white", marginBottom: "1.5rem", maxWidth: 900 }}>
+            {t.elite.line1}
+          </h2>
+          <p className="red-line-left" style={{ color: "#9CA3AF", fontSize: "clamp(0.95rem, 1.6vw, 1.15rem)", lineHeight: 1.8, maxWidth: 720 }}>
+            {t.elite.line2}
+          </p>
+        </div>
+      </section>
+
       {/* SERVICES */}
       <section id="services" style={{ padding: "6rem 0", background: "var(--cascade-dark)" }}>
         <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
@@ -298,73 +315,6 @@ export default function Index() {
               <p style={{ color: "#9CA3AF", fontSize: "1.05rem", maxWidth: 640, margin: "0 auto", lineHeight: 1.8 }}>{t.geo.desc}</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* REPORT */}
-      <section id="report" style={{ padding: "6rem 0", background: "var(--cascade-charcoal)" }}>
-        <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
-          <div style={{ marginBottom: 36 }}>
-            <Tag>{t.report.tag}</Tag>
-            <div className="section-divider" />
-            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.3rem, 2.2vw, 2rem)", fontWeight: 600, letterSpacing: "0.05em", maxWidth: 700 }}>{t.report.title}</h2>
-          </div>
-
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 16, padding: 20, marginBottom: 32, background: "rgba(139,26,26,0.07)", border: "1px solid rgba(139,26,26,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "4px solid var(--cascade-red)" }}>
-            <Icon name="ShieldCheck" size={20} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
-            <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.75 }}>{t.report.warning}</p>
-          </div>
-
-          {!reportSubmitted ? (
-            <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, maxWidth: 880 }}>
-              <div>
-                <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "#6B7280", marginBottom: 10 }}>{t.report.form.category}</label>
-                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
-                  {t.report.categories.map((cat, i) => (
-                    <button key={i} onClick={() => setReportCategory(i)} style={{
-                      textAlign: isRtl ? "right" : "left", padding: "10px 16px",
-                      background: reportCategory === i ? "rgba(139,26,26,0.14)" : "var(--cascade-charcoal)",
-                      border: `1px solid ${reportCategory === i ? "var(--cascade-red)" : "var(--cascade-line)"}`,
-                      color: reportCategory === i ? "var(--cascade-light)" : "#6B7280",
-                      fontFamily: "IBM Plex Sans", fontSize: "0.85rem", cursor: "pointer", transition: "all 0.2s",
-                    }}>{cat}</button>
-                  ))}
-                </div>
-              </div>
-              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                <div>
-                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "#6B7280", marginBottom: 8 }}>{t.report.form.region}</label>
-                  <input className="cascade-input" value={reportRegion} onChange={(e) => setReportRegion(e.target.value)} />
-                </div>
-                <div>
-                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "#6B7280", marginBottom: 8 }}>{t.report.form.message}</label>
-                  <textarea className="cascade-input" rows={6} value={reportMsg} onChange={(e) => setReportMsg(e.target.value)} style={{ resize: "vertical" }} />
-                  <div style={{ fontSize: "0.72rem", color: reportMsg.length >= 50 ? "var(--cascade-red)" : "#374151", marginTop: 4 }}>{reportMsg.length} / 50</div>
-                </div>
-                <p style={{ fontSize: "0.73rem", color: "#4B5563", fontStyle: "italic" }}>{t.report.form.hint}</p>
-                {encrypting && (
-                  <div>
-                    <div style={{ fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.15em", color: "var(--cascade-red)", marginBottom: 6 }}>{t.report.encrypting} {encryptProgress}%</div>
-                    <div style={{ height: 2, background: "var(--cascade-line)" }}>
-                      <div style={{ height: "100%", background: "var(--cascade-red)", width: `${encryptProgress}%`, transition: "width 0.1s" }} />
-                    </div>
-                  </div>
-                )}
-                <button className="btn-cascade" onClick={handleReport} disabled={reportMsg.length < 50 || encrypting} style={{ opacity: reportMsg.length < 50 ? 0.35 : 1, width: "fit-content", display: "flex", alignItems: "center", gap: 8 }}>
-                  <Icon name="Lock" size={13} />
-                  {t.report.form.btn}
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center", maxWidth: 440 }}>
-              <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(139,26,26,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Icon name="ShieldCheck" size={28} style={{ color: "var(--cascade-red)" }} />
-              </div>
-              <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.report.sent}</p>
-              <p style={{ color: "#6B7280", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.report.sentDesc}</p>
-            </div>
-          )}
         </div>
       </section>
 
@@ -468,33 +418,77 @@ export default function Index() {
             <p style={{ color: "#6B7280", fontSize: "0.88rem" }}>{t.contact.desc}</p>
           </div>
 
-          <div style={{ display: "flex", gap: 16, flexWrap: "wrap", marginBottom: 40 }}>
+          <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
             <a href={`tel:${PHONE}`} className="btn-call"><Icon name="Phone" size={16} />{t.contact.callBtn}: +7 913 364-57-48</a>
             <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail"><Icon name="Send" size={16} />{t.contact.tgBtn}</a>
           </div>
+        </div>
+      </section>
 
-          <div className="grid-services" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))", gap: 20 }}>
-            {t.contact.info.map((item, i) => {
-              const href = item.icon === "Phone" ? `tel:${PHONE}` : item.icon === "Send" ? TELEGRAM : undefined;
-              const Wrapper = href ? "a" : "div";
-              return (
-                <Wrapper
-                  key={i}
-                  {...(href ? { href, target: item.icon === "Send" ? "_blank" : undefined, rel: "noopener noreferrer" } : {})}
-                  className="cascade-card"
-                  style={{ padding: "1.5rem", display: "flex", alignItems: "center", gap: 16, textDecoration: "none", cursor: href ? "pointer" : "default" }}
-                >
-                  <div style={{ width: 44, height: 44, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.22)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                    <Icon name={item.icon} fallback="Circle" size={18} style={{ color: "var(--cascade-red)" }} />
-                  </div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontFamily: "Oswald", fontSize: "0.7rem", color: "#4B5563", letterSpacing: "0.18em" }}>{item.label}</div>
-                    <div style={{ fontSize: "0.9rem", color: "var(--cascade-light)", marginTop: 2, wordBreak: "break-all" }}>{item.value}</div>
-                  </div>
-                </Wrapper>
-              );
-            })}
+      {/* REPORT */}
+      <section id="report" style={{ padding: "6rem 0", background: "var(--cascade-charcoal)" }}>
+        <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
+          <div style={{ marginBottom: 36 }}>
+            <Tag>{t.report.tag}</Tag>
+            <div className="section-divider" />
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.3rem, 2.2vw, 2rem)", fontWeight: 600, letterSpacing: "0.05em", maxWidth: 700 }}>{t.report.title}</h2>
           </div>
+
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 16, padding: 20, marginBottom: 32, background: "rgba(139,26,26,0.07)", border: "1px solid rgba(139,26,26,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "4px solid var(--cascade-red)" }}>
+            <Icon name="ShieldCheck" size={20} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+            <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.75 }}>{t.report.warning}</p>
+          </div>
+
+          {!reportSubmitted ? (
+            <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, maxWidth: 880 }}>
+              <div>
+                <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "#6B7280", marginBottom: 10 }}>{t.report.form.category}</label>
+                <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
+                  {t.report.categories.map((cat, i) => (
+                    <button key={i} onClick={() => setReportCategory(i)} style={{
+                      textAlign: isRtl ? "right" : "left", padding: "10px 16px",
+                      background: reportCategory === i ? "rgba(139,26,26,0.14)" : "var(--cascade-charcoal)",
+                      border: `1px solid ${reportCategory === i ? "var(--cascade-red)" : "var(--cascade-line)"}`,
+                      color: reportCategory === i ? "var(--cascade-light)" : "#6B7280",
+                      fontFamily: "IBM Plex Sans", fontSize: "0.85rem", cursor: "pointer", transition: "all 0.2s",
+                    }}>{cat}</button>
+                  ))}
+                </div>
+              </div>
+              <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                <div>
+                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "#6B7280", marginBottom: 8 }}>{t.report.form.region}</label>
+                  <input className="cascade-input" value={reportRegion} onChange={(e) => setReportRegion(e.target.value)} />
+                </div>
+                <div>
+                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "#6B7280", marginBottom: 8 }}>{t.report.form.message}</label>
+                  <textarea className="cascade-input" rows={6} value={reportMsg} onChange={(e) => setReportMsg(e.target.value)} style={{ resize: "vertical" }} />
+                  <div style={{ fontSize: "0.72rem", color: reportMsg.length >= 50 ? "var(--cascade-red)" : "#374151", marginTop: 4 }}>{reportMsg.length} / 50</div>
+                </div>
+                <p style={{ fontSize: "0.73rem", color: "#4B5563", fontStyle: "italic" }}>{t.report.form.hint}</p>
+                {encrypting && (
+                  <div>
+                    <div style={{ fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.15em", color: "var(--cascade-red)", marginBottom: 6 }}>{t.report.encrypting} {encryptProgress}%</div>
+                    <div style={{ height: 2, background: "var(--cascade-line)" }}>
+                      <div style={{ height: "100%", background: "var(--cascade-red)", width: `${encryptProgress}%`, transition: "width 0.1s" }} />
+                    </div>
+                  </div>
+                )}
+                <button className="btn-cascade" onClick={handleReport} disabled={reportMsg.length < 50 || encrypting} style={{ opacity: reportMsg.length < 50 ? 0.35 : 1, width: "fit-content", display: "flex", alignItems: "center", gap: 8 }}>
+                  <Icon name="Lock" size={13} />
+                  {t.report.form.btn}
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center", maxWidth: 440 }}>
+              <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(139,26,26,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <Icon name="ShieldCheck" size={28} style={{ color: "var(--cascade-red)" }} />
+              </div>
+              <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.report.sent}</p>
+              <p style={{ color: "#6B7280", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.report.sentDesc}</p>
+            </div>
+          )}
         </div>
       </section>
 
