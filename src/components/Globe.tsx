@@ -9,6 +9,7 @@ interface GlobeStrings {
   lat: string;
   lon: string;
   tracked: string;
+  nearYou: string;
 }
 
 type Status = "idle" | "detecting" | "done" | "denied";
@@ -18,9 +19,23 @@ interface Coords {
   lon: number;
 }
 
-export default function Globe({ strings }: { strings: GlobeStrings }) {
+export default function Globe({ strings, lang }: { strings: GlobeStrings; lang: string }) {
   const [status, setStatus] = useState<Status>("idle");
   const [coords, setCoords] = useState<Coords | null>(null);
+  const [place, setPlace] = useState<string | null>(null);
+
+  const resolvePlace = async (lat: number, lon: number) => {
+    try {
+      const res = await fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=${lang}`
+      );
+      const data = await res.json();
+      const parts = [data.city || data.locality, data.principalSubdivision, data.countryName].filter(Boolean);
+      if (parts.length) setPlace(parts.slice(0, 2).join(", "));
+    } catch {
+      /* silent — coordinates are still shown */
+    }
+  };
 
   const detect = () => {
     if (!navigator.geolocation) {
@@ -28,10 +43,12 @@ export default function Globe({ strings }: { strings: GlobeStrings }) {
       return;
     }
     setStatus("detecting");
+    setPlace(null);
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         setCoords({ lat: pos.coords.latitude, lon: pos.coords.longitude });
         setStatus("done");
+        resolvePlace(pos.coords.latitude, pos.coords.longitude);
       },
       () => setStatus("denied"),
       { enableHighAccuracy: false, timeout: 10000 }
@@ -181,6 +198,14 @@ export default function Globe({ strings }: { strings: GlobeStrings }) {
             <div style={{ color: "#6B7280", fontSize: "0.72rem", letterSpacing: "0.05em", marginTop: 2, fontFamily: "IBM Plex Sans" }}>
               {strings.detected}
             </div>
+            {place && (
+              <div className="animate-fade-in-up" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 8, paddingTop: 10, borderTop: "1px solid var(--cascade-line)" }}>
+                <Icon name="MapPin" size={14} style={{ color: "var(--cascade-red)", flexShrink: 0 }} />
+                <span style={{ color: "var(--cascade-light)", fontSize: "0.8rem", lineHeight: 1.4, fontFamily: "IBM Plex Sans" }}>
+                  {strings.nearYou.replace("{place}", place)}
+                </span>
+              </div>
+            )}
           </div>
         )}
 

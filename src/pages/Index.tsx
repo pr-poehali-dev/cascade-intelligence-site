@@ -299,7 +299,7 @@ export default function Index() {
               <p style={{ color: "#6B7280", fontSize: "0.9rem", maxWidth: 600, margin: "0 auto", lineHeight: 1.7 }}>{t.geo.desc}</p>
             </div>
             <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "auto 1fr", gap: 56, alignItems: "center" }}>
-              <Globe strings={t.globe} />
+              <Globe strings={t.globe} lang={lang} />
               <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(120px, 1fr))", gap: 12 }}>
                 {t.geo.zones.map((z, i) => (
                   <div key={i} className="zone-chip">{z}</div>
