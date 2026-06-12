@@ -358,3 +358,193 @@ body::before {
   border-color: var(--cascade-red);
   color: var(--cascade-red);
 }
+
+/* Lang dropdown */
+.lang-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  background: var(--cascade-charcoal);
+  border: 1px solid var(--cascade-line);
+  min-width: 150px;
+  z-index: 60;
+  animation: fadeIn 0.2s ease;
+}
+[dir="rtl"] .lang-dropdown {
+  right: auto;
+  left: 0;
+}
+.lang-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 14px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--cascade-line);
+  color: #9ca3af;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    color 0.2s;
+  text-align: left;
+}
+.lang-option:last-child {
+  border-bottom: none;
+}
+.lang-option:hover {
+  background: rgba(139, 26, 26, 0.12);
+  color: var(--cascade-light);
+}
+.lang-option.active {
+  color: var(--cascade-red);
+}
+.lang-option .code {
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.1em;
+  font-size: 0.72rem;
+  color: #4b5563;
+}
+
+/* RTL support */
+[dir="rtl"] .red-line-left {
+  border-left: none;
+  border-right: 3px solid var(--cascade-red);
+  padding-left: 0;
+  padding-right: 16px;
+}
+[dir="rtl"] .section-divider {
+  margin-left: auto;
+}
+
+/* Call button (phone) */
+.btn-call {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--cascade-red);
+  color: white;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 1px solid var(--cascade-red);
+  transition: all 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-call:hover {
+  background: transparent;
+  color: var(--cascade-red);
+}
+.btn-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: transparent;
+  color: var(--cascade-light);
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border: 1px solid var(--cascade-line);
+  transition: all 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.btn-mail:hover {
+  border-color: var(--cascade-red);
+  color: var(--cascade-red);
+}
+
+/* Floating call button (mobile) */
+.fab-call {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 45;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--cascade-red);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 24px rgba(139, 26, 26, 0.4);
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.fab-call:hover {
+  transform: scale(1.08);
+}
+[dir="rtl"] .fab-call {
+  right: auto;
+  left: 24px;
+}
+
+/* Secure ribbon */
+.secure-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(139, 26, 26, 0.1);
+  border-bottom: 1px solid rgba(139, 26, 26, 0.25);
+  padding: 6px 12px;
+  font-family: "Oswald", sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  color: var(--cascade-red);
+  text-transform: uppercase;
+}
+
+/* Zone chip */
+.zone-chip {
+  border: 1px solid var(--cascade-line);
+  background: var(--cascade-charcoal);
+  padding: 12px 8px;
+  text-align: center;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  color: #9ca3af;
+  transition: all 0.3s;
+}
+.zone-chip:hover {
+  border-color: var(--cascade-red);
+  color: var(--cascade-light);
+  background: rgba(139, 26, 26, 0.08);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .grid-2,
+  .grid-services {
+    grid-template-columns: 1fr !important;
+  }
+  .pad-section {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+  .nav-desktop {
+    display: none !important;
+  }
+}
+@media (min-width: 901px) {
+  .nav-mobile-btn {
+    display: none !important;
+  }
+}
+@media (max-width: 640px) {
+  .stats-grid {
+    gap: 10px !important;
+  }
+  .wanted-row {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
