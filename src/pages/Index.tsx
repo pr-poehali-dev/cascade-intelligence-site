@@ -392,8 +392,31 @@ export default function Index() {
         </div>
       </section>
 
+      {/* LEGAL STATUS */}
+      <section style={{ padding: "6rem 0", background: "var(--cascade-charcoal)", position: "relative", borderTop: "1px solid var(--cascade-line)" }}>
+        <div className="pad-section grid-2" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }}>
+          <div>
+            <Tag>{t.legalSection.tag}</Tag>
+            <div className="section-divider" />
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, lineHeight: 1.15, letterSpacing: "0.05em", marginBottom: "1.5rem" }}>{t.legalSection.title}</h2>
+            <p className="red-line-left" style={{ color: "#9CA3AF", lineHeight: 1.85, fontSize: "0.92rem", marginBottom: "1.2rem" }}>{t.legalSection.p1}</p>
+            <p style={{ color: "#6B7280", lineHeight: 1.85, fontSize: "0.92rem" }}>{t.legalSection.p2}</p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
+            {t.legalSection.points.map((p, i) => (
+              <div key={i} className="cascade-card" style={{ padding: "1.1rem 1.3rem", display: "flex", alignItems: "center", gap: 16 }}>
+                <div style={{ width: 42, height: 42, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                  <Icon name={p.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red)" }} />
+                </div>
+                <span style={{ fontSize: "0.9rem", color: "var(--cascade-light)", lineHeight: 1.5 }}>{p.text}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CONTACT */}
-      <section id="contact" style={{ padding: "6rem 0", background: "var(--cascade-charcoal)" }}>
+      <section id="contact" style={{ padding: "6rem 0", background: "var(--cascade-dark)" }}>
         <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
           <div style={{ marginBottom: 40 }}>
             <Tag>{t.contact.tag}</Tag>
