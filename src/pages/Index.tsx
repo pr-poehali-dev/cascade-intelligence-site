@@ -22,6 +22,7 @@ export default function Index() {
   const [reportRegion, setReportRegion] = useState("");
   const [encryptProgress, setEncryptProgress] = useState(0);
   const [encrypting, setEncrypting] = useState(false);
+  const [reportError, setReportError] = useState(false);
 
   const [agentSubmitted, setAgentSubmitted] = useState(false);
   const [agentConsent, setAgentConsent] = useState(false);
@@ -31,6 +32,7 @@ export default function Index() {
   const [agentMotivation, setAgentMotivation] = useState("");
   const [agentEnc, setAgentEnc] = useState(false);
   const [agentEncProgress, setAgentEncProgress] = useState(0);
+  const [agentError, setAgentError] = useState(false);
 
   const langRef = useRef<HTMLDivElement>(null);
   const t = TRANSLATIONS[lang];
@@ -83,8 +85,9 @@ export default function Index() {
     if (reportMsg.length < 50) return;
     setEncrypting(true);
     setEncryptProgress(0);
+    setReportError(false);
 
-    fetch(SEND_URL, {
+    const sent = fetch(SEND_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -93,14 +96,19 @@ export default function Index() {
         region: reportRegion,
         message: reportMsg,
       }),
-    }).catch(() => {});
+    })
+      .then((r) => r.ok)
+      .catch(() => false);
 
     const interval = setInterval(() => {
       setEncryptProgress((p) => {
         if (p >= 100) {
           clearInterval(interval);
-          setEncrypting(false);
-          setReportSubmitted(true);
+          sent.then((ok) => {
+            setEncrypting(false);
+            if (ok) setReportSubmitted(true);
+            else setReportError(true);
+          });
           return 100;
         }
         return p + 5;
@@ -112,8 +120,9 @@ export default function Index() {
     if (!agentConsent || agentAlias.length < 2) return;
     setAgentEnc(true);
     setAgentEncProgress(0);
+    setAgentError(false);
 
-    fetch(SEND_URL, {
+    const sent = fetch(SEND_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -123,14 +132,19 @@ export default function Index() {
         skills: agentSkills,
         motivation: agentMotivation,
       }),
-    }).catch(() => {});
+    })
+      .then((r) => r.ok)
+      .catch(() => false);
 
     const interval = setInterval(() => {
       setAgentEncProgress((p) => {
         if (p >= 100) {
           clearInterval(interval);
-          setAgentEnc(false);
-          setAgentSubmitted(true);
+          sent.then((ok) => {
+            setAgentEnc(false);
+            if (ok) setAgentSubmitted(true);
+            else setAgentError(true);
+          });
           return 100;
         }
         return p + 5;
@@ -367,6 +381,12 @@ export default function Index() {
                   <input type="checkbox" checked={agentConsent} onChange={(e) => setAgentConsent(e.target.checked)} style={{ accentColor: "var(--cascade-red)", marginTop: 3, flexShrink: 0 }} />
                   {t.agent.consent}
                 </label>
+                {agentError && (
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(139,26,26,0.1)", border: "1px solid var(--cascade-red)" }}>
+                    <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                    <p style={{ color: "#D1D5DB", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
+                  </div>
+                )}
                 {agentEnc && (
                   <div>
                     <div style={{ fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.15em", color: "var(--cascade-red)", marginBottom: 6 }}>{t.report.encrypting} {agentEncProgress}%</div>
@@ -493,6 +513,12 @@ export default function Index() {
                   <div style={{ fontSize: "0.72rem", color: reportMsg.length >= 50 ? "var(--cascade-red)" : "#374151", marginTop: 4 }}>{reportMsg.length} / 50</div>
                 </div>
                 <p style={{ fontSize: "0.73rem", color: "#4B5563", fontStyle: "italic" }}>{t.report.form.hint}</p>
+                {reportError && (
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(139,26,26,0.1)", border: "1px solid var(--cascade-red)" }}>
+                    <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                    <p style={{ color: "#D1D5DB", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
+                  </div>
+                )}
                 {encrypting && (
                   <div>
                     <div style={{ fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.15em", color: "var(--cascade-red)", marginBottom: 6 }}>{t.report.encrypting} {encryptProgress}%</div>
