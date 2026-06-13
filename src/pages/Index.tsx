@@ -318,6 +318,29 @@ export default function Index() {
         </div>
       </section>
 
+      {/* PRINCIPLES */}
+      <section style={{ padding: "6rem 0", background: "var(--cascade-charcoal)", position: "relative", borderTop: "1px solid var(--cascade-line)" }}>
+        <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
+          <div style={{ marginBottom: 48 }}>
+            <Tag>{t.principles.tag}</Tag>
+            <div className="section-divider" />
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 700, letterSpacing: "0.06em" }}>{t.principles.title}</h2>
+          </div>
+          <div className="grid-services" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20 }}>
+            {t.principles.items.map((p, i) => (
+              <div key={i} className="cascade-card" style={{ padding: "1.8rem", position: "relative", overflow: "hidden" }}>
+                <div style={{ position: "absolute", top: 0, [isRtl ? "right" : "left"]: 0, width: 3, height: "100%", background: "var(--cascade-red)" }} />
+                <div style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red)" }} />
+                </div>
+                <h3 style={{ fontFamily: "Oswald", fontSize: "1rem", fontWeight: 600, letterSpacing: "0.06em", marginBottom: "0.6rem", color: "var(--cascade-light)" }}>{p.title}</h3>
+                <p style={{ color: "#6B7280", fontSize: "0.85rem", lineHeight: 1.75 }}>{p.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* AGENT */}
       <section id="agent" style={{ padding: "6rem 0", background: "var(--cascade-dark)", position: "relative" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.08) grayscale(0.6)" }} />
@@ -332,6 +355,10 @@ export default function Index() {
 
             {!agentSubmitted ? (
               <div className="cascade-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: 14 }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", background: "rgba(139,26,26,0.07)", border: "1px solid rgba(139,26,26,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "3px solid var(--cascade-red)" }}>
+                  <Icon name="ShieldCheck" size={18} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                  <p style={{ color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.65 }}>{t.agent.secure}</p>
+                </div>
                 <input className="cascade-input" placeholder={t.agent.fields.alias} value={agentAlias} onChange={(e) => setAgentAlias(e.target.value)} />
                 <input className="cascade-input" placeholder={t.agent.fields.contact} value={agentContact} onChange={(e) => setAgentContact(e.target.value)} />
                 <input className="cascade-input" placeholder={t.agent.fields.skills} value={agentSkills} onChange={(e) => setAgentSkills(e.target.value)} />
@@ -419,7 +446,7 @@ export default function Index() {
           </div>
 
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href={`tel:${PHONE}`} className="btn-call"><Icon name="Phone" size={16} />{t.contact.callBtn}: +7 913 364-57-48</a>
+            <a href={`tel:${PHONE}`} className="btn-call"><Icon name="Phone" size={16} />{t.contact.callBtn}</a>
             <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail"><Icon name="Send" size={16} />{t.contact.tgBtn}</a>
           </div>
         </div>
