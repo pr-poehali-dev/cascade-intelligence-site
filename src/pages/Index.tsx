@@ -664,10 +664,15 @@ export default function Index() {
         </div>
       </footer>
 
-      {/* Floating call button */}
-      <a href={`tel:${PHONE}`} className="fab-call" aria-label="call">
-        <Icon name="Phone" size={22} />
-      </a>
+      {/* Floating contact buttons */}
+      <div className="fab-stack">
+        <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="fab-tg" aria-label="Telegram">
+          <Icon name="Send" size={22} />
+        </a>
+        <a href={`tel:${PHONE}`} className="fab-call" aria-label="call">
+          <Icon name="Phone" size={22} />
+        </a>
+      </div>
     </div>
   );
 }

@@ -496,30 +496,44 @@ img {
   color: var(--cascade-red);
 }
 
-/* Floating call button (mobile) */
-.fab-call {
+/* Floating contact buttons (mobile) */
+.fab-stack {
   position: fixed;
   bottom: 24px;
   right: 24px;
   z-index: 45;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+[dir="rtl"] .fab-stack {
+  right: auto;
+  left: 24px;
+}
+.fab-call,
+.fab-tg {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--cascade-red);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(139, 26, 26, 0.4);
   cursor: pointer;
   transition: transform 0.2s;
+  text-decoration: none;
 }
-.fab-call:hover {
+.fab-call {
+  background: var(--cascade-red);
+  box-shadow: 0 8px 24px rgba(139, 26, 26, 0.4);
+}
+.fab-tg {
+  background: #229ed9;
+  box-shadow: 0 8px 24px rgba(34, 158, 217, 0.4);
+}
+.fab-call:hover,
+.fab-tg:hover {
   transform: scale(1.08);
-}
-[dir="rtl"] .fab-call {
-  right: auto;
-  left: 24px;
 }
 
 /* Secure ribbon */
