@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 import { TRANSLATIONS, LANGS, type Lang } from "@/data/translations";
 
-type SectionId = "home" | "about" | "services" | "report" | "agent" | "contact";
+type SectionId = "home" | "about" | "services" | "report" | "agent" | "faq" | "contact";
 
 const HERO_IMG =
   "https://cdn.poehali.dev/projects/b1149f1e-ccbb-4852-b138-f11cd07dfad2/files/65226e92-7c27-4591-a28d-e9eb6ad0495b.jpg";
@@ -36,6 +36,7 @@ export default function Index() {
 
   const [reportHp, setReportHp] = useState("");
   const [agentHp, setAgentHp] = useState("");
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const formOpenedAt = useRef<number>(Date.now());
 
   const langRef = useRef<HTMLDivElement>(null);
@@ -48,6 +49,7 @@ export default function Index() {
     { key: "services", label: t.nav.services },
     { key: "report", label: t.nav.report },
     { key: "agent", label: t.nav.agent },
+    { key: "faq", label: t.faq.tag },
     { key: "contact", label: t.nav.contact },
   ];
 
@@ -70,7 +72,7 @@ export default function Index() {
       },
       { threshold: 0.3 }
     );
-    (["home", "about", "services", "report", "agent", "contact"] as SectionId[]).forEach((id) => {
+    (["home", "about", "services", "report", "agent", "faq", "contact"] as SectionId[]).forEach((id) => {
       const el = document.getElementById(id);
       if (el) observer.observe(el);
     });
@@ -460,6 +462,36 @@ export default function Index() {
                 <p style={{ color: "#6B7280", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.agent.sentDesc}</p>
               </div>
             )}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section id="faq" style={{ padding: "6rem 0", background: "var(--cascade-dark)" }}>
+        <div className="pad-section" style={{ maxWidth: 860, margin: "0 auto", padding: "0 1.5rem" }}>
+          <div style={{ marginBottom: 44 }}>
+            <Tag>{t.faq.tag}</Tag>
+            <div className="section-divider" />
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, letterSpacing: "0.06em" }}>{t.faq.title}</h2>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+            {t.faq.items.map((item, i) => {
+              const isOpen = openFaq === i;
+              return (
+                <div key={i} className="cascade-card" style={{ overflow: "hidden" }}>
+                  <button
+                    onClick={() => setOpenFaq(isOpen ? null : i)}
+                    style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "20px 24px", background: "none", border: "none", cursor: "pointer", textAlign: isRtl ? "right" : "left" }}
+                  >
+                    <span style={{ fontFamily: "Oswald", fontSize: "1.02rem", fontWeight: 500, letterSpacing: "0.02em", color: isOpen ? "var(--cascade-red)" : "var(--cascade-light)", transition: "color 0.3s" }}>{item.q}</span>
+                    <Icon name="ChevronDown" size={20} style={{ color: "var(--cascade-red)", flexShrink: 0, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.3s" }} />
+                  </button>
+                  <div style={{ maxHeight: isOpen ? 400 : 0, overflow: "hidden", transition: "max-height 0.4s ease" }}>
+                    <p style={{ padding: "0 24px 22px", color: "#9CA3AF", fontSize: "0.92rem", lineHeight: 1.8 }}>{item.a}</p>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
