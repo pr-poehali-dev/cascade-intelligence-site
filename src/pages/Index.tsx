@@ -18,6 +18,7 @@ export default function Index() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const [reportSubmitted, setReportSubmitted] = useState(false);
   const [reportCategory, setReportCategory] = useState(0);
@@ -91,7 +92,11 @@ export default function Index() {
   }, []);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(h > 0 ? Math.min((window.scrollY / h) * 100, 100) : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -216,6 +221,11 @@ export default function Index() {
 
   return (
     <div style={{ background: "var(--cascade-dark)", color: "var(--cascade-light)", minHeight: "100vh", overflowX: "hidden" }}>
+
+      {/* SCROLL PROGRESS */}
+      <div style={{ position: "fixed", top: 0, left: 0, right: 0, height: 2, zIndex: 60, pointerEvents: "none" }}>
+        <div style={{ height: "100%", width: `${scrollProgress}%`, background: "linear-gradient(90deg, var(--cascade-red), var(--cascade-red-bright))", transition: "width 0.1s linear", boxShadow: "0 0 8px rgba(158,35,33,0.6)" }} />
+      </div>
 
       {/* SECURE RIBBON */}
       <div className="secure-ribbon" style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 51, height: 28 }}>
