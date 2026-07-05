@@ -382,10 +382,10 @@ export default function Index() {
                 onMouseMove={handleSpotlight}
               >
                 <div className="bento-icon">
-                  <Icon name={s.icon} fallback="Circle" size={i === 0 ? 30 : 22} style={{ color: "var(--cascade-red)" }} />
+                  <Icon name={s.icon} fallback="Circle" size={i === 0 ? 26 : 22} style={{ color: "var(--cascade-red)" }} />
                 </div>
-                <h3 style={{ fontFamily: "Oswald", fontSize: i === 0 ? "1.5rem" : "1.05rem", fontWeight: 600, letterSpacing: "0.04em", marginBottom: "0.75rem", lineHeight: 1.15 }}>{s.title}</h3>
-                <p style={{ color: "#9CA3AF", fontSize: i === 0 ? "0.95rem" : "0.87rem", lineHeight: 1.8 }}>{s.desc}</p>
+                <h3 style={{ fontFamily: "Oswald", fontSize: i === 0 ? "1.2rem" : "1.05rem", fontWeight: 600, letterSpacing: "0.04em", marginBottom: "0.75rem", lineHeight: 1.15 }}>{s.title}</h3>
+                <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.8 }}>{s.desc}</p>
               </div>
             ))}
           </div>

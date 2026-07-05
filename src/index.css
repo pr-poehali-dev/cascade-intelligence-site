@@ -271,11 +271,20 @@ img {
 }
 @media (max-width: 760px) {
   .trust-bar {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px 12px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px 10px;
   }
   .trust-item::after {
     display: none !important;
+  }
+}
+@media (max-width: 430px) {
+  .trust-bar {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 8px;
+  }
+  .trust-item {
+    padding: 6px 2px;
   }
 }
 
@@ -325,7 +334,7 @@ img {
 }
 .bento-lg {
   grid-column: span 2;
-  grid-row: span 2;
+  grid-row: span 1;
   justify-content: flex-end;
   background: linear-gradient(
     150deg,
@@ -345,8 +354,8 @@ img {
   justify-content: center;
 }
 .bento-lg .bento-icon {
-  width: 64px;
-  height: 64px;
+  width: 56px;
+  height: 56px;
 }
 @media (max-width: 900px) {
   .bento-grid {
@@ -410,6 +419,62 @@ img {
 }
 .nav-link.active {
   color: var(--cascade-red);
+}
+
+/* Button shine effect */
+.btn-cascade,
+.btn-call,
+.btn-mail,
+.btn-cascade-outline {
+  position: relative;
+  overflow: hidden;
+}
+.btn-cascade::after,
+.btn-call::after,
+.btn-mail::after,
+.btn-cascade-outline::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  opacity: 0;
+}
+.btn-cascade:hover::after,
+.btn-call:hover::after,
+.btn-mail:hover::after,
+.btn-cascade-outline:hover::after {
+  animation: btnShine 0.85s ease;
+}
+@keyframes btnShine {
+  0% {
+    left: -80%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  100% {
+    left: 130%;
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-cascade:hover::after,
+  .btn-call:hover::after,
+  .btn-mail:hover::after,
+  .btn-cascade-outline:hover::after {
+    animation: none;
+  }
 }
 
 /* Btn primary */
