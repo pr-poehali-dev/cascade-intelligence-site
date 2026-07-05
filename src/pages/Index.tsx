@@ -70,6 +70,11 @@ export default function Index() {
     setMenuOpen(false);
   };
 
+  const scrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    setMenuOpen(false);
+  };
+
   useEffect(() => {
     document.documentElement.dir = isRtl ? "rtl" : "ltr";
     document.documentElement.lang = lang;
@@ -244,7 +249,7 @@ export default function Index() {
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 1.5rem",
       }} className="pad-section">
-        <button onClick={() => scrollTo("home")} style={{ display: "flex", alignItems: "center", gap: 12, background: "none", border: "none", cursor: "pointer" }}>
+        <button onClick={scrollTop} aria-label="Наверх" style={{ display: "flex", alignItems: "center", gap: 12, background: "none", border: "none", cursor: "pointer" }}>
           <div style={{ width: 34, height: 34, background: "var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Oswald", fontWeight: 700, fontSize: 12, color: "white" }}>ЧРК</div>
           <span style={{ fontFamily: "Oswald", fontWeight: 600, fontSize: "1rem", letterSpacing: "0.22em", color: "var(--cascade-light)" }}>КАСКАД</span>
         </button>
