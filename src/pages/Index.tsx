@@ -403,6 +403,18 @@ export default function Index() {
               <div className="section-divider" />
               <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.6rem, 3vw, 2.6rem)", fontWeight: 700, letterSpacing: "0.06em", marginBottom: "1.5rem" }}>{t.agent.title}</h2>
               <p className="red-line-left" style={{ color: "#9CA3AF", lineHeight: 1.85, fontSize: "0.95rem" }}>{t.agent.desc}</p>
+
+              <div style={{ marginTop: 32 }}>
+                <div style={{ fontFamily: "Oswald", fontSize: "0.78rem", letterSpacing: "0.2em", color: "var(--cascade-red)", marginBottom: 16 }}>{t.safety.title}</div>
+                <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+                  {t.safety.items.map((item, i) => (
+                    <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
+                      <Icon name={item.icon} fallback="ShieldCheck" size={17} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                      <p style={{ color: "#9CA3AF", fontSize: "0.82rem", lineHeight: 1.7 }}>{item.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {!agentSubmitted ? (
