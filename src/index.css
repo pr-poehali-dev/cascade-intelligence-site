@@ -290,10 +290,14 @@ img {
   padding: 2rem;
   display: flex;
   flex-direction: column;
+}
+
+/* Spotlight (cursor follow glow) */
+.spotlight {
   position: relative;
   overflow: hidden;
 }
-.bento-item::before {
+.spotlight::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -305,13 +309,19 @@ img {
     rgba(158, 35, 33, 0.18),
     transparent 60%
   );
+  z-index: 0;
 }
-.bento-item:hover::before {
+.spotlight:hover::before {
   opacity: 1;
 }
-.bento-item > * {
+.spotlight > * {
   position: relative;
   z-index: 1;
+}
+@media (hover: none) {
+  .spotlight::before {
+    display: none;
+  }
 }
 .bento-lg {
   grid-column: span 2;

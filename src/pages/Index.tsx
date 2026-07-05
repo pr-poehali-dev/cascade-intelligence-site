@@ -46,6 +46,12 @@ export default function Index() {
 
   useReveal([lang]);
 
+  const handleSpotlight = (e: React.MouseEvent<HTMLElement>) => {
+    const r = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+  };
+
   const navItems: { key: SectionId; label: string }[] = [
     { key: "home", label: t.nav.home },
     { key: "about", label: t.nav.about },
@@ -371,13 +377,9 @@ export default function Index() {
             {t.services.items.map((s, i) => (
               <div
                 key={i}
-                className={`cascade-card bento-item reveal${i === 0 ? " bento-lg" : ""}`}
+                className={`cascade-card bento-item spotlight reveal${i === 0 ? " bento-lg" : ""}`}
                 style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
-                onMouseMove={(e) => {
-                  const r = e.currentTarget.getBoundingClientRect();
-                  e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
-                  e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
-                }}
+                onMouseMove={handleSpotlight}
               >
                 <div className="bento-icon">
                   <Icon name={s.icon} fallback="Circle" size={i === 0 ? 30 : 22} style={{ color: "var(--cascade-red)" }} />
@@ -410,7 +412,7 @@ export default function Index() {
           </div>
           <div className="grid-services" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20 }}>
             {t.principles.items.map((p, i) => (
-              <div key={i} className="cascade-card reveal" style={{ padding: "1.8rem", position: "relative", overflow: "hidden", transitionDelay: `${(i % 4) * 0.08}s` }}>
+              <div key={i} className="cascade-card spotlight reveal" onMouseMove={handleSpotlight} style={{ padding: "1.8rem", position: "relative", overflow: "hidden", transitionDelay: `${(i % 4) * 0.08}s` }}>
                 <div style={{ position: "absolute", top: 0, [isRtl ? "right" : "left"]: 0, width: 3, height: "100%", background: "var(--cascade-red)" }} />
                 <div style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red)" }} />
@@ -497,16 +499,16 @@ export default function Index() {
       {/* FAQ */}
       <section id="faq" style={{ padding: "6rem 0", background: "var(--cascade-dark)" }}>
         <div className="pad-section" style={{ maxWidth: 860, margin: "0 auto", padding: "0 1.5rem" }}>
-          <div style={{ marginBottom: 44 }}>
+          <div className="reveal" style={{ marginBottom: 44 }}>
             <Tag>{t.faq.tag}</Tag>
             <div className="section-divider" />
-            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, letterSpacing: "0.06em" }}>{t.faq.title}</h2>
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, letterSpacing: "0.02em", lineHeight: 1.05 }}>{t.faq.title}</h2>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
             {t.faq.items.map((item, i) => {
               const isOpen = openFaq === i;
               return (
-                <div key={i} className="cascade-card" style={{ overflow: "hidden" }}>
+                <div key={i} className="cascade-card spotlight reveal" onMouseMove={handleSpotlight} style={{ overflow: "hidden", transitionDelay: `${Math.min(i, 4) * 0.06}s` }}>
                   <button
                     onClick={() => setOpenFaq(isOpen ? null : i)}
                     style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "20px 24px", background: "none", border: "none", cursor: "pointer", textAlign: isRtl ? "right" : "left" }}
