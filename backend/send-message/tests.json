@@ -34,6 +34,63 @@
       "expectedStatus": 200,
       "expectedBody": { "success": true },
       "bodyMatcher": "partial"
+    },
+    {
+      "name": "Honeypot triggers silent success",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "type": "report",
+        "category": "Терроризм",
+        "region": "Москва",
+        "message": "Это сообщение от бота должно быть тихо отброшено.",
+        "website": "http://spam-bot.example"
+      },
+      "expectedStatus": 200,
+      "expectedBody": { "success": true },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Too fast fill silently dropped",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "type": "report",
+        "category": "Терроризм",
+        "region": "Москва",
+        "message": "Слишком быстрое заполнение формы, вероятно бот.",
+        "elapsed": 1
+      },
+      "expectedStatus": 200,
+      "expectedBody": { "success": true },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Empty report rejected",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "type": "report",
+        "category": "Терроризм",
+        "region": "Москва",
+        "message": ""
+      },
+      "expectedStatus": 400,
+      "expectedBody": { "error": "Validation failed" },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Agent without alias rejected",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "type": "agent",
+        "alias": "",
+        "contact": "signal:test"
+      },
+      "expectedStatus": 400,
+      "expectedBody": { "error": "Validation failed" },
+      "bodyMatcher": "partial"
     }
   ]
 }

@@ -34,6 +34,10 @@ export default function Index() {
   const [agentEncProgress, setAgentEncProgress] = useState(0);
   const [agentError, setAgentError] = useState(false);
 
+  const [reportHp, setReportHp] = useState("");
+  const [agentHp, setAgentHp] = useState("");
+  const formOpenedAt = useRef<number>(Date.now());
+
   const langRef = useRef<HTMLDivElement>(null);
   const t = TRANSLATIONS[lang];
   const isRtl = LANGS.find((l) => l.code === lang)?.rtl ?? false;
@@ -95,6 +99,8 @@ export default function Index() {
         category: t.report.categories[reportCategory],
         region: reportRegion,
         message: reportMsg,
+        website: reportHp,
+        elapsed: (Date.now() - formOpenedAt.current) / 1000,
       }),
     })
       .then((r) => r.ok)
@@ -131,6 +137,8 @@ export default function Index() {
         contact: agentContact,
         skills: agentSkills,
         motivation: agentMotivation,
+        website: agentHp,
+        elapsed: (Date.now() - formOpenedAt.current) / 1000,
       }),
     })
       .then((r) => r.ok)
@@ -395,6 +403,7 @@ export default function Index() {
                     </div>
                   </div>
                 )}
+                <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={agentHp} onChange={(e) => setAgentHp(e.target.value)} style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
                 <button className="btn-cascade" onClick={handleAgent} disabled={!agentConsent || agentAlias.length < 2 || agentEnc} style={{ opacity: !agentConsent || agentAlias.length < 2 ? 0.35 : 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%" }}>
                   <Icon name="Fingerprint" size={15} />
                   {t.agent.fields.btn}
@@ -512,6 +521,7 @@ export default function Index() {
                   <textarea className="cascade-input" rows={6} value={reportMsg} onChange={(e) => setReportMsg(e.target.value)} style={{ resize: "vertical" }} />
                   <div style={{ fontSize: "0.72rem", color: reportMsg.length >= 50 ? "var(--cascade-red)" : "#374151", marginTop: 4 }}>{reportMsg.length} / 50</div>
                 </div>
+                <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={reportHp} onChange={(e) => setReportHp(e.target.value)} style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
                 <p style={{ fontSize: "0.73rem", color: "#4B5563", fontStyle: "italic" }}>{t.report.form.hint}</p>
                 {reportError && (
                   <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(139,26,26,0.1)", border: "1px solid var(--cascade-red)" }}>
