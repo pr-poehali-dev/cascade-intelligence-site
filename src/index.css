@@ -290,6 +290,28 @@ img {
   padding: 2rem;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.bento-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  background: radial-gradient(
+    360px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(158, 35, 33, 0.18),
+    transparent 60%
+  );
+}
+.bento-item:hover::before {
+  opacity: 1;
+}
+.bento-item > * {
+  position: relative;
+  z-index: 1;
 }
 .bento-lg {
   grid-column: span 2;

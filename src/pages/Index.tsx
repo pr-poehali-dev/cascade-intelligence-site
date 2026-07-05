@@ -369,7 +369,16 @@ export default function Index() {
           </div>
           <div className="bento-grid">
             {t.services.items.map((s, i) => (
-              <div key={i} className={`cascade-card bento-item reveal${i === 0 ? " bento-lg" : ""}`} style={{ transitionDelay: `${(i % 3) * 0.08}s` }}>
+              <div
+                key={i}
+                className={`cascade-card bento-item reveal${i === 0 ? " bento-lg" : ""}`}
+                style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
+                onMouseMove={(e) => {
+                  const r = e.currentTarget.getBoundingClientRect();
+                  e.currentTarget.style.setProperty("--mx", `${e.clientX - r.left}px`);
+                  e.currentTarget.style.setProperty("--my", `${e.clientY - r.top}px`);
+                }}
+              >
                 <div className="bento-icon">
                   <Icon name={s.icon} fallback="Circle" size={i === 0 ? 30 : 22} style={{ color: "var(--cascade-red)" }} />
                 </div>
