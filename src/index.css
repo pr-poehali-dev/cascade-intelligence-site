@@ -329,12 +329,6 @@ img {
 .cascade-input::placeholder {
   color: #6b7280;
 }
-.cascade-input:focus {
-  border-color: var(--cascade-red);
-}
-.cascade-input::placeholder {
-  color: #4b5563;
-}
 
 /* Tag */
 .cascade-tag {
@@ -587,6 +581,33 @@ img {
   }
   .wanted-row {
     grid-template-columns: 1fr 1fr !important;
+  }
+  section:not(#home) {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+  #home {
+    padding-top: 104px !important;
+    padding-bottom: 3.5rem !important;
+  }
+  #home .pad-section {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  .grid-2 {
+    gap: 28px !important;
+  }
+  .grid-services {
+    gap: 14px !important;
+  }
+  .secure-ribbon {
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+  }
+}
+@media (max-width: 380px) {
+  .stats-grid .cascade-card {
+    padding: 1.1rem !important;
   }
 }
 
