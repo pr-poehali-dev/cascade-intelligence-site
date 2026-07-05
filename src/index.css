@@ -277,6 +277,64 @@ img {
   margin-bottom: 1.5rem;
 }
 
+/* Header CTA button */
+.header-cta {
+  display: inline-flex;
+  align-items: center;
+  background: var(--cascade-red);
+  color: #fff;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  padding: 8px 16px;
+  border: 1px solid var(--cascade-red);
+  border-radius: 5px;
+  transition:
+    background 0.3s,
+    color 0.3s,
+    box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.header-cta:hover {
+  background: transparent;
+  color: var(--cascade-red);
+  box-shadow: 0 6px 18px -6px rgba(158, 35, 33, 0.7);
+}
+.header-cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+  opacity: 0;
+}
+.header-cta:hover::after {
+  animation: btnShine 0.85s ease;
+}
+.header-phone-icon {
+  display: none !important;
+}
+@media (max-width: 720px) {
+  .header-cta {
+    display: none;
+  }
+  .header-phone-icon {
+    display: flex !important;
+  }
+}
+
 /* Steps — how we work */
 .steps-grid {
   display: grid;

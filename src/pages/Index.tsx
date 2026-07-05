@@ -256,7 +256,12 @@ export default function Index() {
             )}
           </div>
 
-          <a href={`tel:${PHONE}`} className="lang-btn" style={{ display: "flex", alignItems: "center", gap: 6, textDecoration: "none" }}>
+          <a href={`tel:${PHONE}`} className="header-cta" style={{ display: "flex", alignItems: "center", gap: 7, textDecoration: "none" }}>
+            <Icon name="Phone" size={13} />
+            {t.cta.consultBtn}
+          </a>
+
+          <a href={`tel:${PHONE}`} className="lang-btn header-phone-icon" style={{ display: "flex", alignItems: "center", gap: 6, textDecoration: "none" }}>
             <Icon name="Phone" size={13} />
           </a>
 
