@@ -287,12 +287,20 @@ export default function Index() {
           <div className="animate-fade-in-up" style={{ opacity: 0 }}>
             <Tag>{t.hero.tag}</Tag>
           </div>
-          <h1 className="animate-fade-in-up cascade-line-anim" style={{
+          <h1 className="cascade-line-anim hero-title" style={{
             fontFamily: "Oswald", fontWeight: 700, lineHeight: 0.88,
             fontSize: "clamp(3.5rem, 13vw, 10rem)", letterSpacing: "0.05em", color: "white",
-            animationDelay: "0.2s", opacity: 0, marginBottom: "0.75rem",
+            marginBottom: "0.75rem",
           }}>
-            {t.hero.title}
+            {Array.from(t.hero.title).map((ch, i) => (
+              <span
+                key={`${lang}-${i}`}
+                className="hero-letter"
+                style={{ animationDelay: `${0.2 + i * 0.08}s` }}
+              >
+                {ch === " " ? "\u00A0" : ch}
+              </span>
+            ))}
           </h1>
           <p className="animate-fade-in-up" style={{
             fontFamily: "Oswald", fontSize: "clamp(0.9rem, 2vw, 1.3rem)", letterSpacing: "0.2em",

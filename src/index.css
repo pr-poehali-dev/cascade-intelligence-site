@@ -213,6 +213,41 @@ img {
   animation: pulse-red 2s infinite;
 }
 
+/* Hero title letters */
+.hero-title {
+  display: inline-flex;
+  flex-wrap: wrap;
+}
+.hero-letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.5em);
+  animation: heroLetterIn 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes heroLetterIn {
+  0% {
+    opacity: 0;
+    transform: translateY(0.5em);
+    filter: blur(6px);
+  }
+  60% {
+    opacity: 1;
+    filter: blur(0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}
+
 /* Scroll reveal */
 .reveal {
   opacity: 0;
