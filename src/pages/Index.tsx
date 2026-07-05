@@ -17,6 +17,7 @@ export default function Index() {
   const [activeSection, setActiveSection] = useState<SectionId>("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const [reportSubmitted, setReportSubmitted] = useState(false);
   const [reportCategory, setReportCategory] = useState(0);
@@ -87,6 +88,13 @@ export default function Index() {
       if (el) observer.observe(el);
     });
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -218,8 +226,11 @@ export default function Index() {
       {/* NAVBAR */}
       <header style={{
         position: "fixed", top: 28, left: 0, right: 0, zIndex: 50,
-        background: "rgba(10,10,10,0.96)", borderBottom: "1px solid var(--cascade-line)",
-        backdropFilter: "blur(8px)", height: 60,
+        background: scrolled ? "rgba(16,18,22,0.98)" : "rgba(16,18,22,0.9)",
+        borderBottom: "1px solid var(--cascade-line)",
+        backdropFilter: "blur(12px)", height: scrolled ? 52 : 60,
+        boxShadow: scrolled ? "0 8px 30px -12px rgba(0,0,0,0.7)" : "none",
+        transition: "height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 1.5rem",
       }} className="pad-section">
