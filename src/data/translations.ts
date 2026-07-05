@@ -31,6 +31,8 @@ export interface Dict {
   safety: { title: string; items: { icon: string; text: string }[] };
   faq: { tag: string; title: string; items: { q: string; a: string }[] };
   trust: { title: string; items: { icon: string; value: string; label: string }[] };
+  reassure: string;
+  steps: { tag: string; title: string; items: { icon: string; title: string; desc: string }[] };
   agent: {
     tag: string; title: string; desc: string; secure: string;
     fields: { alias: string; contact: string; skills: string; motivation: string; btn: string };
@@ -84,6 +86,13 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
       { icon: "Clock", value: "24/7", label: "на связи" },
       { icon: "ShieldCheck", value: "100%", label: "конфиденциальность" },
     ] },
+    reassure: "Бесплатно · Конфиденциально · Ни к чему не обязывает",
+    steps: { tag: "Как мы работаем", title: "ВСЁ НАЧИНАЕТСЯ С ОДНОГО ЗВОНКА", items: [
+      { icon: "Phone", title: "Свяжитесь с нами", desc: "Позвоните или напишите в Telegram. Опишите ситуацию в общих чертах — без лишних деталей." },
+      { icon: "MessagesSquare", title: "Бесплатная консультация", desc: "Мы выслушаем, зададим уточняющие вопросы и оценим, чем можем помочь. Конфиденциально." },
+      { icon: "ClipboardList", title: "План и условия", desc: "Предложим чёткий план действий, сроки и стоимость. Вы решаете, работать ли с нами." },
+      { icon: "ShieldCheck", title: "Результат", desc: "Беремся за дело и доводим до результата. По завершении — документированный отчёт." },
+    ] },
     agent: { tag: "Сотрудничество", title: "СТАНЬТЕ ЧАСТЬЮ КОМАНДЫ", desc: "Мы ищем людей действия по всему миру — тех, кто обладает доступом, информацией, особыми навыками или просто хочет быть полезным большому делу. Военный и оперативный опыт, знание закрытых сфер, связи в нужных кругах — всё это ценится. Каждому находится своя роль. Это не работа за деньги, а вклад в дело, которое больше нас. Сделайте первый шаг — остальное мы возьмём на себя.", secure: "Данные передаются по защищённому каналу. Мы не сохраняем IP-адрес и метаданные — ваша анонимность под полной защитой. Обратиться к нам безопасно.", fields: { alias: "Как к вам обращаться", contact: "Защищённый способ связи", skills: "Ваш опыт, доступы, регион и возможности", motivation: "Чем вы можете быть полезны", btn: "Подать заявку" }, consent: "Я готов содействовать на добровольной и безвозмездной основе", sent: "ЗАЯВКА ПРИНЯТА", sentDesc: "Ваш потенциал будет изучен. Если вы нам подходите — с вами свяжутся через указанный канал. Действуйте сдержанно." },
     principles: { tag: "Принципы работы", title: "ПОЧЕМУ ОБРАЩАЮТСЯ ИМЕННО К НАМ", items: [ { icon: "Award", title: "Платите за результат", desc: "Не решили вашу задачу — не берём оплату. Мы беремся за дело только тогда, когда уверены в исходе." }, { icon: "Medal", title: "Люди с особым прошлым", desc: "В команде — специалисты с оперативным и силовым опытом, прошедшие школу, о которой не пишут в резюме." }, { icon: "FileCheck", title: "Полный отчёт", desc: "По завершении вы получаете задокументированный результат: фото-, видео- и аудиоматериалы, подтверждающие проделанную работу." }, { icon: "Clock", title: "Круглосуточно", desc: "Работаем 24/7, без выходных и праздников. Когда нужно действовать — медлить нельзя." } ] },
     cta: { title: "НЕ РЕШАЙТЕ ПРОБЛЕМУ В ОДИНОЧКУ", desc: "Один звонок — и за вашу ситуацию возьмутся профессионалы. Первая консультация бесплатна и абсолютно конфиденциальна. Чем раньше вы обратитесь — тем больше у нас возможностей помочь.", callBtn: "Позвонить", consultBtn: "Получить консультацию", tgBtn: "Написать в Telegram", note: "Отвечаем круглосуточно · Полная анонимность гарантирована" },
@@ -127,6 +136,13 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
       { icon: "Globe2", value: "40+", label: "countries" },
       { icon: "Clock", value: "24/7", label: "availability" },
       { icon: "ShieldCheck", value: "100%", label: "confidentiality" },
+    ] },
+    reassure: "Free · Confidential · No obligation",
+    steps: { tag: "How we work", title: "IT ALL STARTS WITH ONE CALL", items: [
+      { icon: "Phone", title: "Get in touch", desc: "Call us or message on Telegram. Describe the situation in general terms — no unnecessary details." },
+      { icon: "MessagesSquare", title: "Free consultation", desc: "We listen, ask clarifying questions and assess how we can help. Confidentially." },
+      { icon: "ClipboardList", title: "Plan and terms", desc: "We propose a clear plan of action, timeline and price. You decide whether to work with us." },
+      { icon: "ShieldCheck", title: "Result", desc: "We take on the case and see it through. On completion — a documented report." },
     ] },
     agent: { tag: "Cooperation", title: "BECOME PART OF THE TEAM", desc: "We are looking for people of action around the world — those who hold access, information, special skills, or simply wish to be useful to a greater cause. Military and operational experience, knowledge of closed circles, connections in the right places — all of it is valued. There is a role for everyone. This is not work for money, but a contribution to something larger than ourselves. Take the first step — we will handle the rest.", secure: "Data is sent over a secure channel. We do not store your IP address or metadata — your anonymity is fully protected. Reaching out to us is safe.", fields: { alias: "How to address you", contact: "Secure contact method", skills: "Your experience, access, region and capabilities", motivation: "How you can be useful", btn: "Submit Request" }, consent: "I am ready to assist on a voluntary and unpaid basis", sent: "REQUEST RECEIVED", sentDesc: "Your potential will be reviewed. If you are a fit, we will contact you via the specified channel. Act with discretion." },
     principles: { tag: "How we work", title: "WHY PEOPLE COME TO US", items: [ { icon: "Award", title: "Pay for results", desc: "If we don't solve your problem, we don't charge. We take on a case only when we are confident of the outcome." }, { icon: "Medal", title: "People with a special past", desc: "Our team includes specialists with operational and field experience — trained in a school that never appears on a résumé." }, { icon: "FileCheck", title: "Full report", desc: "Upon completion you receive documented proof: photo, video and audio materials confirming the work done." }, { icon: "Clock", title: "Around the clock", desc: "We work 24/7, no weekends or holidays. When action is needed, there is no time to wait." } ] },
@@ -172,6 +188,13 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
       { icon: "Clock", value: "24/7", label: "disponibilité" },
       { icon: "ShieldCheck", value: "100%", label: "confidentialité" },
     ] },
+    reassure: "Gratuit · Confidentiel · Sans engagement",
+    steps: { tag: "Comment nous travaillons", title: "TOUT COMMENCE PAR UN APPEL", items: [
+      { icon: "Phone", title: "Contactez-nous", desc: "Appelez ou écrivez sur Telegram. Décrivez la situation dans les grandes lignes — sans détails superflus." },
+      { icon: "MessagesSquare", title: "Consultation gratuite", desc: "Nous écoutons, posons des questions et évaluons comment vous aider. En toute confidentialité." },
+      { icon: "ClipboardList", title: "Plan et conditions", desc: "Nous proposons un plan d'action clair, des délais et un prix. C'est vous qui décidez." },
+      { icon: "ShieldCheck", title: "Résultat", desc: "Nous prenons l'affaire en main et allons jusqu'au bout. À la fin — un rapport documenté." },
+    ] },
     agent: { tag: "Coopération", title: "REJOIGNEZ L'ÉQUIPE", desc: "Nous recherchons des hommes d'action partout dans le monde — ceux qui détiennent un accès, des informations, des compétences particulières, ou qui souhaitent simplement être utiles à une grande cause. Expérience militaire et opérationnelle, connaissance des milieux fermés, relations dans les bons cercles — tout cela est apprécié. Chacun trouve son rôle. Ce n'est pas un travail rémunéré, mais une contribution à une cause plus grande que nous. Faites le premier pas — nous nous chargeons du reste.", secure: "Les données sont transmises via un canal sécurisé. Nous ne conservons ni votre adresse IP ni les métadonnées — votre anonymat est totalement protégé. Nous contacter est sûr.", fields: { alias: "Comment vous appeler", contact: "Moyen de contact sécurisé", skills: "Votre expérience, vos accès, votre région et vos possibilités", motivation: "En quoi vous pouvez être utile", btn: "Envoyer la demande" }, consent: "Je suis prêt à contribuer sur une base bénévole et non rémunérée", sent: "DEMANDE REÇUE", sentDesc: "Votre potentiel sera étudié. Si vous correspondez, nous vous contacterons via le canal indiqué. Agissez avec discrétion." },
     principles: { tag: "Notre méthode", title: "POURQUOI ON S'ADRESSE À NOUS", items: [ { icon: "Award", title: "Payez pour le résultat", desc: "Si nous ne résolvons pas votre problème, nous ne facturons rien. Nous n'acceptons une affaire que lorsque nous sommes sûrs de l'issue." }, { icon: "Medal", title: "Des hommes au passé particulier", desc: "Notre équipe compte des spécialistes à l'expérience opérationnelle et de terrain — formés dans une école qui n'apparaît sur aucun CV." }, { icon: "FileCheck", title: "Rapport complet", desc: "À la fin, vous recevez une preuve documentée : photos, vidéos et enregistrements audio attestant le travail accompli." }, { icon: "Clock", title: "24h/24", desc: "Nous travaillons 24h/24, sans week-ends ni jours fériés. Quand il faut agir, on ne peut pas attendre." } ] },
     cta: { title: "NE RESTEZ PAS SEUL FACE AU PROBLÈME", desc: "Un appel — et des professionnels prennent en main votre situation. La première consultation est gratuite et totalement confidentielle. Plus vous nous contactez tôt, plus nous pouvons agir.", callBtn: "Appeler", consultBtn: "Obtenir une consultation", tgBtn: "Écrire sur Telegram", note: "Disponible 24h/24 · Anonymat total garanti" },
@@ -215,6 +238,13 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
       { icon: "Globe2", value: "+40", label: "دولة" },
       { icon: "Clock", value: "24/7", label: "متاحون دائماً" },
       { icon: "ShieldCheck", value: "100%", label: "سرية تامة" },
+    ] },
+    reassure: "مجاناً · بسرية تامة · دون أي التزام",
+    steps: { tag: "كيف نعمل", title: "كل شيء يبدأ بمكالمة واحدة", items: [
+      { icon: "Phone", title: "تواصل معنا", desc: "اتصل أو راسلنا على تيليجرام. صِف الوضع بشكل عام — دون تفاصيل زائدة." },
+      { icon: "MessagesSquare", title: "استشارة مجانية", desc: "نستمع، ونطرح أسئلة توضيحية، ونقيّم كيف يمكننا المساعدة. بسرية تامة." },
+      { icon: "ClipboardList", title: "الخطة والشروط", desc: "نقترح خطة عمل واضحة ومدة وسعراً. أنت من يقرر التعامل معنا." },
+      { icon: "ShieldCheck", title: "النتيجة", desc: "نتولى القضية وننجزها حتى النهاية. وعند الانتهاء — تقرير موثّق." },
     ] },
     agent: { tag: "تعاون", title: "كن جزءاً من الفريق", desc: "نبحث عن أصحاب الفعل حول العالم — من يمتلكون وصولاً أو معلومات أو مهارات خاصة، أو يرغبون ببساطة في أن يكونوا نافعين لقضية كبرى. الخبرة العسكرية والميدانية، ومعرفة الأوساط المغلقة، والصلات في الدوائر المناسبة — كل ذلك مُقدَّر. لكلٍّ دوره. هذا ليس عملاً مقابل المال، بل إسهام في قضية أكبر منّا. اتخذ الخطوة الأولى — ونحن نتكفّل بالباقي.", secure: "تُنقل البيانات عبر قناة آمنة. لا نحفظ عنوان IP أو البيانات الوصفية — هويتك محمية بالكامل. التواصل معنا آمن.", fields: { alias: "كيف نخاطبك", contact: "وسيلة تواصل آمنة", skills: "خبرتك، وصولك، منطقتك وإمكاناتك", motivation: "كيف يمكنك أن تكون نافعاً" , btn: "إرسال الطلب" }, consent: "أنا مستعد للمساهمة على أساس تطوعي وبدون مقابل", sent: "تم استلام الطلب", sentDesc: "ستتم دراسة إمكاناتك. إن كنت مناسباً — سنتواصل معك عبر القناة المحددة. تصرّف بتكتم." },
     principles: { tag: "أسلوب عملنا", title: "لماذا يلجؤون إلينا تحديداً", items: [ { icon: "Award", title: "تدفع مقابل النتيجة", desc: "إن لم نحل مشكلتك، فلا نتقاضى أجراً. لا نقبل القضية إلا عندما نكون واثقين من النتيجة." }, { icon: "Medal", title: "أشخاص بماضٍ خاص", desc: "يضم فريقنا متخصصين بخبرة ميدانية وعملياتية — تدربوا في مدرسة لا تُذكر في السير الذاتية." }, { icon: "FileCheck", title: "تقرير كامل", desc: "عند الإنجاز تحصل على دليل موثّق: مواد مصورة وفيديو وصوتية تؤكد العمل المنجز." }, { icon: "Clock", title: "على مدار الساعة", desc: "نعمل 24/7 بلا عطلات. حين يجب التحرك، لا وقت للانتظار." } ] },
@@ -260,6 +290,13 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
       { icon: "Clock", value: "24/7", label: "全天候待命" },
       { icon: "ShieldCheck", value: "100%", label: "绝对保密" },
     ] },
+    reassure: "免费 · 保密 · 无任何义务",
+    steps: { tag: "我们如何工作", title: "一切始于一通电话", items: [
+      { icon: "Phone", title: "联系我们", desc: "致电或通过 Telegram 联系。大致描述您的情况——无需多余细节。" },
+      { icon: "MessagesSquare", title: "免费咨询", desc: "我们倾听、提出澄清问题，并评估如何帮助您。全程保密。" },
+      { icon: "ClipboardList", title: "方案与条款", desc: "我们提供清晰的行动方案、周期和价格。是否合作由您决定。" },
+      { icon: "ShieldCheck", title: "结果", desc: "我们接手并全力做到底。完成后提供有据可查的报告。" },
+    ] },
     agent: { tag: "合作", title: "成为团队的一员", desc: "我们在全球寻找行动派——拥有渠道、信息、特殊技能，或只是愿意为伟大事业尽一份力的人。军事与行动经验、对封闭领域的了解、在关键圈层的人脉——这些都备受重视。每个人都有自己的角色。这不是为钱工作，而是为比我们更宏大的事业贡献力量。迈出第一步——其余交给我们。", secure: "数据通过安全通道传输。我们不保存您的 IP 地址和元数据——您的匿名性受到完全保护。联系我们是安全的。", fields: { alias: "如何称呼您", contact: "安全的联系方式", skills: "您的经验、渠道、所在地区与能力", motivation: "您能提供怎样的帮助", btn: "提交申请" }, consent: "我愿意以自愿且无偿的方式提供协助", sent: "申请已接收", sentDesc: "我们将评估您的潜力。若您合适，将通过指定渠道与您联系。请保持低调。" },
     principles: { tag: "工作原则", title: "为何人们选择我们", items: [ { icon: "Award", title: "按结果付费", desc: "若未能解决您的问题，我们分文不取。只有在对结果有把握时，我们才会接案。" }, { icon: "Medal", title: "拥有特殊背景的人", desc: "团队成员具备一线行动与实战经验——出自履历中从不会写明的训练。" }, { icon: "FileCheck", title: "完整报告", desc: "任务完成后，您将获得有据可查的成果：照片、视频与音频资料，证明所做的工作。" }, { icon: "Clock", title: "全天候", desc: "我们 24/7 工作，无休无假。需要行动时，绝不拖延。" } ] },
     cta: { title: "不要独自面对问题", desc: "一通电话——专业团队即刻接手您的情况。首次咨询免费且绝对保密。您越早联系，我们能做的就越多。", callBtn: "致电", consultBtn: "获取咨询", tgBtn: "通过 Telegram 联系", note: "24 小时待命 · 保证完全匿名" },
@@ -304,6 +341,13 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
       { icon: "Clock", value: "24/7", label: "זמינות" },
       { icon: "ShieldCheck", value: "100%", label: "חיסיון מלא" },
     ] },
+    reassure: "חינם · חסוי · ללא כל התחייבות",
+    steps: { tag: "איך אנחנו עובדים", title: "הכול מתחיל בשיחה אחת", items: [
+      { icon: "Phone", title: "צרו קשר", desc: "התקשרו או כתבו בטלגרם. תארו את המצב באופן כללי — ללא פרטים מיותרים." },
+      { icon: "MessagesSquare", title: "ייעוץ חינם", desc: "אנו מקשיבים, שואלים שאלות הבהרה ומעריכים כיצד נוכל לעזור. בחיסיון מלא." },
+      { icon: "ClipboardList", title: "תוכנית ותנאים", desc: "נציע תוכנית פעולה ברורה, לוחות זמנים ומחיר. אתם מחליטים אם לעבוד איתנו." },
+      { icon: "ShieldCheck", title: "תוצאה", desc: "אנו לוקחים את התיק ומביאים אותו לתוצאה. בסיום — דוח מתועד." },
+    ] },
     agent: { tag: "שיתוף פעולה", title: "הצטרפו לצוות", desc: "אנו מחפשים אנשי מעשה בכל העולם — בעלי גישה, מידע, כישורים מיוחדים, או כאלה שפשוט רוצים להועיל למטרה גדולה. ניסיון צבאי ומבצעי, היכרות עם מעגלים סגורים, קשרים בחוגים הנכונים — כל אלה מוערכים. לכל אחד יש תפקיד. זו אינה עבודה תמורת כסף, אלא תרומה למשהו גדול מאיתנו. עשו את הצעד הראשון — את השאר ניקח על עצמנו.", secure: "הנתונים נשלחים בערוץ מאובטח. איננו שומרים את כתובת ה-IP או את המטא-נתונים — האנונימיות שלכם מוגנת לחלוטין. לפנות אלינו זה בטוח.", fields: { alias: "כיצד לפנות אליך", contact: "אמצעי קשר מאובטח", skills: "הניסיון, הגישות, האזור והיכולות שלך", motivation: "כיצד תוכל להועיל", btn: "שליחת בקשה" }, consent: "אני מוכן לסייע על בסיס התנדבותי וללא תמורה", sent: "הבקשה התקבלה", sentDesc: "הפוטנציאל שלך ייבחן. אם תתאים — ניצור איתך קשר דרך הערוץ שצוין. פעל בדיסקרטיות." },
     principles: { tag: "שיטת העבודה", title: "מדוע פונים דווקא אלינו", items: [ { icon: "Award", title: "משלמים על התוצאה", desc: "אם לא פתרנו את הבעיה — איננו גובים תשלום. אנו מקבלים משימה רק כשאנו בטוחים בתוצאה." }, { icon: "Medal", title: "אנשים עם עבר מיוחד", desc: "בצוות מומחים בעלי ניסיון מבצעי ושטח — בוגרי אסכולה שלעולם אינה מופיעה בקורות חיים." }, { icon: "FileCheck", title: "דוח מלא", desc: "בסיום תקבלו הוכחה מתועדת: חומרי צילום, וידאו ואודיו המאמתים את העבודה שבוצעה." }, { icon: "Clock", title: "מסביב לשעון", desc: "אנו עובדים 24/7, ללא סופי שבוע וחגים. כשצריך לפעול — אין זמן להמתין." } ] },
     cta: { title: "אל תתמודדו עם הבעיה לבד", desc: "שיחה אחת — ואנשי מקצוע לוקחים את המצב שלכם לידיים. הייעוץ הראשון חינמי וחסוי לחלוטין. ככל שתפנו מוקדם יותר, כך נוכל לעשות יותר.", callBtn: "התקשרו", consultBtn: "קבלת ייעוץ", tgBtn: "כתבו בטלגרם", note: "זמינים 24/7 · אנונימיות מלאה מובטחת" },
@@ -347,6 +391,13 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
       { icon: "Globe2", value: "40+", label: "活動国" },
       { icon: "Clock", value: "24/7", label: "対応可能" },
       { icon: "ShieldCheck", value: "100%", label: "機密保持" },
+    ] },
+    reassure: "無料 · 機密厳守 · 義務は一切なし",
+    steps: { tag: "ご依頼の流れ", title: "すべては一本の電話から", items: [
+      { icon: "Phone", title: "ご連絡ください", desc: "お電話または Telegram で。状況を大まかにお伝えください——余計な詳細は不要です。" },
+      { icon: "MessagesSquare", title: "無料相談", desc: "お話を伺い、確認の質問をし、どうお役に立てるか見極めます。機密厳守で。" },
+      { icon: "ClipboardList", title: "計画と条件", desc: "明確な行動計画、期間、料金をご提案します。ご依頼になるかはお客様が決めます。" },
+      { icon: "ShieldCheck", title: "結果", desc: "案件をお引き受けし、結果まで導きます。完了時には記録された報告書をお渡しします。" },
     ] },
     agent: { tag: "協力", title: "チームの一員になる", desc: "私たちは世界中で「行動する人」を求めています——アクセス、情報、特別な技能をお持ちの方、あるいは大いなる目的に役立ちたいと願う方へ。軍事・作戦の経験、閉ざされた領域への知見、適切な人脈——そのすべてが評価されます。誰にでも役割があります。これは金銭のための仕事ではなく、私たち自身より大きな目的への貢献です。最初の一歩を——あとは私たちが引き受けます。", secure: "データは安全な経路で送信されます。IPアドレスやメタデータは保存しません——あなたの匿名性は完全に守られます。私たちへの連絡は安全です。", fields: { alias: "お呼びする名前", contact: "安全な連絡手段", skills: "ご経験、アクセス、地域、可能性", motivation: "どのように役立てるか", btn: "申し込む" }, consent: "私は自発的かつ無報酬で協力する用意があります", sent: "申し込みを受領しました", sentDesc: "あなたの可能性を検討します。適任であれば、指定の経路でご連絡します。慎重に行動してください。" },
     principles: { tag: "業務方針", title: "なぜ私たちが選ばれるのか", items: [ { icon: "Award", title: "成果に対してお支払い", desc: "問題を解決できなければ、費用はいただきません。結果に確信が持てる場合にのみ案件をお受けします。" }, { icon: "Medal", title: "特別な経歴を持つ人材", desc: "チームには現場・作戦の経験を持つ専門家が在籍——履歴書には決して載らない訓練を経た者たちです。" }, { icon: "FileCheck", title: "完全な報告書", desc: "完了時、実施した作業を裏付ける写真・動画・音声の記録をお渡しします。" }, { icon: "Clock", title: "24時間体制", desc: "土日祝日なく24時間稼働。行動すべき時に、待つ時間はありません。" } ] },

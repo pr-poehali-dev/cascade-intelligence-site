@@ -319,6 +319,10 @@ export default function Index() {
             <a href={`tel:${PHONE}`} className="btn-call cta-pulse" style={{ padding: "14px 32px" }}><Icon name="Phone" size={17} />{t.contact.callBtn}</a>
             <button className="btn-cascade-outline" onClick={() => scrollTo("services")}>{t.hero.btn1}</button>
           </div>
+          <div className="animate-fade-in-up" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 18, animationDelay: "0.95s", opacity: 0 }}>
+            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
+            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.8rem", color: "#9CA3AF", letterSpacing: "0.02em" }}>{t.reassure}</span>
+          </div>
         </div>
       </section>
 
@@ -505,6 +509,36 @@ export default function Index() {
         </div>
       </section>
 
+      {/* STEPS — HOW WE WORK */}
+      <section style={{ padding: "6rem 0", background: "var(--cascade-charcoal)", borderTop: "1px solid var(--cascade-line)" }}>
+        <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
+          <div className="reveal" style={{ marginBottom: 48, textAlign: "center" }}>
+            <Tag>{t.steps.tag}</Tag>
+            <div className="section-divider" style={{ margin: "0 auto" }} />
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, letterSpacing: "0.02em", marginTop: 16, lineHeight: 1.05 }}>{t.steps.title}</h2>
+          </div>
+          <div className="steps-grid">
+            {t.steps.items.map((step, i) => (
+              <div key={i} className="step-item reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
+                <div className="step-num">{i + 1}</div>
+                <div style={{ width: 48, height: 48, margin: "0 auto 16px", background: "rgba(158,35,33,0.1)", border: "1px solid rgba(158,35,33,0.28)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  <Icon name={step.icon} fallback="Circle" size={22} style={{ color: "var(--cascade-red)" }} />
+                </div>
+                <h3 style={{ fontFamily: "Oswald", fontSize: "1.05rem", fontWeight: 600, letterSpacing: "0.03em", marginBottom: "0.6rem", color: "var(--cascade-light)" }}>{step.title}</h3>
+                <p style={{ color: "#9CA3AF", fontSize: "0.86rem", lineHeight: 1.75 }}>{step.desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="reveal" style={{ textAlign: "center", marginTop: 44, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
+            <a href={`tel:${PHONE}`} className="btn-call cta-pulse" style={{ padding: "14px 34px" }}><Icon name="Phone" size={17} />{t.cta.callBtn}</a>
+            <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+              <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
+              <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#9CA3AF" }}>{t.reassure}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ */}
       <section id="faq" style={{ padding: "6rem 0", background: "var(--cascade-dark)" }}>
         <div className="pad-section" style={{ maxWidth: 860, margin: "0 auto", padding: "0 1.5rem" }}>
@@ -551,6 +585,10 @@ export default function Index() {
             <a href={`tel:${PHONE}`} className="btn-call cta-pulse" style={{ fontSize: "1rem", padding: "16px 36px" }}><Icon name="Phone" size={18} />{t.cta.callBtn}</a>
             <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail" style={{ padding: "16px 36px" }}><Icon name="Send" size={18} />{t.cta.tgBtn}</a>
           </div>
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 18 }}>
+            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
+            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#D1D5DB", letterSpacing: "0.02em" }}>{t.reassure}</span>
+          </div>
         </div>
       </section>
 
@@ -590,6 +628,10 @@ export default function Index() {
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
             <a href={`tel:${PHONE}`} className="btn-call"><Icon name="Phone" size={16} />{t.contact.callBtn}</a>
             <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail"><Icon name="Send" size={16} />{t.contact.tgBtn}</a>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 18 }}>
+            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
+            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#9CA3AF", letterSpacing: "0.02em" }}>{t.reassure}</span>
           </div>
         </div>
       </section>
