@@ -85,8 +85,34 @@ export default function Index() {
     return () => document.removeEventListener("mousedown", handler);
   }, []);
 
+  const rateLimitHit = () => {
+    const KEY = "cascade_submits";
+    const WINDOW = 60000;
+    const LIMIT = 3;
+    const now = Date.now();
+    let stamps: number[] = [];
+    try {
+      stamps = JSON.parse(localStorage.getItem(KEY) || "[]");
+    } catch {
+      stamps = [];
+    }
+    stamps = stamps.filter((ts) => now - ts < WINDOW);
+    if (stamps.length >= LIMIT) return true;
+    stamps.push(now);
+    try {
+      localStorage.setItem(KEY, JSON.stringify(stamps));
+    } catch {
+      /* ignore */
+    }
+    return false;
+  };
+
   const handleReport = () => {
     if (reportMsg.length < 50) return;
+    if (rateLimitHit()) {
+      setReportError(true);
+      return;
+    }
     setEncrypting(true);
     setEncryptProgress(0);
     setReportError(false);
@@ -124,6 +150,10 @@ export default function Index() {
 
   const handleAgent = () => {
     if (!agentConsent || agentAlias.length < 2) return;
+    if (rateLimitHit()) {
+      setAgentError(true);
+      return;
+    }
     setAgentEnc(true);
     setAgentEncProgress(0);
     setAgentError(false);
