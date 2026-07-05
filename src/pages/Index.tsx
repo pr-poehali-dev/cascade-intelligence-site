@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 import { TRANSLATIONS, LANGS, type Lang } from "@/data/translations";
+import { useReveal } from "@/hooks/use-reveal";
 
 type SectionId = "home" | "about" | "services" | "report" | "agent" | "faq" | "contact";
 
@@ -42,6 +43,8 @@ export default function Index() {
   const langRef = useRef<HTMLDivElement>(null);
   const t = TRANSLATIONS[lang];
   const isRtl = LANGS.find((l) => l.code === lang)?.rtl ?? false;
+
+  useReveal([lang]);
 
   const navItems: { key: SectionId; label: string }[] = [
     { key: "home", label: t.nav.home },
@@ -304,6 +307,22 @@ export default function Index() {
         </div>
       </section>
 
+      {/* TRUST BAR */}
+      <section style={{ padding: "3rem 0", background: "var(--cascade-dark)", borderTop: "1px solid var(--cascade-line)", borderBottom: "1px solid var(--cascade-line)" }}>
+        <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
+          <div className="reveal" style={{ textAlign: "center", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.28em", color: "#6B7280", textTransform: "uppercase", marginBottom: 28 }}>{t.trust.title}</div>
+          <div className="trust-bar">
+            {t.trust.items.map((item, i) => (
+              <div key={i} className="trust-item reveal" style={{ transitionDelay: `${(i % 5) * 0.07}s` }}>
+                <Icon name={item.icon} fallback="ShieldCheck" size={22} style={{ color: "var(--cascade-red)", marginBottom: 10 }} />
+                <div style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "var(--cascade-light)", lineHeight: 1 }}>{item.value}</div>
+                <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "#6B7280", marginTop: 6, letterSpacing: "0.04em" }}>{item.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ABOUT */}
       <section id="about" style={{ padding: "6rem 0", background: "var(--cascade-charcoal)", position: "relative" }}>
         <div className="pad-section grid-2" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center", position: "relative" }}>
@@ -343,29 +362,29 @@ export default function Index() {
       {/* SERVICES */}
       <section id="services" style={{ padding: "6rem 0", background: "var(--cascade-dark)" }}>
         <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
-          <div style={{ marginBottom: 48, textAlign: "center" }}>
+          <div className="reveal" style={{ marginBottom: 48, textAlign: "center" }}>
             <Tag>{t.services.tag}</Tag>
             <div className="section-divider" style={{ margin: "0 auto" }} />
-            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, letterSpacing: "0.08em", marginTop: 16 }}>{t.services.title}</h2>
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, letterSpacing: "0.02em", marginTop: 16, lineHeight: 1.05 }}>{t.services.title}</h2>
           </div>
-          <div className="grid-services" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+          <div className="bento-grid">
             {t.services.items.map((s, i) => (
-              <div key={i} className="cascade-card" style={{ padding: "2rem" }}>
-                <div style={{ width: 52, height: 52, marginBottom: 24, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Icon name={s.icon} fallback="Circle" size={22} style={{ color: "var(--cascade-red)" }} />
+              <div key={i} className={`cascade-card bento-item reveal${i === 0 ? " bento-lg" : ""}`} style={{ transitionDelay: `${(i % 3) * 0.08}s` }}>
+                <div className="bento-icon">
+                  <Icon name={s.icon} fallback="Circle" size={i === 0 ? 30 : 22} style={{ color: "var(--cascade-red)" }} />
                 </div>
-                <h3 style={{ fontFamily: "Oswald", fontSize: "1.05rem", fontWeight: 500, letterSpacing: "0.08em", marginBottom: "0.75rem" }}>{s.title}</h3>
-                <p style={{ color: "#6B7280", fontSize: "0.87rem", lineHeight: 1.8 }}>{s.desc}</p>
+                <h3 style={{ fontFamily: "Oswald", fontSize: i === 0 ? "1.5rem" : "1.05rem", fontWeight: 600, letterSpacing: "0.04em", marginBottom: "0.75rem", lineHeight: 1.15 }}>{s.title}</h3>
+                <p style={{ color: "#9CA3AF", fontSize: i === 0 ? "0.95rem" : "0.87rem", lineHeight: 1.8 }}>{s.desc}</p>
               </div>
             ))}
           </div>
 
           {/* GEO */}
           <div style={{ marginTop: 80 }}>
-            <div style={{ textAlign: "center" }}>
+            <div className="reveal" style={{ textAlign: "center" }}>
               <Tag>{t.geo.tag}</Tag>
               <div className="section-divider" style={{ margin: "0 auto" }} />
-              <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.6rem, 3vw, 2.6rem)", fontWeight: 700, letterSpacing: "0.08em", marginTop: 16, marginBottom: 16 }}>{t.geo.title}</h2>
+              <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(2rem, 4.5vw, 3.4rem)", fontWeight: 700, letterSpacing: "0.01em", marginTop: 16, marginBottom: 16, lineHeight: 1.02 }}>{t.geo.title}</h2>
               <p style={{ color: "#9CA3AF", fontSize: "1.05rem", maxWidth: 640, margin: "0 auto", lineHeight: 1.8 }}>{t.geo.desc}</p>
             </div>
           </div>
@@ -375,14 +394,14 @@ export default function Index() {
       {/* PRINCIPLES */}
       <section style={{ padding: "6rem 0", background: "var(--cascade-charcoal)", position: "relative", borderTop: "1px solid var(--cascade-line)" }}>
         <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
-          <div style={{ marginBottom: 48 }}>
+          <div className="reveal" style={{ marginBottom: 48 }}>
             <Tag>{t.principles.tag}</Tag>
             <div className="section-divider" />
-            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 700, letterSpacing: "0.06em" }}>{t.principles.title}</h2>
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, letterSpacing: "0.02em", lineHeight: 1.05 }}>{t.principles.title}</h2>
           </div>
           <div className="grid-services" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20 }}>
             {t.principles.items.map((p, i) => (
-              <div key={i} className="cascade-card" style={{ padding: "1.8rem", position: "relative", overflow: "hidden" }}>
+              <div key={i} className="cascade-card reveal" style={{ padding: "1.8rem", position: "relative", overflow: "hidden", transitionDelay: `${(i % 4) * 0.08}s` }}>
                 <div style={{ position: "absolute", top: 0, [isRtl ? "right" : "left"]: 0, width: 3, height: "100%", background: "var(--cascade-red)" }} />
                 <div style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red)" }} />
