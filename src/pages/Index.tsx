@@ -525,6 +525,18 @@ export default function Index() {
             <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.75 }}>{t.report.warning}</p>
           </div>
 
+          <div style={{ marginBottom: 40 }}>
+            <div style={{ fontFamily: "Oswald", fontSize: "0.78rem", letterSpacing: "0.2em", color: "var(--cascade-red)", marginBottom: 18 }}>{t.safety.title}</div>
+            <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
+              {t.safety.items.map((item, i) => (
+                <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: 16, background: "var(--cascade-dark)", border: "1px solid var(--cascade-line)" }}>
+                  <Icon name={item.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                  <p style={{ color: "#9CA3AF", fontSize: "0.82rem", lineHeight: 1.7 }}>{item.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
           {!reportSubmitted ? (
             <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, maxWidth: 880 }}>
               <div>
