@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 import { TRANSLATIONS, LANGS, type Lang } from "@/data/translations";
 import { useReveal } from "@/hooks/use-reveal";
+import CountUp from "@/components/CountUp";
 
 type SectionId = "home" | "about" | "services" | "report" | "agent" | "faq" | "contact";
 
@@ -321,7 +322,7 @@ export default function Index() {
             {t.trust.items.map((item, i) => (
               <div key={i} className="trust-item reveal" style={{ transitionDelay: `${(i % 5) * 0.07}s` }}>
                 <Icon name={item.icon} fallback="ShieldCheck" size={22} style={{ color: "var(--cascade-red)", marginBottom: 10 }} />
-                <div style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "var(--cascade-light)", lineHeight: 1 }}>{item.value}</div>
+                <CountUp value={item.value} style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "var(--cascade-light)", lineHeight: 1, display: "inline-block" }} />
                 <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "#6B7280", marginTop: 6, letterSpacing: "0.04em" }}>{item.label}</div>
               </div>
             ))}
@@ -342,7 +343,7 @@ export default function Index() {
           <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {t.about.stats.map((s, i) => (
               <div key={i} className="cascade-card" style={{ padding: "1.6rem" }}>
-                <div style={{ fontFamily: "Oswald", fontSize: "2.6rem", fontWeight: 700, color: "var(--cascade-red)", lineHeight: 1 }}>{s.num}</div>
+                <CountUp value={s.num} style={{ fontFamily: "Oswald", fontSize: "2.6rem", fontWeight: 700, color: "var(--cascade-red)", lineHeight: 1, display: "inline-block" }} />
                 <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "#6B7280", marginTop: "0.5rem", letterSpacing: "0.05em" }}>{s.label}</div>
               </div>
             ))}
@@ -382,9 +383,9 @@ export default function Index() {
                 onMouseMove={handleSpotlight}
               >
                 <div className="bento-icon">
-                  <Icon name={s.icon} fallback="Circle" size={i === 0 ? 26 : 22} style={{ color: "var(--cascade-red)" }} />
+                  <Icon name={s.icon} fallback="Circle" size={22} style={{ color: "var(--cascade-red)" }} />
                 </div>
-                <h3 style={{ fontFamily: "Oswald", fontSize: i === 0 ? "1.2rem" : "1.05rem", fontWeight: 600, letterSpacing: "0.04em", marginBottom: "0.75rem", lineHeight: 1.15 }}>{s.title}</h3>
+                <h3 style={{ fontFamily: "Oswald", fontSize: "1.05rem", fontWeight: 600, letterSpacing: "0.04em", marginBottom: "0.75rem", lineHeight: 1.15 }}>{s.title}</h3>
                 <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.8 }}>{s.desc}</p>
               </div>
             ))}

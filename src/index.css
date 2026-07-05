@@ -333,9 +333,8 @@ img {
   }
 }
 .bento-lg {
-  grid-column: span 2;
+  grid-column: span 1;
   grid-row: span 1;
-  justify-content: flex-end;
   background: linear-gradient(
     150deg,
     rgba(158, 35, 33, 0.14),
@@ -354,8 +353,8 @@ img {
   justify-content: center;
 }
 .bento-lg .bento-icon {
-  width: 56px;
-  height: 56px;
+  width: 52px;
+  height: 52px;
 }
 @media (max-width: 900px) {
   .bento-grid {
