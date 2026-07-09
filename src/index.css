@@ -43,6 +43,8 @@
     --cascade-grey: #9aa3b2;
     --cascade-light: #eef0f3;
     --cascade-line: #2a2e37;
+    --text-muted: #9ca3af;
+    --text-label: #cbd2dc;
   }
 }
 
@@ -53,6 +55,20 @@
 
   html {
     scroll-behavior: smooth;
+  }
+
+  section[id] {
+    scroll-margin-top: 96px;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--cascade-red-bright);
+    outline-offset: 2px;
+    border-radius: 2px;
   }
 
   body {
@@ -971,13 +987,28 @@ img {
     gap: 14px !important;
   }
   .secure-ribbon {
-    font-size: 0.58rem;
-    letter-spacing: 0.1em;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    padding: 6px 10px;
   }
 }
 @media (max-width: 380px) {
   .stats-grid .cascade-card {
     padding: 1.1rem !important;
+  }
+  .fab-stack {
+    bottom: 16px;
+    right: 14px;
+    gap: 12px;
+  }
+  [dir="rtl"] .fab-stack {
+    right: auto;
+    left: 14px;
+  }
+  .fab-call,
+  .fab-tg {
+    width: 50px;
+    height: 50px;
   }
 }
 

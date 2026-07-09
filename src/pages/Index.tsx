@@ -12,8 +12,29 @@ const PHONE = "+79133645748";
 const TELEGRAM = "https://t.me/PIC_STRUNA";
 const SEND_URL = "https://functions.poehali.dev/654c4728-371c-4136-b7fe-b9e74c204df3";
 
+const detectLang = (): Lang => {
+  const supported = LANGS.map((l) => l.code);
+  try {
+    const saved = localStorage.getItem("lang");
+    if (saved && supported.includes(saved as Lang)) return saved as Lang;
+  } catch { /* ignore */ }
+  const nav = typeof navigator !== "undefined"
+    ? [navigator.language, ...(navigator.languages || [])]
+    : [];
+  for (const raw of nav) {
+    const code = raw.toLowerCase().split("-")[0];
+    if (supported.includes(code as Lang)) return code as Lang;
+  }
+  return "ru";
+};
+
 export default function Index() {
-  const [lang, setLang] = useState<Lang>("ru");
+  const [lang, setLangState] = useState<Lang>(detectLang);
+
+  const setLang = (l: Lang) => {
+    setLangState(l);
+    try { localStorage.setItem("lang", l); } catch { /* ignore */ }
+  };
   const [activeSection, setActiveSection] = useState<SectionId>("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
@@ -265,7 +286,7 @@ export default function Index() {
         <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
           {/* Lang dropdown */}
           <div ref={langRef} style={{ position: "relative" }}>
-            <button className={`lang-btn ${langOpen ? "active" : ""}`} onClick={() => setLangOpen(!langOpen)} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <button className={`lang-btn ${langOpen ? "active" : ""}`} onClick={() => setLangOpen(!langOpen)} aria-label="Выбрать язык" aria-expanded={langOpen} aria-haspopup="listbox" style={{ display: "flex", alignItems: "center", gap: 6 }}>
               <Icon name="Globe" size={13} />
               {LANGS.find((l) => l.code === lang)?.label}
               <Icon name="ChevronDown" size={12} />
@@ -282,16 +303,16 @@ export default function Index() {
             )}
           </div>
 
-          <a href={`tel:${PHONE}`} className="header-cta" style={{ display: "flex", alignItems: "center", gap: 7, textDecoration: "none" }}>
+          <a href={`tel:${PHONE}`} className="header-cta" aria-label="Позвонить для консультации" style={{ display: "flex", alignItems: "center", gap: 7, textDecoration: "none" }}>
             <Icon name="Phone" size={13} />
             {t.cta.consultBtn}
           </a>
 
-          <a href={`tel:${PHONE}`} className="lang-btn header-phone-icon" style={{ display: "flex", alignItems: "center", gap: 6, textDecoration: "none" }}>
+          <a href={`tel:${PHONE}`} className="lang-btn header-phone-icon" aria-label="Позвонить" style={{ display: "flex", alignItems: "center", gap: 6, textDecoration: "none" }}>
             <Icon name="Phone" size={13} />
           </a>
 
-          <button className="nav-mobile-btn" onClick={() => setMenuOpen(!menuOpen)} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--cascade-light)" }}>
+          <button className="nav-mobile-btn" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? "Закрыть меню" : "Открыть меню"} aria-expanded={menuOpen} style={{ background: "none", border: "none", cursor: "pointer", color: "var(--cascade-light)" }}>
             <Icon name={menuOpen ? "X" : "Menu"} size={22} />
           </button>
         </div>
@@ -299,7 +320,7 @@ export default function Index() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div style={{ position: "fixed", inset: 0, zIndex: 49, background: "rgba(10,10,10,0.98)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 28, paddingTop: 88 }}>
+        <div role="dialog" aria-modal="true" aria-label="Меню навигации" style={{ position: "fixed", inset: 0, zIndex: 49, background: "rgba(10,10,10,0.98)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 28, paddingTop: 96, paddingBottom: 32, overflowY: "auto" }}>
           {navItems.map((item) => (
             <button key={item.key} onClick={() => scrollTo(item.key)} className="nav-link" style={{ fontSize: "1.2rem", background: "none", border: "none", cursor: "pointer" }}>{item.label}</button>
           ))}
@@ -360,13 +381,13 @@ export default function Index() {
       {/* TRUST BAR */}
       <section style={{ padding: "3rem 0", background: "var(--cascade-dark)", borderTop: "1px solid var(--cascade-line)", borderBottom: "1px solid var(--cascade-line)" }}>
         <div className="pad-section" style={{ maxWidth: 1200, margin: "0 auto", padding: "0 1.5rem" }}>
-          <div className="reveal" style={{ textAlign: "center", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.28em", color: "#6B7280", textTransform: "uppercase", marginBottom: 28 }}>{t.trust.title}</div>
+          <div className="reveal" style={{ textAlign: "center", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.28em", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: 28 }}>{t.trust.title}</div>
           <div className="trust-bar">
             {t.trust.items.map((item, i) => (
               <div key={i} className="trust-item reveal" style={{ transitionDelay: `${(i % 5) * 0.07}s` }}>
                 <Icon name={item.icon} fallback="ShieldCheck" size={22} style={{ color: "var(--cascade-red)", marginBottom: 10 }} />
                 <CountUp value={item.value} style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "var(--cascade-light)", lineHeight: 1, display: "inline-block" }} />
-                <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "#6B7280", marginTop: 6, letterSpacing: "0.04em" }}>{item.label}</div>
+                <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "var(--text-muted)", marginTop: 6, letterSpacing: "0.04em" }}>{item.label}</div>
               </div>
             ))}
           </div>
@@ -381,13 +402,13 @@ export default function Index() {
             <div className="section-divider" />
             <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, lineHeight: 1.1, letterSpacing: "0.06em", marginBottom: "1.5rem" }}>{t.about.title}</h2>
             <p className="red-line-left" style={{ color: "#9CA3AF", lineHeight: 1.85, fontSize: "0.92rem", marginBottom: "1.2rem" }}>{t.about.p1}</p>
-            <p style={{ color: "#6B7280", lineHeight: 1.85, fontSize: "0.92rem" }}>{t.about.p2}</p>
+            <p style={{ color: "var(--text-muted)", lineHeight: 1.85, fontSize: "0.92rem" }}>{t.about.p2}</p>
           </div>
           <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {t.about.stats.map((s, i) => (
               <div key={i} className="cascade-card" style={{ padding: "1.6rem" }}>
                 <CountUp value={s.num} style={{ fontFamily: "Oswald", fontSize: "2.6rem", fontWeight: 700, color: "var(--cascade-red)", lineHeight: 1, display: "inline-block" }} />
-                <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "#6B7280", marginTop: "0.5rem", letterSpacing: "0.05em" }}>{s.label}</div>
+                <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "var(--text-muted)", marginTop: "0.5rem", letterSpacing: "0.05em" }}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -462,7 +483,7 @@ export default function Index() {
                   <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red)" }} />
                 </div>
                 <h3 style={{ fontFamily: "Oswald", fontSize: "1rem", fontWeight: 600, letterSpacing: "0.06em", marginBottom: "0.6rem", color: "var(--cascade-light)" }}>{p.title}</h3>
-                <p style={{ color: "#6B7280", fontSize: "0.85rem", lineHeight: 1.75 }}>{p.desc}</p>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", lineHeight: 1.75 }}>{p.desc}</p>
               </div>
             ))}
           </div>
@@ -533,7 +554,7 @@ export default function Index() {
                   <Icon name="Fingerprint" size={28} style={{ color: "var(--cascade-red)" }} />
                 </div>
                 <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.agent.sent}</p>
-                <p style={{ color: "#6B7280", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.agent.sentDesc}</p>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.agent.sentDesc}</p>
               </div>
             )}
           </div>
@@ -631,7 +652,7 @@ export default function Index() {
             <div className="section-divider" />
             <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, lineHeight: 1.15, letterSpacing: "0.05em", marginBottom: "1.5rem" }}>{t.legalSection.title}</h2>
             <p className="red-line-left" style={{ color: "#9CA3AF", lineHeight: 1.85, fontSize: "0.92rem", marginBottom: "1.2rem" }}>{t.legalSection.p1}</p>
-            <p style={{ color: "#6B7280", lineHeight: 1.85, fontSize: "0.92rem" }}>{t.legalSection.p2}</p>
+            <p style={{ color: "var(--text-muted)", lineHeight: 1.85, fontSize: "0.92rem" }}>{t.legalSection.p2}</p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             {t.legalSection.points.map((p, i) => (
@@ -653,7 +674,7 @@ export default function Index() {
             <Tag>{t.contact.tag}</Tag>
             <div className="section-divider" />
             <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, letterSpacing: "0.08em", marginBottom: "0.5rem" }}>{t.contact.title}</h2>
-            <p style={{ color: "#6B7280", fontSize: "0.88rem" }}>{t.contact.desc}</p>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.88rem" }}>{t.contact.desc}</p>
           </div>
 
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
@@ -696,14 +717,14 @@ export default function Index() {
           {!reportSubmitted ? (
             <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32, maxWidth: 880 }}>
               <div>
-                <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "#6B7280", marginBottom: 10 }}>{t.report.form.category}</label>
+                <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "var(--text-muted)", marginBottom: 10 }}>{t.report.form.category}</label>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   {t.report.categories.map((cat, i) => (
                     <button key={i} onClick={() => setReportCategory(i)} style={{
                       textAlign: isRtl ? "right" : "left", padding: "10px 16px",
                       background: reportCategory === i ? "rgba(139,26,26,0.14)" : "var(--cascade-charcoal)",
                       border: `1px solid ${reportCategory === i ? "var(--cascade-red)" : "var(--cascade-line)"}`,
-                      color: reportCategory === i ? "var(--cascade-light)" : "#6B7280",
+                      color: reportCategory === i ? "var(--cascade-light)" : "var(--text-muted)",
                       fontFamily: "IBM Plex Sans", fontSize: "0.85rem", cursor: "pointer", transition: "all 0.2s",
                     }}>{cat}</button>
                   ))}
@@ -711,11 +732,11 @@ export default function Index() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 <div>
-                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "#6B7280", marginBottom: 8 }}>{t.report.form.region}</label>
+                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "var(--text-muted)", marginBottom: 8 }}>{t.report.form.region}</label>
                   <input className="cascade-input" value={reportRegion} onChange={(e) => setReportRegion(e.target.value)} />
                 </div>
                 <div>
-                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "#6B7280", marginBottom: 8 }}>{t.report.form.message}</label>
+                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "var(--text-muted)", marginBottom: 8 }}>{t.report.form.message}</label>
                   <textarea className="cascade-input" rows={6} value={reportMsg} onChange={(e) => setReportMsg(e.target.value)} style={{ resize: "vertical" }} />
                   <div style={{ fontSize: "0.72rem", color: reportMsg.length >= 50 ? "var(--cascade-red)" : "#374151", marginTop: 4 }}>{reportMsg.length} / 50</div>
                 </div>
@@ -747,7 +768,7 @@ export default function Index() {
                 <Icon name="ShieldCheck" size={28} style={{ color: "var(--cascade-red)" }} />
               </div>
               <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.report.sent}</p>
-              <p style={{ color: "#6B7280", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.report.sentDesc}</p>
+              <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.report.sentDesc}</p>
             </div>
           )}
         </div>
@@ -781,7 +802,7 @@ export default function Index() {
         <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="fab-tg" aria-label="Telegram">
           <Icon name="Send" size={22} />
         </a>
-        <a href={`tel:${PHONE}`} className="fab-call" aria-label="call">
+        <a href={`tel:${PHONE}`} className="fab-call" aria-label="Позвонить">
           <Icon name="Phone" size={22} />
         </a>
       </div>
