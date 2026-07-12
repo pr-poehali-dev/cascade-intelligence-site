@@ -782,12 +782,6 @@ export default function Index() {
           <Icon name="Scale" size={14} style={{ color: "var(--cascade-red)", flexShrink: 0 }} />
           <p style={{ fontSize: "0.78rem", color: "#9CA3AF", letterSpacing: "0.02em", fontStyle: "italic", lineHeight: 1.6 }}>{t.footer.hint}</p>
         </div>
-        <div style={{ maxWidth: 1200, margin: "0 auto 1.75rem", paddingBottom: "1.75rem", borderBottom: "1px solid var(--cascade-line)", textAlign: isRtl ? "right" : "left" }}>
-          <p style={{ fontFamily: "Oswald", fontSize: "0.7rem", letterSpacing: "0.18em", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: 8 }}>{t.footer.requisitesTitle}</p>
-          {t.footer.requisites.map((line, i) => (
-            <p key={i} style={{ fontSize: "0.74rem", color: i === 0 ? "#B6BDC8" : "#8A93A0", lineHeight: 1.7, marginTop: i === 0 ? 0 : 3 }}>{line}</p>
-          ))}
-        </div>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ width: 28, height: 28, background: "var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Oswald", fontWeight: 700, fontSize: 11, color: "white" }}>ЧРК</div>
