@@ -260,7 +260,7 @@ export default function Index() {
       </div>
 
       {/* NAVBAR */}
-      <header style={{
+      <header role="banner" style={{
         position: "fixed", top: 28, left: 0, right: 0, zIndex: 50,
         background: scrolled ? "rgba(16,18,22,0.98)" : "rgba(16,18,22,0.9)",
         borderBottom: "1px solid var(--cascade-line)",
@@ -275,7 +275,7 @@ export default function Index() {
           <span style={{ fontFamily: "Oswald", fontWeight: 600, fontSize: "1rem", letterSpacing: "0.22em", color: "var(--cascade-light)" }}>КАСКАД</span>
         </button>
 
-        <nav className="nav-desktop" style={{ display: "flex", alignItems: "center", gap: 26 }}>
+        <nav className="nav-desktop" aria-label="Основная навигация" style={{ display: "flex", alignItems: "center", gap: 26 }}>
           {navItems.map((item) => (
             <button key={item.key} onClick={() => scrollTo(item.key)} className={`nav-link ${activeSection === item.key ? "active" : ""}`} style={{ background: "none", border: "none", cursor: "pointer" }}>
               {item.label}
@@ -328,6 +328,7 @@ export default function Index() {
       )}
 
       {/* HERO */}
+      <main id="main-content">
       <section id="home" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", paddingTop: 88 }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.15) grayscale(0.5)" }} />
         <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(139,26,26,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139,26,26,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
@@ -773,27 +774,34 @@ export default function Index() {
           )}
         </div>
       </section>
+      </main>
 
       {/* FOOTER */}
-      <footer style={{ background: "#060606", borderTop: "1px solid var(--cascade-line)", padding: "2.5rem 1.5rem 2.5rem" }}>
+      <footer role="contentinfo" style={{ background: "#060606", borderTop: "1px solid var(--cascade-line)", padding: "2.5rem 1.5rem 2.5rem" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto 1.75rem", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, paddingBottom: "1.75rem", borderBottom: "1px solid var(--cascade-line)", textAlign: "center" }}>
           <Icon name="Scale" size={14} style={{ color: "var(--cascade-red)", flexShrink: 0 }} />
           <p style={{ fontSize: "0.78rem", color: "#9CA3AF", letterSpacing: "0.02em", fontStyle: "italic", lineHeight: 1.6 }}>{t.footer.hint}</p>
         </div>
+        <div style={{ maxWidth: 1200, margin: "0 auto 1.75rem", paddingBottom: "1.75rem", borderBottom: "1px solid var(--cascade-line)", textAlign: isRtl ? "right" : "left" }}>
+          <p style={{ fontFamily: "Oswald", fontSize: "0.7rem", letterSpacing: "0.18em", color: "var(--text-muted)", textTransform: "uppercase", marginBottom: 8 }}>{t.footer.requisitesTitle}</p>
+          {t.footer.requisites.map((line, i) => (
+            <p key={i} style={{ fontSize: "0.74rem", color: i === 0 ? "#B6BDC8" : "#8A93A0", lineHeight: 1.7, marginTop: i === 0 ? 0 : 3 }}>{line}</p>
+          ))}
+        </div>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ width: 28, height: 28, background: "var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Oswald", fontWeight: 700, fontSize: 11, color: "white" }}>ЧРК</div>
-            <span style={{ fontFamily: "Oswald", fontSize: "0.8rem", letterSpacing: "0.22em", color: "#4B5563" }}>КАСКАД</span>
+            <span style={{ fontFamily: "Oswald", fontSize: "0.8rem", letterSpacing: "0.22em", color: "#8A93A0" }}>КАСКАД</span>
           </div>
           <div style={{ textAlign: "center" }}>
-            <p style={{ fontSize: "0.72rem", color: "#374151" }}>{t.footer.rights}</p>
-            <p style={{ fontSize: "0.68rem", color: "#2D2D2D", marginTop: 2 }}>{t.footer.legal}</p>
+            <p style={{ fontSize: "0.72rem", color: "#9CA3AF" }}>{t.footer.rights}</p>
+            <p style={{ fontSize: "0.68rem", color: "#7B8492", marginTop: 2 }}>{t.footer.legal}</p>
           </div>
-          <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+          <nav aria-label="Навигация в подвале" style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
             {navItems.slice(0, 4).map((item) => (
-              <button key={item.key} onClick={() => scrollTo(item.key)} style={{ fontFamily: "Oswald", fontSize: "0.68rem", letterSpacing: "0.14em", color: "#374151", background: "none", border: "none", cursor: "pointer" }}>{item.label}</button>
+              <button key={item.key} onClick={() => scrollTo(item.key)} style={{ fontFamily: "Oswald", fontSize: "0.68rem", letterSpacing: "0.14em", color: "#9CA3AF", background: "none", border: "none", cursor: "pointer" }}>{item.label}</button>
             ))}
-          </div>
+          </nav>
         </div>
       </footer>
 
