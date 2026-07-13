@@ -241,8 +241,8 @@ export default function Index() {
     }, 70);
   };
 
-  const Tag = ({ children }: { children: React.ReactNode }) => (
-    <span className="cascade-tag" style={{ marginBottom: 16, display: "inline-block" }}>{children}</span>
+  const Tag = ({ children, trend }: { children: React.ReactNode; trend?: boolean }) => (
+    <span className={`cascade-tag${trend ? " tag-glass mono-label" : ""}`} style={{ marginBottom: 16, display: "inline-block" }}>{children}</span>
   );
 
   return (
@@ -269,7 +269,7 @@ export default function Index() {
         transition: "height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease",
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 1.5rem",
-      }} className="pad-section">
+      }} className="pad-section glass-header">
         <button onClick={scrollTop} aria-label="Наверх" style={{ display: "flex", alignItems: "center", gap: 12, background: "none", border: "none", cursor: "pointer" }}>
           <div style={{ width: 34, height: 34, background: "var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Oswald", fontWeight: 700, fontSize: 12, color: "white" }}>ЧРК</div>
           <span style={{ fontFamily: "Oswald", fontWeight: 600, fontSize: "1rem", letterSpacing: "0.22em", color: "var(--cascade-light)" }}>КАСКАД</span>
@@ -329,8 +329,9 @@ export default function Index() {
 
       {/* HERO */}
       <main id="main-content">
-      <section id="home" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", paddingTop: 88 }}>
+      <section id="home" className="seamless-fade" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", paddingTop: 88 }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.15) grayscale(0.5)" }} />
+        <div className="living-gradient" style={{ position: "absolute", inset: 0 }} />
         <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(139,26,26,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139,26,26,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
         <div style={{ position: "absolute", inset: 0, background: isRtl ? "radial-gradient(circle at 80% 50%, rgba(139,26,26,0.28), transparent 55%)" : "radial-gradient(circle at 20% 50%, rgba(139,26,26,0.28), transparent 55%)" }} />
         <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 200px rgba(0,0,0,0.9)" }} />
@@ -338,7 +339,7 @@ export default function Index() {
 
         <div className="pad-section" style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "5rem 1.5rem", width: "100%" }}>
           <div className="animate-fade-in-up" style={{ opacity: 0 }}>
-            <Tag>{t.hero.tag}</Tag>
+            <Tag trend>{t.hero.tag}</Tag>
           </div>
           <h1 className="cascade-line-anim hero-title" style={{
             fontFamily: "Oswald", fontWeight: 700, lineHeight: 0.88,
@@ -443,7 +444,7 @@ export default function Index() {
             {t.services.items.map((s, i) => (
               <div
                 key={i}
-                className={`cascade-card bento-item spotlight reveal${i === 0 ? " bento-lg" : ""}`}
+                className={`cascade-card bento-item spotlight tile-btn reveal${i === 0 ? " bento-lg" : ""}`}
                 style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
                 onMouseMove={handleSpotlight}
               >

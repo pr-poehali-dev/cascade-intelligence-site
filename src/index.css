@@ -1094,3 +1094,97 @@ img {
 .hero-edge-pulse {
   animation: edgePulse 3s ease-in-out infinite;
 }
+
+/* ==========================================================================
+   TREND-STYLES START — экспериментальный визуальный слой (2026 UI-тренды)
+   Чтобы откатить: удалить весь блок между этим комментарием и
+   "TREND-STYLES END", а в Index.tsx убрать классы glass-header,
+   living-gradient, tile-btn, mono-label, tag-glass.
+   ========================================================================== */
+
+/* Живой градиент — медленное движение свечения в hero */
+@keyframes livingGradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+.living-gradient {
+  background: linear-gradient(120deg, rgba(158, 35, 33, 0.22), rgba(44, 50, 64, 0.05), rgba(192, 57, 43, 0.18));
+  background-size: 220% 220%;
+  animation: livingGradientShift 14s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .living-gradient {
+    animation: none;
+  }
+}
+
+/* Усиленный стекломорфизм для шапки при скролле */
+.glass-header {
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+}
+
+/* Моноширинный «протокольный» акцентный шрифт для меток/тегов */
+.mono-label {
+  font-family: "JetBrains Mono", monospace;
+  letter-spacing: 0.06em;
+}
+
+/* Тег с лёгким стеклом под моно-шрифт (не заменяет cascade-tag, доп. класс) */
+.tag-glass {
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: rgba(158, 35, 33, 0.08);
+  border: 1px solid rgba(158, 35, 33, 0.35);
+}
+
+/* Кнопки-плитки для карточек услуг: усиленный тактильный отклик */
+.tile-btn {
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.tile-btn:hover {
+  transform: translateY(-6px) scale(1.015);
+  box-shadow: 0 18px 40px -14px rgba(158, 35, 33, 0.45);
+}
+.tile-btn:active {
+  transform: translateY(-2px) scale(0.99);
+}
+@media (hover: none) {
+  .tile-btn:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* Микроанимация иконок в плитках */
+.tile-btn .bento-icon {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.3s ease;
+}
+.tile-btn:hover .bento-icon {
+  transform: scale(1.12) rotate(-4deg);
+  background: rgba(158, 35, 33, 0.22);
+}
+
+/* Бесшовный переход между секциями — мягкая тень-градиент на стыках */
+.seamless-fade {
+  position: relative;
+}
+.seamless-fade::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.25));
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   TREND-STYLES END
+   ========================================================================== */
