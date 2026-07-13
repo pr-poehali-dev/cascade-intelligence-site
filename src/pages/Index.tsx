@@ -408,7 +408,7 @@ export default function Index() {
           </div>
           <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {t.about.stats.map((s, i) => (
-              <div key={i} className="cascade-card" style={{ padding: "1.6rem" }}>
+              <div key={i} className="cascade-card tile-btn" style={{ padding: "1.6rem" }}>
                 <CountUp value={s.num} style={{ fontFamily: "Oswald", fontSize: "2.6rem", fontWeight: 700, color: "var(--cascade-red)", lineHeight: 1, display: "inline-block" }} />
                 <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "var(--text-muted)", marginTop: "0.5rem", letterSpacing: "0.05em" }}>{s.label}</div>
               </div>
@@ -479,9 +479,9 @@ export default function Index() {
           </div>
           <div className="grid-services" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20 }}>
             {t.principles.items.map((p, i) => (
-              <div key={i} className="cascade-card spotlight reveal" onMouseMove={handleSpotlight} style={{ padding: "1.8rem", position: "relative", overflow: "hidden", transitionDelay: `${(i % 4) * 0.08}s` }}>
+              <div key={i} className="cascade-card spotlight tile-btn reveal" onMouseMove={handleSpotlight} style={{ padding: "1.8rem", position: "relative", overflow: "hidden", transitionDelay: `${(i % 4) * 0.08}s` }}>
                 <div style={{ position: "absolute", top: 0, [isRtl ? "right" : "left"]: 0, width: 3, height: "100%", background: "var(--cascade-red)" }} />
-                <div style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div className="bento-icon" style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red)" }} />
                 </div>
                 <h3 style={{ fontFamily: "Oswald", fontSize: "1rem", fontWeight: 600, letterSpacing: "0.06em", marginBottom: "0.6rem", color: "var(--cascade-light)" }}>{p.title}</h3>
@@ -658,8 +658,8 @@ export default function Index() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             {t.legalSection.points.map((p, i) => (
-              <div key={i} className="cascade-card" style={{ padding: "1.1rem 1.3rem", display: "flex", alignItems: "center", gap: 16 }}>
-                <div style={{ width: 42, height: 42, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+              <div key={i} className="cascade-card tile-btn" style={{ padding: "1.1rem 1.3rem", display: "flex", alignItems: "center", gap: 16 }}>
+                <div className="bento-icon" style={{ width: 42, height: 42, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <Icon name={p.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red)" }} />
                 </div>
                 <span style={{ fontSize: "0.9rem", color: "var(--cascade-light)", lineHeight: 1.5 }}>{p.text}</span>
