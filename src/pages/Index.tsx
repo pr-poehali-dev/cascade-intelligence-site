@@ -303,7 +303,7 @@ export default function Index() {
             )}
           </div>
 
-          <a href={`tel:${PHONE}`} className="header-cta" aria-label="Позвонить для консультации" style={{ display: "flex", alignItems: "center", gap: 7, textDecoration: "none" }}>
+          <a href={`tel:${PHONE}`} className="header-cta" aria-label="Позвонить для консультации" style={{ alignItems: "center", gap: 7, textDecoration: "none" }}>
             <Icon name="Phone" size={13} />
             {t.cta.consultBtn}
           </a>

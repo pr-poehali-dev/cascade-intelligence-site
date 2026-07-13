@@ -366,7 +366,7 @@ img {
 }
 @media (max-width: 900px) {
   .header-cta {
-    display: none;
+    display: none !important;
   }
   .header-phone-icon {
     display: flex !important;
