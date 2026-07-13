@@ -1227,6 +1227,8 @@ img {
   color: var(--cascade-red);
   opacity: 0.6;
   display: block;
+  direction: ltr;
+  unicode-bidi: isolate;
   margin-bottom: 6px;
 }
 
