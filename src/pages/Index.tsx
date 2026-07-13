@@ -370,8 +370,8 @@ export default function Index() {
             {t.hero.desc}
           </p>
           <div className="animate-fade-in-up" style={{ display: "flex", gap: 16, flexWrap: "wrap", animationDelay: "0.8s", opacity: 0 }}>
-            <a href={`tel:${PHONE}`} className="btn-call cta-pulse" style={{ padding: "14px 32px" }}><Icon name="Phone" size={17} />{t.contact.callBtn}</a>
-            <button className="btn-cascade-outline" onClick={() => scrollTo("services")}>{t.hero.btn1}</button>
+            <a href={`tel:${PHONE}`} className="btn-call cta-pulse btn-lift" style={{ padding: "14px 32px" }}><Icon name="Phone" size={17} />{t.contact.callBtn}</a>
+            <button className="btn-cascade-outline btn-lift" onClick={() => scrollTo("services")}>{t.hero.btn1}</button>
           </div>
           <div className="animate-fade-in-up" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 18, animationDelay: "0.95s", opacity: 0 }}>
             <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
@@ -545,7 +545,7 @@ export default function Index() {
                   </div>
                 )}
                 <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={agentHp} onChange={(e) => setAgentHp(e.target.value)} style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
-                <button className="btn-cascade" onClick={handleAgent} disabled={!agentConsent || agentAlias.length < 2 || agentEnc} style={{ opacity: !agentConsent || agentAlias.length < 2 ? 0.35 : 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%" }}>
+                <button className="btn-cascade btn-lift" onClick={handleAgent} disabled={!agentConsent || agentAlias.length < 2 || agentEnc} style={{ opacity: !agentConsent || agentAlias.length < 2 ? 0.35 : 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%" }}>
                   <Icon name="Fingerprint" size={15} />
                   {t.agent.fields.btn}
                 </button>
@@ -584,7 +584,7 @@ export default function Index() {
             ))}
           </div>
           <div className="reveal" style={{ textAlign: "center", marginTop: 44, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-            <a href={`tel:${PHONE}`} className="btn-call cta-pulse" style={{ padding: "14px 34px" }}><Icon name="Phone" size={17} />{t.cta.callBtn}</a>
+            <a href={`tel:${PHONE}`} className="btn-call cta-pulse btn-lift" style={{ padding: "14px 34px" }}><Icon name="Phone" size={17} />{t.cta.callBtn}</a>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
               <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#9CA3AF" }}>{t.reassure}</span>
@@ -636,8 +636,8 @@ export default function Index() {
           <h2 style={{ fontFamily: "Oswald", fontWeight: 700, fontSize: "clamp(1.8rem, 5vw, 3.4rem)", letterSpacing: "0.04em", lineHeight: 1.05, color: "white", marginBottom: "1.2rem" }}>{t.cta.title}</h2>
           <p style={{ color: "#D1D5DB", fontSize: "1rem", lineHeight: 1.8, maxWidth: 580, margin: "0 auto 2.5rem" }}>{t.cta.desc}</p>
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
-            <a href={`tel:${PHONE}`} className="btn-call cta-pulse" style={{ fontSize: "1rem", padding: "16px 36px" }}><Icon name="Phone" size={18} />{t.cta.callBtn}</a>
-            <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail" style={{ padding: "16px 36px" }}><Icon name="Send" size={18} />{t.cta.tgBtn}</a>
+            <a href={`tel:${PHONE}`} className="btn-call cta-pulse btn-lift" style={{ fontSize: "1rem", padding: "16px 36px" }}><Icon name="Phone" size={18} />{t.cta.callBtn}</a>
+            <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail btn-lift" style={{ padding: "16px 36px" }}><Icon name="Send" size={18} />{t.cta.tgBtn}</a>
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 18 }}>
             <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
@@ -680,8 +680,8 @@ export default function Index() {
           </div>
 
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap" }}>
-            <a href={`tel:${PHONE}`} className="btn-call"><Icon name="Phone" size={16} />{t.contact.callBtn}</a>
-            <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail"><Icon name="Send" size={16} />{t.contact.tgBtn}</a>
+            <a href={`tel:${PHONE}`} className="btn-call btn-lift"><Icon name="Phone" size={16} />{t.contact.callBtn}</a>
+            <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail btn-lift"><Icon name="Send" size={16} />{t.contact.tgBtn}</a>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 18 }}>
             <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
@@ -758,7 +758,7 @@ export default function Index() {
                     </div>
                   </div>
                 )}
-                <button className="btn-cascade" onClick={handleReport} disabled={reportMsg.length < 50 || encrypting} style={{ opacity: reportMsg.length < 50 ? 0.35 : 1, width: "fit-content", display: "flex", alignItems: "center", gap: 8 }}>
+                <button className="btn-cascade btn-lift" onClick={handleReport} disabled={reportMsg.length < 50 || encrypting} style={{ opacity: reportMsg.length < 50 ? 0.35 : 1, width: "fit-content", display: "flex", alignItems: "center", gap: 8 }}>
                   <Icon name="Lock" size={13} />
                   {t.report.form.btn}
                 </button>

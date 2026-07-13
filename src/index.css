@@ -1185,6 +1185,30 @@ img {
   pointer-events: none;
 }
 
+/* Микроанимация кнопок — пружинящий подъём + мягкое свечение */
+.btn-lift {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+.btn-lift:hover {
+  transform: translateY(-3px);
+}
+.btn-lift:active {
+  transform: translateY(-1px) scale(0.98);
+}
+@media (hover: none) {
+  .btn-lift:hover {
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-lift,
+  .btn-lift:hover,
+  .btn-lift:active {
+    transition: none;
+    transform: none;
+  }
+}
+
 /* ==========================================================================
    TREND-STYLES END
    ========================================================================== */
