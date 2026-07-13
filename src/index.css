@@ -1209,6 +1209,53 @@ img {
   }
 }
 
+/* Акцидентная типографика — протокольные метки в стиле "секретного досье" */
+.tag-glass::before {
+  content: "// ";
+  opacity: 0.55;
+}
+.tag-glass::after {
+  content: " //";
+  opacity: 0.55;
+}
+
+/* Микроэлемент: технический индекс-номер на карточках (нумерация досье) */
+.file-index {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: var(--cascade-red);
+  opacity: 0.6;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Микроэлемент: живой индикатор "онлайн/в сети" */
+@keyframes liveDotBlink {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.5);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 0 4px rgba(192, 57, 43, 0);
+  }
+}
+.live-dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--cascade-red-bright);
+  animation: liveDotBlink 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .live-dot {
+    animation: none;
+  }
+}
+
 /* ==========================================================================
    TREND-STYLES END
    ========================================================================== */

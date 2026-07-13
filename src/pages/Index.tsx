@@ -241,7 +241,7 @@ export default function Index() {
     }, 70);
   };
 
-  const Tag = ({ children, trend }: { children: React.ReactNode; trend?: boolean }) => (
+  const Tag = ({ children, trend = true }: { children: React.ReactNode; trend?: boolean }) => (
     <span className={`cascade-tag${trend ? " tag-glass mono-label" : ""}`} style={{ marginBottom: 16, display: "inline-block" }}>{children}</span>
   );
 
@@ -451,6 +451,7 @@ export default function Index() {
                 <div className="bento-icon">
                   <Icon name={s.icon} fallback="Circle" size={22} style={{ color: "var(--cascade-red)" }} />
                 </div>
+                <span className="file-index">DOC.{String(i + 1).padStart(2, "0")}</span>
                 <h3 style={{ fontFamily: "Oswald", fontSize: "1.05rem", fontWeight: 600, letterSpacing: "0.04em", marginBottom: "0.75rem", lineHeight: 1.15 }}>{s.title}</h3>
                 <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.8 }}>{s.desc}</p>
               </div>
@@ -484,6 +485,7 @@ export default function Index() {
                 <div className="bento-icon" style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red)" }} />
                 </div>
+                <span className="file-index">§ {String(i + 1).padStart(2, "0")}</span>
                 <h3 style={{ fontFamily: "Oswald", fontSize: "1rem", fontWeight: 600, letterSpacing: "0.06em", marginBottom: "0.6rem", color: "var(--cascade-light)" }}>{p.title}</h3>
                 <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", lineHeight: 1.75 }}>{p.desc}</p>
               </div>
@@ -675,7 +677,10 @@ export default function Index() {
           <div style={{ marginBottom: 40 }}>
             <Tag>{t.contact.tag}</Tag>
             <div className="section-divider" />
-            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, letterSpacing: "0.08em", marginBottom: "0.5rem" }}>{t.contact.title}</h2>
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, letterSpacing: "0.08em", marginBottom: "0.5rem", display: "flex", alignItems: "center", gap: 12 }}>
+              {t.contact.title}
+              <span className="live-dot" aria-hidden="true" />
+            </h2>
             <p style={{ color: "var(--text-muted)", fontSize: "0.88rem" }}>{t.contact.desc}</p>
           </div>
 
