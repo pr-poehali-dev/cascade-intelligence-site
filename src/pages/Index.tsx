@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import Icon from "@/components/ui/icon";
 import { TRANSLATIONS, LANGS, type Lang } from "@/data/translations";
 import { useReveal } from "@/hooks/use-reveal";
-import { useAimCursor } from "@/hooks/use-aim-cursor";
 import CountUp from "@/components/CountUp";
 
 type SectionId = "home" | "about" | "services" | "proof" | "report" | "agent" | "citizens" | "faq" | "contact";
@@ -30,7 +29,6 @@ const detectLang = (): Lang => {
 };
 
 export default function Index() {
-  useAimCursor();
   const [lang, setLangState] = useState<Lang>(detectLang);
 
   const setLang = (l: Lang) => {
@@ -288,7 +286,7 @@ export default function Index() {
       {/* NAVBAR */}
       <header role="banner" style={{
         position: "fixed", top: 28, left: 0, right: 0, zIndex: 50,
-        background: scrolled ? "rgba(16,18,22,0.98)" : "rgba(16,18,22,0.9)",
+        background: scrolled ? "rgba(22,19,15,0.98)" : "rgba(22,19,15,0.92)",
         borderBottom: "1px solid var(--cascade-line)",
         height: scrolled ? 52 : 60,
         boxShadow: scrolled ? "0 8px 30px -12px rgba(0,0,0,0.7)" : "none",
@@ -346,7 +344,7 @@ export default function Index() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div role="dialog" aria-modal="true" aria-label="Меню навигации" style={{ position: "fixed", inset: 0, zIndex: 49, background: "rgba(10,10,10,0.98)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 28, paddingTop: 96, paddingBottom: 32, overflowY: "auto" }}>
+        <div role="dialog" aria-modal="true" aria-label="Меню навигации" style={{ position: "fixed", inset: 0, zIndex: 49, background: "rgba(18,15,12,0.98)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 28, paddingTop: 96, paddingBottom: 32, overflowY: "auto" }}>
           {navItems.map((item) => (
             <button key={item.key} onClick={() => scrollTo(item.key)} className="nav-link" style={{ fontSize: "1.2rem", background: "none", border: "none", cursor: "pointer" }}>{item.label}</button>
           ))}
@@ -358,8 +356,8 @@ export default function Index() {
       <section id="home" className="seamless-fade" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", paddingTop: 88 }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.15) grayscale(0.5)" }} />
         <div className="living-gradient" style={{ position: "absolute", inset: 0 }} />
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(90,14,27,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(90,14,27,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-        <div style={{ position: "absolute", inset: 0, background: isRtl ? "radial-gradient(circle at 80% 50%, rgba(90,14,27,0.28), transparent 55%)" : "radial-gradient(circle at 20% 50%, rgba(90,14,27,0.28), transparent 55%)" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(107, 18, 32,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(107, 18, 32,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        <div style={{ position: "absolute", inset: 0, background: isRtl ? "radial-gradient(circle at 80% 50%, rgba(107, 18, 32,0.28), transparent 55%)" : "radial-gradient(circle at 20% 50%, rgba(107, 18, 32,0.28), transparent 55%)" }} />
         <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 200px rgba(0,0,0,0.9)" }} />
         <div className="hero-edge-pulse" style={{ position: "absolute", [isRtl ? "right" : "left"]: 0, top: 0, bottom: 0, width: 4, background: "var(--cascade-red)" }} />
 
@@ -390,7 +388,7 @@ export default function Index() {
             {t.hero.subtitle}
           </p>
           <p className="animate-fade-in-up" style={{
-            fontFamily: "IBM Plex Sans", fontSize: "0.95rem", color: "#9CA3AF", lineHeight: 1.8,
+            fontFamily: "IBM Plex Sans", fontSize: "0.95rem", color: "var(--text-muted)", lineHeight: 1.8,
             maxWidth: 560, animationDelay: "0.6s", opacity: 0, marginBottom: "2.5rem",
           }}>
             {t.hero.desc}
@@ -401,7 +399,7 @@ export default function Index() {
           </div>
           <div className="animate-fade-in-up" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 18, animationDelay: "0.95s", opacity: 0 }}>
             <Icon name="Lock" size={13} style={{ color: "var(--cascade-red-text)" }} />
-            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.8rem", color: "#9CA3AF", letterSpacing: "0.02em" }}>{t.reassure}</span>
+            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.8rem", color: "var(--text-muted)", letterSpacing: "0.02em" }}>{t.reassure}</span>
           </div>
         </div>
       </section>
@@ -429,7 +427,7 @@ export default function Index() {
             <Tag>{t.about.tag}</Tag>
             <div className="section-divider" />
             <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, lineHeight: 1.1, letterSpacing: "0.06em", marginBottom: "1.5rem" }}>{t.about.title}</h2>
-            <p className="red-line-left" style={{ color: "#9CA3AF", lineHeight: 1.85, fontSize: "0.92rem", marginBottom: "1.2rem" }}>{t.about.p1}</p>
+            <p className="red-line-left" style={{ color: "var(--text-muted)", lineHeight: 1.85, fontSize: "0.92rem", marginBottom: "1.2rem" }}>{t.about.p1}</p>
             <p style={{ color: "var(--text-muted)", lineHeight: 1.85, fontSize: "0.92rem" }}>{t.about.p2}</p>
           </div>
           <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
@@ -445,14 +443,14 @@ export default function Index() {
 
       {/* ELITE */}
       <section style={{ position: "relative", padding: "5rem 0", background: "#080808", overflow: "hidden", borderTop: "1px solid var(--cascade-line)", borderBottom: "1px solid var(--cascade-line)" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(90,14,27,0.06) 22px, rgba(90,14,27,0.06) 24px)" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(107, 18, 32,0.06) 22px, rgba(107, 18, 32,0.06) 24px)" }} />
         <div style={{ position: "absolute", top: 0, bottom: 0, [isRtl ? "right" : "left"]: 0, width: 5, background: "var(--cascade-red)" }} />
         <div className="pad-section" style={{ position: "relative", maxWidth: 1100, margin: "0 auto", padding: "0 1.5rem" }}>
           <span className="cascade-tag" style={{ marginBottom: 24, display: "inline-block" }}>{t.elite.tag}</span>
           <h2 style={{ fontFamily: "Oswald", fontWeight: 700, fontSize: "clamp(1.8rem, 4.5vw, 3.2rem)", lineHeight: 1.05, letterSpacing: "0.02em", color: "white", marginBottom: "1.5rem", maxWidth: 900 }}>
             {t.elite.line1}
           </h2>
-          <p className="red-line-left" style={{ color: "#9CA3AF", fontSize: "clamp(0.95rem, 1.6vw, 1.15rem)", lineHeight: 1.8, maxWidth: 720 }}>
+          <p className="red-line-left" style={{ color: "var(--text-muted)", fontSize: "clamp(0.95rem, 1.6vw, 1.15rem)", lineHeight: 1.8, maxWidth: 720 }}>
             {t.elite.line2}
           </p>
         </div>
@@ -479,7 +477,7 @@ export default function Index() {
                 </div>
                 <span className="file-index">DOC.{String(i + 1).padStart(2, "0")}</span>
                 <h3 style={{ fontFamily: "Oswald", fontSize: "1.05rem", fontWeight: 600, letterSpacing: "0.04em", marginBottom: "0.75rem", lineHeight: 1.15 }}>{s.title}</h3>
-                <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.8 }}>{s.desc}</p>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.87rem", lineHeight: 1.8 }}>{s.desc}</p>
               </div>
             ))}
           </div>
@@ -490,7 +488,7 @@ export default function Index() {
               <Tag>{t.geo.tag}</Tag>
               <div className="section-divider" style={{ margin: "0 auto" }} />
               <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(2rem, 4.5vw, 3.4rem)", fontWeight: 700, letterSpacing: "0.01em", marginTop: 16, marginBottom: 16, lineHeight: 1.02 }}>{t.geo.title}</h2>
-              <p style={{ color: "#9CA3AF", fontSize: "1.05rem", maxWidth: 640, margin: "0 auto", lineHeight: 1.8 }}>{t.geo.desc}</p>
+              <p style={{ color: "var(--text-muted)", fontSize: "1.05rem", maxWidth: 640, margin: "0 auto", lineHeight: 1.8 }}>{t.geo.desc}</p>
             </div>
           </div>
         </div>
@@ -508,7 +506,7 @@ export default function Index() {
             {t.principles.items.map((p, i) => (
               <div key={i} className="cascade-card spotlight tile-btn reveal" onMouseMove={handleSpotlight} style={{ padding: "1.8rem", position: "relative", overflow: "hidden", transitionDelay: `${(i % 4) * 0.08}s` }}>
                 <div style={{ position: "absolute", top: 0, [isRtl ? "right" : "left"]: 0, width: 3, height: "100%", background: "var(--cascade-red)" }} />
-                <div className="bento-icon" style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(90,14,27,0.1)", border: "1px solid rgba(90,14,27,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div className="bento-icon" style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(107, 18, 32,0.1)", border: "1px solid rgba(107, 18, 32,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <span className="file-index">§ {String(i + 1).padStart(2, "0")}</span>
@@ -547,7 +545,7 @@ export default function Index() {
                 <h3 style={{ fontFamily: "Oswald", fontSize: "0.95rem", fontWeight: 500, letterSpacing: "0.03em", color: "var(--cascade-light)", lineHeight: 1.35, marginBottom: 12 }}>
                   {it.task}
                 </h3>
-                <p style={{ fontFamily: "IBM Plex Sans", fontSize: "0.85rem", color: "#B4B8C0", lineHeight: 1.7, paddingInlineStart: 12, borderInlineStart: "2px solid var(--cascade-red)" }}>
+                <p style={{ fontFamily: "IBM Plex Sans", fontSize: "0.85rem", color: "#BDB5A8", lineHeight: 1.7, paddingInlineStart: 12, borderInlineStart: "2px solid var(--cascade-red)" }}>
                   {it.result}
                 </p>
               </article>
@@ -569,7 +567,7 @@ export default function Index() {
               <Tag>{t.agent.tag}</Tag>
               <div className="section-divider" />
               <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.6rem, 3vw, 2.6rem)", fontWeight: 700, letterSpacing: "0.06em", marginBottom: "1.5rem" }}>{t.agent.title}</h2>
-              <p className="red-line-left" style={{ color: "#9CA3AF", lineHeight: 1.85, fontSize: "0.95rem" }}>{t.agent.desc}</p>
+              <p className="red-line-left" style={{ color: "var(--text-muted)", lineHeight: 1.85, fontSize: "0.95rem" }}>{t.agent.desc}</p>
 
               <div style={{ marginTop: 32 }}>
                 <div style={{ fontFamily: "Oswald", fontSize: "0.78rem", letterSpacing: "0.2em", color: "var(--cascade-red-text)", marginBottom: 16 }}>{t.safety.title}</div>
@@ -577,7 +575,7 @@ export default function Index() {
                   {t.safety.items.map((item, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                       <Icon name={item.icon} fallback="ShieldCheck" size={17} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
-                      <p style={{ color: "#9CA3AF", fontSize: "0.82rem", lineHeight: 1.7 }}>{item.text}</p>
+                      <p style={{ color: "var(--text-muted)", fontSize: "0.82rem", lineHeight: 1.7 }}>{item.text}</p>
                     </div>
                   ))}
                 </div>
@@ -586,22 +584,22 @@ export default function Index() {
 
             {!agentSubmitted ? (
               <div className="cascade-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: 14 }}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", background: "rgba(90,14,27,0.07)", borderTop: "1px solid rgba(90,14,27,0.22)", borderBottom: "1px solid rgba(90,14,27,0.22)", borderInlineEnd: "1px solid rgba(90,14,27,0.22)", borderInlineStart: "3px solid var(--cascade-red)" }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", background: "rgba(107, 18, 32,0.07)", borderTop: "1px solid rgba(107, 18, 32,0.22)", borderBottom: "1px solid rgba(107, 18, 32,0.22)", borderInlineEnd: "1px solid rgba(107, 18, 32,0.22)", borderInlineStart: "3px solid var(--cascade-red)" }}>
                   <Icon name="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
-                  <p style={{ color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.65 }}>{t.agent.secure}</p>
+                  <p style={{ color: "var(--text-muted)", fontSize: "0.8rem", lineHeight: 1.65 }}>{t.agent.secure}</p>
                 </div>
                 <input className="cascade-input" placeholder={t.agent.fields.alias} value={agentAlias} onChange={(e) => setAgentAlias(e.target.value)} />
                 <input className="cascade-input" placeholder={t.agent.fields.contact} value={agentContact} onChange={(e) => setAgentContact(e.target.value)} />
                 <input className="cascade-input" placeholder={t.agent.fields.skills} value={agentSkills} onChange={(e) => setAgentSkills(e.target.value)} />
                 <textarea className="cascade-input" rows={4} placeholder={t.agent.fields.motivation} value={agentMotivation} onChange={(e) => setAgentMotivation(e.target.value)} style={{ resize: "vertical" }} />
-                <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer", color: "#9CA3AF", fontSize: "0.82rem", lineHeight: 1.5 }}>
+                <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer", color: "var(--text-muted)", fontSize: "0.82rem", lineHeight: 1.5 }}>
                   <input type="checkbox" checked={agentConsent} onChange={(e) => setAgentConsent(e.target.checked)} style={{ accentColor: "var(--cascade-red)", marginTop: 3, flexShrink: 0 }} />
                   {t.agent.consent}
                 </label>
                 {agentError && (
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(90,14,27,0.1)", border: "1px solid var(--cascade-red)" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(107, 18, 32,0.1)", border: "1px solid var(--cascade-red)" }}>
                     <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
-                    <p style={{ color: "#D1D5DB", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
+                    <p style={{ color: "var(--text-label)", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
                   </div>
                 )}
                 {agentEnc && (
@@ -620,7 +618,7 @@ export default function Index() {
               </div>
             ) : (
               <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center" }}>
-                <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(90,14,27,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(107, 18, 32,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon name="Fingerprint" size={28} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.agent.sent}</p>
@@ -647,7 +645,7 @@ export default function Index() {
                   <Icon name={step.icon} fallback="Circle" size={22} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <h3 style={{ fontFamily: "Oswald", fontSize: "1.05rem", fontWeight: 600, letterSpacing: "0.03em", marginBottom: "0.6rem", color: "var(--cascade-light)" }}>{step.title}</h3>
-                <p style={{ color: "#9CA3AF", fontSize: "0.86rem", lineHeight: 1.75 }}>{step.desc}</p>
+                <p style={{ color: "var(--text-muted)", fontSize: "0.86rem", lineHeight: 1.75 }}>{step.desc}</p>
               </div>
             ))}
           </div>
@@ -655,7 +653,7 @@ export default function Index() {
             <a href={`tel:${PHONE}`} className="btn-call cta-pulse btn-lift" style={{ padding: "14px 34px" }}><Icon name="Phone" size={17} />{t.cta.callBtn}</a>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
               <Icon name="Lock" size={13} style={{ color: "var(--cascade-red-text)" }} />
-              <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#9CA3AF" }}>{t.reassure}</span>
+              <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "var(--text-muted)" }}>{t.reassure}</span>
             </div>
           </div>
         </div>
@@ -678,7 +676,7 @@ export default function Index() {
 
           <div className="citizens-grid">
             <div className="reveal">
-              <p style={{ fontFamily: "IBM Plex Sans", fontSize: "0.95rem", color: "#C3C7CE", lineHeight: 1.85, marginBottom: 26 }}>
+              <p style={{ fontFamily: "IBM Plex Sans", fontSize: "0.95rem", color: "#CFC7B8", lineHeight: 1.85, marginBottom: 26 }}>
                 {t.citizens.p1}
               </p>
               <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 9 }}>
@@ -702,7 +700,7 @@ export default function Index() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 11, marginBottom: 22 }}>
                 {t.citizens.terms.map((term, i) => (
-                  <div key={i} style={{ fontFamily: "IBM Plex Sans", fontSize: "0.83rem", color: "#B4B8C0", lineHeight: 1.65, paddingInlineStart: 12, borderInlineStart: "1px solid var(--cascade-line)" }}>
+                  <div key={i} style={{ fontFamily: "IBM Plex Sans", fontSize: "0.83rem", color: "#BDB5A8", lineHeight: 1.65, paddingInlineStart: 12, borderInlineStart: "1px solid var(--cascade-line)" }}>
                     {term}
                   </div>
                 ))}
@@ -740,7 +738,7 @@ export default function Index() {
                     <Icon name="ChevronDown" size={20} style={{ color: "var(--cascade-red-text)", flexShrink: 0, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.3s" }} />
                   </button>
                   <div style={{ maxHeight: isOpen ? 400 : 0, overflow: "hidden", transition: "max-height 0.4s ease" }}>
-                    <p style={{ padding: "0 24px 22px", color: "#9CA3AF", fontSize: "0.92rem", lineHeight: 1.8 }}>{item.a}</p>
+                    <p style={{ padding: "0 24px 22px", color: "var(--text-muted)", fontSize: "0.92rem", lineHeight: 1.8 }}>{item.a}</p>
                   </div>
                 </div>
               );
@@ -752,22 +750,22 @@ export default function Index() {
       {/* CTA */}
       <section style={{ position: "relative", padding: "5.5rem 0", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.12) grayscale(0.5)" }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(90,14,27,0.35), rgba(10,10,10,0.85))" }} />
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(90,14,27,0.05) 18px, rgba(90,14,27,0.05) 19px)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(107, 18, 32,0.35), rgba(18,15,12,0.88))" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(107, 18, 32,0.05) 18px, rgba(107, 18, 32,0.05) 19px)" }} />
         <div className="pad-section" style={{ position: "relative", maxWidth: 820, margin: "0 auto", padding: "0 1.5rem", textAlign: "center" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 20, padding: "6px 14px", border: "1px solid var(--cascade-red)", background: "rgba(90,14,27,0.15)" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 20, padding: "6px 14px", border: "1px solid var(--cascade-red)", background: "rgba(107, 18, 32,0.15)" }}>
             <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--cascade-red)" }} />
             <span style={{ fontFamily: "Oswald", fontSize: "0.68rem", letterSpacing: "0.2em", color: "var(--cascade-light)" }}>{t.cta.note}</span>
           </div>
           <h2 style={{ fontFamily: "Oswald", fontWeight: 700, fontSize: "clamp(1.8rem, 5vw, 3.4rem)", letterSpacing: "0.04em", lineHeight: 1.05, color: "white", marginBottom: "1.2rem" }}>{t.cta.title}</h2>
-          <p style={{ color: "#D1D5DB", fontSize: "1rem", lineHeight: 1.8, maxWidth: 580, margin: "0 auto 2.5rem" }}>{t.cta.desc}</p>
+          <p style={{ color: "var(--text-label)", fontSize: "1rem", lineHeight: 1.8, maxWidth: 580, margin: "0 auto 2.5rem" }}>{t.cta.desc}</p>
           <div style={{ display: "flex", gap: 16, flexWrap: "wrap", justifyContent: "center" }}>
             <a href={`tel:${PHONE}`} className="btn-call cta-pulse btn-lift" style={{ fontSize: "1rem", padding: "16px 36px" }}><Icon name="Phone" size={18} />{t.cta.callBtn}</a>
             <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail btn-lift" style={{ padding: "16px 36px" }}><Icon name="Send" size={18} />{t.cta.tgBtn}</a>
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 18 }}>
             <Icon name="Lock" size={13} style={{ color: "var(--cascade-red-text)" }} />
-            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#D1D5DB", letterSpacing: "0.02em" }}>{t.reassure}</span>
+            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "var(--text-label)", letterSpacing: "0.02em" }}>{t.reassure}</span>
           </div>
         </div>
       </section>
@@ -779,13 +777,13 @@ export default function Index() {
             <Tag>{t.legalSection.tag}</Tag>
             <div className="section-divider" />
             <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 2.5vw, 2.2rem)", fontWeight: 600, lineHeight: 1.15, letterSpacing: "0.05em", marginBottom: "1.5rem" }}>{t.legalSection.title}</h2>
-            <p className="red-line-left" style={{ color: "#9CA3AF", lineHeight: 1.85, fontSize: "0.92rem", marginBottom: "1.2rem" }}>{t.legalSection.p1}</p>
+            <p className="red-line-left" style={{ color: "var(--text-muted)", lineHeight: 1.85, fontSize: "0.92rem", marginBottom: "1.2rem" }}>{t.legalSection.p1}</p>
             <p style={{ color: "var(--text-muted)", lineHeight: 1.85, fontSize: "0.92rem" }}>{t.legalSection.p2}</p>
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             {t.legalSection.points.map((p, i) => (
               <div key={i} className="cascade-card tile-btn" style={{ padding: "1.1rem 1.3rem", display: "flex", alignItems: "center", gap: 16 }}>
-                <div className="bento-icon" style={{ width: 42, height: 42, background: "rgba(90,14,27,0.1)", border: "1px solid rgba(90,14,27,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <div className="bento-icon" style={{ width: 42, height: 42, background: "rgba(107, 18, 32,0.1)", border: "1px solid rgba(107, 18, 32,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <Icon name={p.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <span style={{ fontSize: "0.9rem", color: "var(--cascade-light)", lineHeight: 1.5 }}>{p.text}</span>
@@ -814,7 +812,7 @@ export default function Index() {
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 18 }}>
             <Icon name="Lock" size={13} style={{ color: "var(--cascade-red-text)" }} />
-            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#9CA3AF", letterSpacing: "0.02em" }}>{t.reassure}</span>
+            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "var(--text-muted)", letterSpacing: "0.02em" }}>{t.reassure}</span>
           </div>
         </div>
       </section>
@@ -828,9 +826,9 @@ export default function Index() {
             <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.3rem, 2.2vw, 2rem)", fontWeight: 600, letterSpacing: "0.05em", maxWidth: 700 }}>{t.report.title}</h2>
           </div>
 
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 16, padding: 20, marginBottom: 32, background: "rgba(90,14,27,0.07)", borderTop: "1px solid rgba(90,14,27,0.22)", borderBottom: "1px solid rgba(90,14,27,0.22)", borderInlineEnd: "1px solid rgba(90,14,27,0.22)", borderInlineStart: "4px solid var(--cascade-red)" }}>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 16, padding: 20, marginBottom: 32, background: "rgba(107, 18, 32,0.07)", borderTop: "1px solid rgba(107, 18, 32,0.22)", borderBottom: "1px solid rgba(107, 18, 32,0.22)", borderInlineEnd: "1px solid rgba(107, 18, 32,0.22)", borderInlineStart: "4px solid var(--cascade-red)" }}>
             <Icon name="ShieldCheck" size={20} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
-            <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.75 }}>{t.report.warning}</p>
+            <p style={{ color: "var(--text-muted)", fontSize: "0.87rem", lineHeight: 1.75 }}>{t.report.warning}</p>
           </div>
 
           <div style={{ marginBottom: 40 }}>
@@ -839,7 +837,7 @@ export default function Index() {
               {t.safety.items.map((item, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: 16, background: "var(--cascade-dark)", border: "1px solid var(--cascade-line)" }}>
                   <Icon name={item.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
-                  <p style={{ color: "#9CA3AF", fontSize: "0.82rem", lineHeight: 1.7 }}>{item.text}</p>
+                  <p style={{ color: "var(--text-muted)", fontSize: "0.82rem", lineHeight: 1.7 }}>{item.text}</p>
                 </div>
               ))}
             </div>
@@ -853,7 +851,7 @@ export default function Index() {
                   {t.report.categories.map((cat, i) => (
                     <button key={i} onClick={() => setReportCategory(i)} style={{
                       textAlign: isRtl ? "right" : "left", padding: "10px 16px",
-                      background: reportCategory === i ? "rgba(90,14,27,0.14)" : "var(--cascade-charcoal)",
+                      background: reportCategory === i ? "rgba(107, 18, 32,0.14)" : "var(--cascade-charcoal)",
                       border: `1px solid ${reportCategory === i ? "var(--cascade-red)" : "var(--cascade-line)"}`,
                       color: reportCategory === i ? "var(--cascade-light)" : "var(--text-muted)",
                       fontFamily: "IBM Plex Sans", fontSize: "0.85rem", cursor: "pointer", transition: "all 0.2s",
@@ -875,11 +873,11 @@ export default function Index() {
                   </div>
                 </div>
                 <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={reportHp} onChange={(e) => setReportHp(e.target.value)} style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
-                <p style={{ fontSize: "0.73rem", color: "#4B5563", fontStyle: "italic" }}>{t.report.form.hint}</p>
+                <p style={{ fontSize: "0.73rem", color: "#6B6357", fontStyle: "italic" }}>{t.report.form.hint}</p>
                 {reportError && (
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(90,14,27,0.1)", border: "1px solid var(--cascade-red)" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(107, 18, 32,0.1)", border: "1px solid var(--cascade-red)" }}>
                     <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
-                    <p style={{ color: "#D1D5DB", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
+                    <p style={{ color: "var(--text-label)", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
                   </div>
                 )}
                 {encrypting && (
@@ -898,7 +896,7 @@ export default function Index() {
             </div>
           ) : (
             <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center", maxWidth: 440 }}>
-              <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(90,14,27,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(107, 18, 32,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Icon name="ShieldCheck" size={28} style={{ color: "var(--cascade-red-text)" }} />
               </div>
               <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.report.sent}</p>
@@ -913,7 +911,7 @@ export default function Index() {
       <footer role="contentinfo" style={{ background: "#060606", borderTop: "1px solid var(--cascade-line)", padding: "2.5rem 1.5rem 2.5rem" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto 1.75rem", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, paddingBottom: "1.75rem", borderBottom: "1px solid var(--cascade-line)", textAlign: "center" }}>
           <Icon name="Scale" size={14} style={{ color: "var(--cascade-red-text)", flexShrink: 0 }} />
-          <p style={{ fontSize: "0.78rem", color: "#9CA3AF", letterSpacing: "0.02em", fontStyle: "italic", lineHeight: 1.6 }}>{t.footer.hint}</p>
+          <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", letterSpacing: "0.02em", fontStyle: "italic", lineHeight: 1.6 }}>{t.footer.hint}</p>
         </div>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -921,12 +919,12 @@ export default function Index() {
             <span style={{ fontFamily: "Oswald", fontSize: "0.8rem", letterSpacing: "0.22em", color: "#8A93A0" }}>КАСКАД</span>
           </div>
           <div style={{ textAlign: "center" }}>
-            <p style={{ fontSize: "0.72rem", color: "#9CA3AF" }}>{t.footer.rights}</p>
+            <p style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>{t.footer.rights}</p>
             <p style={{ fontSize: "0.68rem", color: "#7B8492", marginTop: 2 }}>{t.footer.legal}</p>
           </div>
           <nav aria-label="Навигация в подвале" style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
             {navItems.slice(0, 4).map((item) => (
-              <button key={item.key} onClick={() => scrollTo(item.key)} style={{ fontFamily: "Oswald", fontSize: "0.68rem", letterSpacing: "0.14em", color: "#9CA3AF", background: "none", border: "none", cursor: "pointer" }}>{item.label}</button>
+              <button key={item.key} onClick={() => scrollTo(item.key)} style={{ fontFamily: "Oswald", fontSize: "0.68rem", letterSpacing: "0.14em", color: "var(--text-muted)", background: "none", border: "none", cursor: "pointer" }}>{item.label}</button>
             ))}
           </nav>
         </div>
