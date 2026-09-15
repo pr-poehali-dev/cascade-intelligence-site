@@ -18,6 +18,31 @@
     <meta name="yandex-verification" content="ebdbcb5938227286" />
     <meta name="google-site-verification" content="0VyRcJJ06u9Lb1n1ed2ilOyTbfBbYSQ-f4dJ0INiW2c" />
     <link rel="canonical" href="https://cascade-pic.ru/">
+    <style>
+      /* Critical CSS: базовый фон бренда до загрузки основных стилей — без белой вспышки */
+      html { background: #14161a; }
+      body {
+        margin: 0;
+        background: #14161a;
+        color: #eef0f3;
+        font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+      }
+      /* SEO-фоллбэк виден роботам, но не мигает белым листом перед пользователем */
+      #root > main {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 6rem 1.5rem;
+        opacity: 0.55;
+      }
+      #root > main h1 {
+        font-size: clamp(1.6rem, 4vw, 2.6rem);
+        line-height: 1.15;
+        color: #eef0f3;
+      }
+      #root > main h2 { font-size: 1.1rem; color: #cbd2dc; }
+      #root > main p,
+      #root > main li { color: #9ca3af; line-height: 1.8; }
+    </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://mc.yandex.ru">
