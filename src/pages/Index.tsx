@@ -102,6 +102,22 @@ export default function Index() {
   }, [isRtl, lang]);
 
   useEffect(() => {
+    const onContactClick = (e: MouseEvent) => {
+      const link = (e.target as HTMLElement)?.closest?.("a");
+      if (!link) return;
+      const href = link.getAttribute("href") || "";
+      let goal = "";
+      if (href.startsWith("tel:")) goal = "call";
+      else if (href.includes("t.me/")) goal = "telegram";
+      if (!goal) return;
+      const ym = (window as unknown as { ym?: (...a: unknown[]) => void }).ym;
+      if (typeof ym === "function") ym(101026698, "reachGoal", goal);
+    };
+    document.addEventListener("click", onContactClick);
+    return () => document.removeEventListener("click", onContactClick);
+  }, []);
+
+  useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -189,8 +205,11 @@ export default function Index() {
           clearInterval(interval);
           sent.then((ok) => {
             setEncrypting(false);
-            if (ok) setReportSubmitted(true);
-            else setReportError(true);
+            if (ok) {
+              setReportSubmitted(true);
+              const ym = (window as unknown as { ym?: (...a: unknown[]) => void }).ym;
+              if (typeof ym === "function") ym(101026698, "reachGoal", "report_sent");
+            } else setReportError(true);
           });
           return 100;
         }
@@ -231,8 +250,11 @@ export default function Index() {
           clearInterval(interval);
           sent.then((ok) => {
             setAgentEnc(false);
-            if (ok) setAgentSubmitted(true);
-            else setAgentError(true);
+            if (ok) {
+              setAgentSubmitted(true);
+              const ym = (window as unknown as { ym?: (...a: unknown[]) => void }).ym;
+              if (typeof ym === "function") ym(101026698, "reachGoal", "agent_sent");
+            } else setAgentError(true);
           });
           return 100;
         }
@@ -520,7 +542,7 @@ export default function Index() {
 
             {!agentSubmitted ? (
               <div className="cascade-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: 14 }}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", background: "rgba(128,0,32,0.07)", border: "1px solid rgba(128,0,32,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "3px solid var(--cascade-red)" }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", background: "rgba(128,0,32,0.07)", borderTop: "1px solid rgba(128,0,32,0.22)", borderBottom: "1px solid rgba(128,0,32,0.22)", borderInlineEnd: "1px solid rgba(128,0,32,0.22)", borderInlineStart: "3px solid var(--cascade-red)" }}>
                   <Icon name="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                   <p style={{ color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.65 }}>{t.agent.secure}</p>
                 </div>
@@ -704,7 +726,7 @@ export default function Index() {
             <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.3rem, 2.2vw, 2rem)", fontWeight: 600, letterSpacing: "0.05em", maxWidth: 700 }}>{t.report.title}</h2>
           </div>
 
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 16, padding: 20, marginBottom: 32, background: "rgba(128,0,32,0.07)", border: "1px solid rgba(128,0,32,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "4px solid var(--cascade-red)" }}>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 16, padding: 20, marginBottom: 32, background: "rgba(128,0,32,0.07)", borderTop: "1px solid rgba(128,0,32,0.22)", borderBottom: "1px solid rgba(128,0,32,0.22)", borderInlineEnd: "1px solid rgba(128,0,32,0.22)", borderInlineStart: "4px solid var(--cascade-red)" }}>
             <Icon name="ShieldCheck" size={20} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
             <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.75 }}>{t.report.warning}</p>
           </div>
