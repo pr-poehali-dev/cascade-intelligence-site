@@ -27,21 +27,60 @@
         color: #eef0f3;
         font-family: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
       }
-      /* SEO-фоллбэк виден роботам, но не мигает белым листом перед пользователем */
+      /* SEO-фоллбэк: остаётся в DOM для поисковых роботов, но не показывается
+         пользователю — иначе до старта приложения мелькает «вордовский» текст */
       #root > main {
-        max-width: 1100px;
-        margin: 0 auto;
-        padding: 6rem 1.5rem;
-        opacity: 0.55;
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border: 0;
       }
-      #root > main h1 {
-        font-size: clamp(1.6rem, 4vw, 2.6rem);
-        line-height: 1.15;
-        color: #eef0f3;
+      /* Фирменная заставка на время загрузки приложения */
+      #boot {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #14161a;
+        z-index: 9999;
       }
-      #root > main h2 { font-size: 1.1rem; color: #cbd2dc; }
-      #root > main p,
-      #root > main li { color: #9ca3af; line-height: 1.8; }
+      #boot span {
+        font-family: "Oswald", "Arial Narrow", sans-serif;
+        font-size: 13px;
+        letter-spacing: 0.42em;
+        color: #cf8a86;
+        text-transform: uppercase;
+        animation: bootPulse 1.4s ease-in-out infinite;
+      }
+      #boot i {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background: linear-gradient(90deg, #b8925a 0%, #800020 100%);
+        transform-origin: left;
+        animation: bootBar 1.1s ease-in-out infinite;
+      }
+      @keyframes bootPulse {
+        0%, 100% { opacity: 0.45; }
+        50% { opacity: 1; }
+      }
+      @keyframes bootBar {
+        0% { transform: scaleX(0); }
+        60% { transform: scaleX(1); }
+        100% { transform: scaleX(1); opacity: 0; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot span, #boot i { animation: none; }
+      }
     </style>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -99,6 +138,15 @@
   </head>
 
 <body>
+<div id="boot" aria-hidden="true"><span>Каскад</span><i></i></div>
+<script>
+    // Страховка: если приложение не стартовало за 6 сек — убираем заставку,
+    // чтобы пользователь не остался перед пустым экраном
+    setTimeout(function () {
+        var b = document.getElementById("boot");
+        if (b) b.remove();
+    }, 6000);
+</script>
 <div id="root">
     <!-- SEO fallback: виден поисковым роботам и при отключённом JS; заменяется приложением после загрузки -->
     <main>
