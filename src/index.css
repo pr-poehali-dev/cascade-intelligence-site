@@ -35,10 +35,13 @@
     --radius: 0rem;
 
     /* Custom */
-    --cascade-red: #9e2321;
-    --cascade-red-bright: #c0392b;
-    /* Красный для ТЕКСТА на тёмном фоне: контраст 4.6:1 (WCAG AA) */
-    --cascade-red-text: #e8645c;
+    /* Bordeaux — заливка кнопок и плашек. С белым текстом: 10.8:1 */
+    --cascade-red: #800020;
+    --cascade-red-bright: #9c0026;
+    /* Пыльная роза — ТЕКСТ и иконки на тёмном. Контраст 6.6:1 (WCAG AA) */
+    --cascade-red-text: #cf8a86;
+    /* Приглушённая латунь — акцент на цифрах и разделителях. 6.3:1 */
+    --cascade-gold: #b8925a;
     --cascade-steel: #2c3240;
     --cascade-dark: #14161a;
     --cascade-charcoal: #1a1d23;
@@ -205,10 +208,10 @@ img {
 @keyframes pulse-red {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(139, 26, 26, 0.4);
+    box-shadow: 0 0 0 0 rgba(128, 0, 32, 0.4);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(139, 26, 26, 0);
+    box-shadow: 0 0 0 8px rgba(128, 0, 32, 0);
   }
 }
 
@@ -313,7 +316,11 @@ img {
 .section-divider {
   width: 60px;
   height: 2px;
-  background: var(--cascade-red);
+  background: linear-gradient(
+    90deg,
+    var(--cascade-gold) 0%,
+    var(--cascade-red) 100%
+  );
   margin-bottom: 1.5rem;
 }
 
@@ -828,7 +835,7 @@ img {
   border-bottom: none;
 }
 .lang-option:hover {
-  background: rgba(139, 26, 26, 0.12);
+  background: rgba(128, 0, 32, 0.12);
   color: var(--cascade-light);
 }
 .lang-option.active {
@@ -921,7 +928,7 @@ img {
 }
 .fab-call {
   background: var(--cascade-red);
-  box-shadow: 0 8px 24px rgba(139, 26, 26, 0.4);
+  box-shadow: 0 8px 24px rgba(128, 0, 32, 0.4);
 }
 .fab-tg {
   background: #229ed9;
@@ -939,7 +946,7 @@ img {
   justify-content: center;
   gap: 8px;
   background: #120909;
-  border-bottom: 1px solid rgba(139, 26, 26, 0.4);
+  border-bottom: 1px solid rgba(128, 0, 32, 0.4);
   padding: 6px 12px;
   font-family: "Oswald", sans-serif;
   font-size: 0.65rem;
@@ -963,7 +970,7 @@ img {
 .zone-chip:hover {
   border-color: var(--cascade-red);
   color: var(--cascade-light);
-  background: rgba(139, 26, 26, 0.08);
+  background: rgba(128, 0, 32, 0.08);
 }
 
 /* Responsive */
@@ -1060,10 +1067,10 @@ img {
 @keyframes ctaPulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(139, 26, 26, 0.6);
+    box-shadow: 0 0 0 0 rgba(128, 0, 32, 0.6);
   }
   50% {
-    box-shadow: 0 0 0 12px rgba(139, 26, 26, 0);
+    box-shadow: 0 0 0 12px rgba(128, 0, 32, 0);
   }
 }
 .cta-pulse {
@@ -1077,7 +1084,7 @@ img {
     0 12px 30px rgba(0, 0, 0, 0.5);
 }
 .btn-cascade:hover {
-  box-shadow: 0 6px 20px rgba(139, 26, 26, 0.45);
+  box-shadow: 0 6px 20px rgba(128, 0, 32, 0.45);
 }
 .fab-call {
   animation: ctaPulse 2s infinite;

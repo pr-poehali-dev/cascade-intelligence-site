@@ -332,8 +332,8 @@ export default function Index() {
       <section id="home" className="seamless-fade" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", paddingTop: 88 }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.15) grayscale(0.5)" }} />
         <div className="living-gradient" style={{ position: "absolute", inset: 0 }} />
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(139,26,26,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(139,26,26,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-        <div style={{ position: "absolute", inset: 0, background: isRtl ? "radial-gradient(circle at 80% 50%, rgba(139,26,26,0.28), transparent 55%)" : "radial-gradient(circle at 20% 50%, rgba(139,26,26,0.28), transparent 55%)" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(128,0,32,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(128,0,32,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        <div style={{ position: "absolute", inset: 0, background: isRtl ? "radial-gradient(circle at 80% 50%, rgba(128,0,32,0.28), transparent 55%)" : "radial-gradient(circle at 20% 50%, rgba(128,0,32,0.28), transparent 55%)" }} />
         <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 200px rgba(0,0,0,0.9)" }} />
         <div className="hero-edge-pulse" style={{ position: "absolute", [isRtl ? "right" : "left"]: 0, top: 0, bottom: 0, width: 4, background: "var(--cascade-red)" }} />
 
@@ -388,7 +388,7 @@ export default function Index() {
             {t.trust.items.map((item, i) => (
               <div key={i} className="trust-item reveal" style={{ transitionDelay: `${(i % 5) * 0.07}s` }}>
                 <Icon name={item.icon} fallback="ShieldCheck" size={22} style={{ color: "var(--cascade-red-text)", marginBottom: 10 }} />
-                <CountUp value={item.value} style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "var(--cascade-light)", lineHeight: 1, display: "inline-block" }} />
+                <CountUp value={item.value} style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "var(--cascade-gold)", lineHeight: 1, display: "inline-block" }} />
                 <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "var(--text-muted)", marginTop: 6, letterSpacing: "0.04em" }}>{item.label}</div>
               </div>
             ))}
@@ -409,7 +409,7 @@ export default function Index() {
           <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {t.about.stats.map((s, i) => (
               <div key={i} className="cascade-card tile-btn" style={{ padding: "1.6rem" }}>
-                <CountUp value={s.num} style={{ fontFamily: "Oswald", fontSize: "2.6rem", fontWeight: 700, color: "var(--cascade-red-text)", lineHeight: 1, display: "inline-block" }} />
+                <CountUp value={s.num} style={{ fontFamily: "Oswald", fontSize: "2.6rem", fontWeight: 700, color: "var(--cascade-gold)", lineHeight: 1, display: "inline-block" }} />
                 <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "var(--text-muted)", marginTop: "0.5rem", letterSpacing: "0.05em" }}>{s.label}</div>
               </div>
             ))}
@@ -419,7 +419,7 @@ export default function Index() {
 
       {/* ELITE */}
       <section style={{ position: "relative", padding: "5rem 0", background: "#080808", overflow: "hidden", borderTop: "1px solid var(--cascade-line)", borderBottom: "1px solid var(--cascade-line)" }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(139,26,26,0.06) 22px, rgba(139,26,26,0.06) 24px)" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(128,0,32,0.06) 22px, rgba(128,0,32,0.06) 24px)" }} />
         <div style={{ position: "absolute", top: 0, bottom: 0, [isRtl ? "right" : "left"]: 0, width: 5, background: "var(--cascade-red)" }} />
         <div className="pad-section" style={{ position: "relative", maxWidth: 1100, margin: "0 auto", padding: "0 1.5rem" }}>
           <span className="cascade-tag" style={{ marginBottom: 24, display: "inline-block" }}>{t.elite.tag}</span>
@@ -482,7 +482,7 @@ export default function Index() {
             {t.principles.items.map((p, i) => (
               <div key={i} className="cascade-card spotlight tile-btn reveal" onMouseMove={handleSpotlight} style={{ padding: "1.8rem", position: "relative", overflow: "hidden", transitionDelay: `${(i % 4) * 0.08}s` }}>
                 <div style={{ position: "absolute", top: 0, [isRtl ? "right" : "left"]: 0, width: 3, height: "100%", background: "var(--cascade-red)" }} />
-                <div className="bento-icon" style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div className="bento-icon" style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(128,0,32,0.1)", border: "1px solid rgba(128,0,32,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <span className="file-index">§ {String(i + 1).padStart(2, "0")}</span>
@@ -520,7 +520,7 @@ export default function Index() {
 
             {!agentSubmitted ? (
               <div className="cascade-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: 14 }}>
-                <div style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", background: "rgba(139,26,26,0.07)", border: "1px solid rgba(139,26,26,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "3px solid var(--cascade-red)" }}>
+                <div style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", background: "rgba(128,0,32,0.07)", border: "1px solid rgba(128,0,32,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "3px solid var(--cascade-red)" }}>
                   <Icon name="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                   <p style={{ color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.65 }}>{t.agent.secure}</p>
                 </div>
@@ -533,7 +533,7 @@ export default function Index() {
                   {t.agent.consent}
                 </label>
                 {agentError && (
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(139,26,26,0.1)", border: "1px solid var(--cascade-red)" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(128,0,32,0.1)", border: "1px solid var(--cascade-red)" }}>
                     <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                     <p style={{ color: "#D1D5DB", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
                   </div>
@@ -554,7 +554,7 @@ export default function Index() {
               </div>
             ) : (
               <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center" }}>
-                <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(139,26,26,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(128,0,32,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon name="Fingerprint" size={28} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.agent.sent}</p>
@@ -628,10 +628,10 @@ export default function Index() {
       {/* CTA */}
       <section style={{ position: "relative", padding: "5.5rem 0", overflow: "hidden" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.12) grayscale(0.5)" }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(139,26,26,0.35), rgba(10,10,10,0.85))" }} />
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(139,26,26,0.05) 18px, rgba(139,26,26,0.05) 19px)" }} />
+        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(135deg, rgba(128,0,32,0.35), rgba(10,10,10,0.85))" }} />
+        <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 18px, rgba(128,0,32,0.05) 18px, rgba(128,0,32,0.05) 19px)" }} />
         <div className="pad-section" style={{ position: "relative", maxWidth: 820, margin: "0 auto", padding: "0 1.5rem", textAlign: "center" }}>
-          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 20, padding: "6px 14px", border: "1px solid var(--cascade-red)", background: "rgba(139,26,26,0.15)" }}>
+          <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 20, padding: "6px 14px", border: "1px solid var(--cascade-red)", background: "rgba(128,0,32,0.15)" }}>
             <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--cascade-red)" }} />
             <span style={{ fontFamily: "Oswald", fontSize: "0.68rem", letterSpacing: "0.2em", color: "var(--cascade-light)" }}>{t.cta.note}</span>
           </div>
@@ -661,7 +661,7 @@ export default function Index() {
           <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
             {t.legalSection.points.map((p, i) => (
               <div key={i} className="cascade-card tile-btn" style={{ padding: "1.1rem 1.3rem", display: "flex", alignItems: "center", gap: 16 }}>
-                <div className="bento-icon" style={{ width: 42, height: 42, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                <div className="bento-icon" style={{ width: 42, height: 42, background: "rgba(128,0,32,0.1)", border: "1px solid rgba(128,0,32,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                   <Icon name={p.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <span style={{ fontSize: "0.9rem", color: "var(--cascade-light)", lineHeight: 1.5 }}>{p.text}</span>
@@ -704,7 +704,7 @@ export default function Index() {
             <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.3rem, 2.2vw, 2rem)", fontWeight: 600, letterSpacing: "0.05em", maxWidth: 700 }}>{t.report.title}</h2>
           </div>
 
-          <div style={{ display: "flex", alignItems: "flex-start", gap: 16, padding: 20, marginBottom: 32, background: "rgba(139,26,26,0.07)", border: "1px solid rgba(139,26,26,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "4px solid var(--cascade-red)" }}>
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 16, padding: 20, marginBottom: 32, background: "rgba(128,0,32,0.07)", border: "1px solid rgba(128,0,32,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "4px solid var(--cascade-red)" }}>
             <Icon name="ShieldCheck" size={20} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
             <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.75 }}>{t.report.warning}</p>
           </div>
@@ -729,7 +729,7 @@ export default function Index() {
                   {t.report.categories.map((cat, i) => (
                     <button key={i} onClick={() => setReportCategory(i)} style={{
                       textAlign: isRtl ? "right" : "left", padding: "10px 16px",
-                      background: reportCategory === i ? "rgba(139,26,26,0.14)" : "var(--cascade-charcoal)",
+                      background: reportCategory === i ? "rgba(128,0,32,0.14)" : "var(--cascade-charcoal)",
                       border: `1px solid ${reportCategory === i ? "var(--cascade-red)" : "var(--cascade-line)"}`,
                       color: reportCategory === i ? "var(--cascade-light)" : "var(--text-muted)",
                       fontFamily: "IBM Plex Sans", fontSize: "0.85rem", cursor: "pointer", transition: "all 0.2s",
@@ -753,7 +753,7 @@ export default function Index() {
                 <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={reportHp} onChange={(e) => setReportHp(e.target.value)} style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
                 <p style={{ fontSize: "0.73rem", color: "#4B5563", fontStyle: "italic" }}>{t.report.form.hint}</p>
                 {reportError && (
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(139,26,26,0.1)", border: "1px solid var(--cascade-red)" }}>
+                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(128,0,32,0.1)", border: "1px solid var(--cascade-red)" }}>
                     <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                     <p style={{ color: "#D1D5DB", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
                   </div>
@@ -774,7 +774,7 @@ export default function Index() {
             </div>
           ) : (
             <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center", maxWidth: 440 }}>
-              <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(139,26,26,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(128,0,32,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Icon name="ShieldCheck" size={28} style={{ color: "var(--cascade-red-text)" }} />
               </div>
               <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.report.sent}</p>
