@@ -36,7 +36,7 @@ const PageNotFound = () => {
           position: "absolute",
           inset: 0,
           backgroundImage:
-            "linear-gradient(rgba(128,0,32,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(128,0,32,0.05) 1px, transparent 1px)",
+            "linear-gradient(rgba(90,14,27,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(90,14,27,0.05) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
         }}
       />
@@ -45,7 +45,7 @@ const PageNotFound = () => {
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(circle at 50% 50%, rgba(128,0,32,0.18), transparent 60%)",
+            "radial-gradient(circle at 50% 50%, rgba(90,14,27,0.18), transparent 60%)",
         }}
       />
 
@@ -56,7 +56,7 @@ const PageNotFound = () => {
             fontSize: "0.72rem",
             letterSpacing: "0.22em",
             color: "var(--cascade-red-text)",
-            border: "1px solid rgba(128,0,32,0.4)",
+            border: "1px solid rgba(90,14,27,0.4)",
             padding: "6px 14px",
             display: "inline-block",
             marginBottom: 28,

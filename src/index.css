@@ -35,12 +35,12 @@
     --radius: 0rem;
 
     /* Custom */
-    /* Bordeaux — заливка кнопок и плашек. С белым текстом: 10.8:1 */
-    --cascade-red: #800020;
-    --cascade-red-bright: #9c0026;
-    /* Пыльная роза — ТЕКСТ и иконки на тёмном. Контраст 6.6:1 (WCAG AA) */
-    --cascade-red-text: #cf8a86;
-    /* Приглушённая латунь — акцент на цифрах и разделителях. 6.3:1 */
+    /* Oxide Bordeaux — заливка кнопок и плашек. С белым текстом: 13.9:1 */
+    --cascade-red: #5a0e1b;
+    --cascade-red-bright: #6e1222;
+    /* Сушёная роза — ТЕКСТ и иконки на тёмном. Контраст 6.6:1 (WCAG AA) */
+    --cascade-red-text: #c98d84;
+    /* Тусклая латунь — акцент на цифрах и разделителях. 6.3:1 */
     --cascade-gold: #b8925a;
     --cascade-steel: #2c3240;
     --cascade-dark: #14161a;
@@ -139,7 +139,30 @@ body::before {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.18;
+  opacity: 0.34;
+}
+
+/* Сканлайны — след архивного монитора, поверх зерна */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.16) 0px,
+    rgba(0, 0, 0, 0.16) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  opacity: 0.35;
+  mix-blend-mode: multiply;
+}
+@media (max-width: 640px) {
+  body::after {
+    opacity: 0.22;
+  }
 }
 
 /* Copy protection */
@@ -208,10 +231,10 @@ img {
 @keyframes pulse-red {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(128, 0, 32, 0.4);
+    box-shadow: 0 0 0 0 rgba(90, 14, 27, 0.4);
   }
   50% {
-    box-shadow: 0 0 0 8px rgba(128, 0, 32, 0);
+    box-shadow: 0 0 0 8px rgba(90, 14, 27, 0);
   }
 }
 
@@ -348,7 +371,7 @@ img {
 .header-cta:hover {
   background: transparent;
   color: var(--cascade-red-text);
-  box-shadow: 0 6px 18px -6px rgba(158, 35, 33, 0.7);
+  box-shadow: 0 6px 18px -6px rgba(90, 14, 27, 0.7);
 }
 .header-cta::after {
   content: "";
@@ -509,7 +532,7 @@ img {
   transition: opacity 0.4s ease;
   background: radial-gradient(
     360px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(158, 35, 33, 0.18),
+    rgba(90, 14, 27, 0.18),
     transparent 60%
   );
   z-index: 0;
@@ -531,7 +554,7 @@ img {
   grid-row: span 1;
   background: linear-gradient(
     150deg,
-    rgba(158, 35, 33, 0.14),
+    rgba(90, 14, 27, 0.14),
     var(--cascade-charcoal) 60%
   );
 }
@@ -539,8 +562,8 @@ img {
   width: 52px;
   height: 52px;
   margin-bottom: 20px;
-  background: rgba(158, 35, 33, 0.12);
-  border: 1px solid rgba(158, 35, 33, 0.3);
+  background: rgba(90, 14, 27, 0.12);
+  border: 1px solid rgba(90, 14, 27, 0.3);
   border-radius: 8px;
   display: flex;
   align-items: center;
@@ -689,7 +712,7 @@ img {
 .btn-cascade:hover {
   background: transparent;
   color: var(--cascade-red-text);
-  box-shadow: 0 8px 24px -10px rgba(158, 35, 33, 0.7);
+  box-shadow: 0 8px 24px -10px rgba(90, 14, 27, 0.7);
 }
 
 .btn-cascade-outline {
@@ -727,7 +750,7 @@ img {
 }
 .cascade-input:focus {
   border-color: var(--cascade-red);
-  box-shadow: 0 0 0 3px rgba(158, 35, 33, 0.15);
+  box-shadow: 0 0 0 3px rgba(90, 14, 27, 0.15);
 }
 .cascade-input::placeholder {
   color: #6b7280;
@@ -835,7 +858,7 @@ img {
   border-bottom: none;
 }
 .lang-option:hover {
-  background: rgba(128, 0, 32, 0.12);
+  background: rgba(90, 14, 27, 0.12);
   color: var(--cascade-light);
 }
 .lang-option.active {
@@ -928,7 +951,7 @@ img {
 }
 .fab-call {
   background: var(--cascade-red);
-  box-shadow: 0 8px 24px rgba(128, 0, 32, 0.4);
+  box-shadow: 0 8px 24px rgba(90, 14, 27, 0.4);
 }
 .fab-tg {
   background: #229ed9;
@@ -946,7 +969,7 @@ img {
   justify-content: center;
   gap: 8px;
   background: #120909;
-  border-bottom: 1px solid rgba(128, 0, 32, 0.4);
+  border-bottom: 1px solid rgba(90, 14, 27, 0.4);
   padding: 6px 12px;
   font-family: "Oswald", sans-serif;
   font-size: 0.65rem;
@@ -970,7 +993,7 @@ img {
 .zone-chip:hover {
   border-color: var(--cascade-red);
   color: var(--cascade-light);
-  background: rgba(128, 0, 32, 0.08);
+  background: rgba(90, 14, 27, 0.08);
 }
 
 /* Responsive */
@@ -1053,11 +1076,11 @@ img {
   0%,
   100% {
     opacity: 1;
-    box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.7);
+    box-shadow: 0 0 0 0 rgba(110, 18, 34, 0.7);
   }
   50% {
     opacity: 0.6;
-    box-shadow: 0 0 0 6px rgba(192, 57, 43, 0);
+    box-shadow: 0 0 0 6px rgba(110, 18, 34, 0);
   }
 }
 .pulse-dot {
@@ -1067,10 +1090,10 @@ img {
 @keyframes ctaPulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(128, 0, 32, 0.6);
+    box-shadow: 0 0 0 0 rgba(90, 14, 27, 0.6);
   }
   50% {
-    box-shadow: 0 0 0 12px rgba(128, 0, 32, 0);
+    box-shadow: 0 0 0 12px rgba(90, 14, 27, 0);
   }
 }
 .cta-pulse {
@@ -1084,7 +1107,7 @@ img {
     0 12px 30px rgba(0, 0, 0, 0.5);
 }
 .btn-cascade:hover {
-  box-shadow: 0 6px 20px rgba(128, 0, 32, 0.45);
+  box-shadow: 0 6px 20px rgba(90, 14, 27, 0.45);
 }
 .fab-call {
   animation: ctaPulse 2s infinite;
@@ -1098,11 +1121,11 @@ img {
   0%,
   100% {
     opacity: 1;
-    box-shadow: 0 0 14px 1px rgba(192, 57, 43, 0.6);
+    box-shadow: 0 0 14px 1px rgba(110, 18, 34, 0.6);
   }
   50% {
     opacity: 0.55;
-    box-shadow: 0 0 26px 3px rgba(192, 57, 43, 0.35);
+    box-shadow: 0 0 26px 3px rgba(110, 18, 34, 0.35);
   }
 }
 .hero-edge-pulse {
@@ -1129,9 +1152,9 @@ img {
 .living-gradient {
   background: linear-gradient(
     120deg,
-    rgba(158, 35, 33, 0.22),
+    rgba(90, 14, 27, 0.22),
     rgba(44, 50, 64, 0.05),
-    rgba(192, 57, 43, 0.18)
+    rgba(110, 18, 34, 0.18)
   );
   background-size: 220% 220%;
   animation: livingGradientShift 14s ease-in-out infinite;
@@ -1158,8 +1181,8 @@ img {
 .tag-glass {
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
-  background: rgba(158, 35, 33, 0.08);
-  border: 1px solid rgba(158, 35, 33, 0.35);
+  background: rgba(90, 14, 27, 0.08);
+  border: 1px solid rgba(90, 14, 27, 0.35);
 }
 /* На мобильных blur на каждом теге ощутимо грузит GPU при скролле — отключаем */
 @media (pointer: coarse) {
@@ -1179,7 +1202,7 @@ img {
 }
 .tile-btn:hover {
   transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 18px 40px -14px rgba(158, 35, 33, 0.45);
+  box-shadow: 0 18px 40px -14px rgba(90, 14, 27, 0.45);
 }
 .tile-btn:active {
   transform: translateY(-2px) scale(0.99);
@@ -1215,7 +1238,7 @@ img {
 }
 .tile-btn:hover .bento-icon {
   transform: scale(1.12) rotate(-4deg);
-  background: rgba(158, 35, 33, 0.22);
+  background: rgba(90, 14, 27, 0.22);
 }
 
 /* Бесшовный переход между секциями — мягкая тень-градиент на стыках */
@@ -1287,11 +1310,11 @@ img {
   0%,
   100% {
     opacity: 1;
-    box-shadow: 0 0 0 0 rgba(192, 57, 43, 0.5);
+    box-shadow: 0 0 0 0 rgba(110, 18, 34, 0.5);
   }
   50% {
     opacity: 0.6;
-    box-shadow: 0 0 0 4px rgba(192, 57, 43, 0);
+    box-shadow: 0 0 0 4px rgba(110, 18, 34, 0);
   }
 }
 .live-dot {
@@ -1312,3 +1335,112 @@ img {
 /* ==========================================================================
    TREND-STYLES END
    ========================================================================== */
+
+/* ==========================================================================
+   Курсор-визир — только на точных указателях (мышь), не трогает тач
+   ========================================================================== */
+@media (pointer: fine) {
+  body,
+  a,
+  button,
+  .tile-btn,
+  [role="button"] {
+    cursor: none;
+  }
+
+  #aim {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+    pointer-events: none;
+    z-index: 10000;
+    will-change: transform;
+  }
+  #aim::before,
+  #aim::after {
+    content: "";
+    position: absolute;
+    background: var(--cascade-red-text);
+  }
+  /* горизонтальная риска */
+  #aim::before {
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    transform: translateY(-50%);
+  }
+  /* вертикальная риска */
+  #aim::after {
+    left: 50%;
+    top: 0;
+    height: 100%;
+    width: 1px;
+    transform: translateX(-50%);
+  }
+  #aim .dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3px;
+    height: 3px;
+    margin: -1.5px 0 0 -1.5px;
+    background: var(--cascade-red-text);
+  }
+  /* над кликабельным — визир раскрывается и краснеет */
+  #aim.hot {
+    width: 30px;
+    height: 30px;
+    margin: -15px 0 0 -15px;
+  }
+  #aim.hot::before,
+  #aim.hot::after,
+  #aim.hot .dot {
+    background: var(--cascade-gold);
+  }
+  #aim {
+    transition:
+      width 0.16s ease,
+      height 0.16s ease,
+      margin 0.16s ease;
+  }
+}
+@media (pointer: coarse) {
+  #aim {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   Раздел для граждан — намеренно сбитая сетка: карточка цены смещена вверх
+   и слегка наезжает на колонку текста. Ровная сетка здесь читалась бы
+   как шаблон, а не как живая страница.
+   ========================================================================== */
+.citizens-grid {
+  display: grid;
+  grid-template-columns: 1.35fr 0.95fr;
+  gap: 44px;
+  align-items: start;
+}
+.citizens-price {
+  background: var(--cascade-dark);
+  border: 1px solid var(--cascade-line);
+  border-top: 2px solid var(--cascade-red);
+  padding: 26px 24px 28px;
+  margin-top: -18px;
+  margin-inline-start: -22px;
+  box-shadow: 0 18px 40px -22px rgba(0, 0, 0, 0.8);
+}
+@media (max-width: 900px) {
+  .citizens-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+  .citizens-price {
+    margin-top: 0;
+    margin-inline-start: 0;
+  }
+}

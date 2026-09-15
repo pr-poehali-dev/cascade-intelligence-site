@@ -15,7 +15,7 @@ interface StatItem { num: string; label: string; }
 interface InfoItem { icon: string; label: string; value: string; }
 
 export interface Dict {
-  nav: { home: string; about: string; services: string; report: string; agent: string; contact: string };
+  nav: { home: string; about: string; services: string; report: string; agent: string; citizens: string; contact: string };
   secure: string;
   elite: { tag: string; line1: string; line2: string };
   hero: { tag: string; title: string; subtitle: string; desc: string; btn1: string; btn2: string };
@@ -40,6 +40,11 @@ export interface Dict {
   };
   principles: { tag: string; title: string; items: { icon: string; title: string; desc: string }[] };
   cta: { title: string; desc: string; callBtn: string; consultBtn: string; tgBtn: string; note: string };
+  citizens: {
+    tag: string; title: string; lead: string; p1: string;
+    cases: string[];
+    priceLabel: string; price: string; terms: string[]; note: string; btn: string;
+  };
   legalSection: { tag: string; title: string; p1: string; p2: string; points: { icon: string; text: string }[] };
   contact: {
     tag: string; title: string; desc: string;
@@ -50,7 +55,7 @@ export interface Dict {
 
 export const TRANSLATIONS: Record<Lang, Dict> = {
   ru: {
-    nav: { home: "Главная", about: "Компания", services: "Услуги", report: "Сообщить", agent: "Сотрудничество", contact: "Контакты" },
+    nav: { home: "Главная", about: "Компания", services: "Услуги", report: "Сообщить", agent: "Сотрудничество", citizens: "Гражданам", contact: "Контакты" },
     secure: "Конфиденциально · Ваше обращение под защитой",
     elite: { tag: "Закрытый контур", line1: "Мы работаем с ограниченным числом резидентов.", line2: "Это не вопрос цены. Это вопрос ресурса: каждый контур ведёт выделенная группа, и мы не берём больше задач, чем способны закрыть с гарантией результата." },
     hero: { tag: "Частная Разведывательная Компания", title: "КАСКАД", subtitle: "Конфиденциальность. Ресурс. Спокойствие.", desc: "Репутация и время стоят дороже денег. Мы принимаем вопросы, цена ошибки в которых несоизмерима со стоимостью работы, и ведём их в закрытом контуре — до результата.", btn1: "Наши услуги", btn2: "Получить консультацию" },
@@ -96,12 +101,34 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     agent: { tag: "Сотрудничество", title: "СТАНЬТЕ ЧАСТЬЮ КОМАНДЫ", desc: "Мы ищем людей действия по всему миру — тех, кто обладает доступом, информацией, особыми навыками или просто хочет быть полезным большому делу. Военный и оперативный опыт, знание закрытых сфер, связи в нужных кругах — всё это ценится. Каждому находится своя роль. Это не работа за деньги, а вклад в дело, которое больше нас. Сделайте первый шаг — остальное мы возьмём на себя.", secure: "Данные передаются по защищённому каналу. Мы не сохраняем IP-адрес и метаданные — ваша анонимность под полной защитой. Обратиться к нам безопасно.", fields: { alias: "Как к вам обращаться", contact: "Защищённый способ связи", skills: "Ваш опыт, доступы, регион и возможности", motivation: "Чем вы можете быть полезны", btn: "Подать заявку" }, consent: "Я готов содействовать на добровольной и безвозмездной основе", sent: "ЗАЯВКА ПРИНЯТА", sentDesc: "Ваш потенциал будет изучен. Если вы нам подходите — с вами свяжутся через указанный канал. Действуйте сдержанно." },
     principles: { tag: "Принципы", title: "ЧТО ПОЛУЧАЕТ РЕЗИДЕНТ", items: [ { icon: "Award", title: "Оплата по результату", desc: "Задача не закрыта — оплата не удерживается. Мы открываем контур только там, где уверены в исходе." }, { icon: "Medal", title: "Уровень команды", desc: "Методология построена на стандартах безопасности высшего уровня сложности. Состав группы под задачу фиксируется и не меняется по ходу." }, { icon: "FileCheck", title: "Документированный результат", desc: "По завершении — отчёт с подтверждающими материалами: фото, видео, аудио, аналитическая справка." }, { icon: "Clock", title: "Время реакции", desc: "Контур принимает обращения круглосуточно. По срочным вопросам реагируем немедленно — промедление здесь дороже денег." } ] },
     cta: { title: "ВОПРОС РЕШАЕТСЯ ДО ТОГО, КАК СТАНЕТ ПУБЛИЧНЫМ", desc: "Репутационный риск дешевле предупредить, чем устранять. Первая консультация конфиденциальна, проводится без оплаты и ни к чему вас не обязывает. Чем раньше открыт контур — тем шире набор доступных решений.", callBtn: "Позвонить", consultBtn: "Получить консультацию", tgBtn: "Написать в Telegram", note: "Защищённая линия · Круглосуточно · Полная конфиденциальность" },
+    citizens: {
+      tag: "Без контура и регламентов",
+      title: "ИНФОРМАЦИОННАЯ РАЗВЕДКА ДЛЯ ГРАЖДАН",
+      lead: "Здесь без предисловий.",
+      p1: "Украли деньги. Пропал человек. Кто-то живёт в вашей квартире по липовой доверенности. Их отговорки меня не интересуют — интересуют выписки, номера, адреса. Работаю руками: поднимаю базы, отслеживаю цепочку переводов, устанавливаю имя и место. На выходе — папка, с которой следователь обязан возбудить дело.",
+      cases: [
+        "Вывели деньги на карту или крипту. Ищу конечного получателя.",
+        "Пропал родственник. Устанавливаю последнее местонахождение.",
+        "Мошенники по недвижимости. Поднимаю сделку, нахожу схему.",
+        "Должник «исчез». Нахожу адрес, работу, имущество.",
+        "Проверка человека перед сделкой, браком, наймом.",
+      ],
+      priceLabel: "Цена вопроса",
+      price: "от 50 000 ₽",
+      terms: [
+        "Срок — от трёх суток. Быстрее не обещаю, врать не буду.",
+        "Берусь не за всё. Если дело безнадёжное — скажу сразу и денег не возьму.",
+        "Оценка бесплатная. Дальше — по договору.",
+      ],
+      note: "Бюджет ниже — не берусь, чтобы не тратить ваше и своё время.",
+      btn: "Описать ситуацию",
+    },
     legalSection: { tag: "Правовой статус", title: "В ПРАВОВОМ ПОЛЕ. С МАКСИМАЛЬНОЙ ОТДАЧЕЙ.", p1: "ЧРК «Каскад» осуществляет деятельность в строгом соответствии с законодательством Российской Федерации и нормами международного права.", p2: "Каждая задача решается с учётом конкретной юрисдикции. Мы располагаем правовыми знаниями и ресурсами, чтобы находить эффективные и полностью законные решения даже в сложных ситуациях.", points: [ { icon: "Scale", text: "Соответствие законодательству РФ" }, { icon: "Globe2", text: "Нормы международного права" }, { icon: "KeyRound", text: "Индивидуальные правовые решения под каждую юрисдикцию" }, { icon: "ShieldCheck", text: "Полная конфиденциальность и правовая защита клиента" } ] },
     contact: { tag: "Контакты", title: "ЗАПРОСИТЬ ПРОТОКОЛ ДОСТУПА", desc: "Обращения обрабатываются в закрытом режиме. Круглосуточная линия для ситуаций, не терпящих отлагательства.", callBtn: "Позвонить", tgBtn: "Написать в Telegram", info: [ { icon: "Phone", label: "Защищённая линия", value: "+7 913 364-57-48" }, { icon: "Send", label: "Telegram", value: "@PIC_STRUNA" }, { icon: "MapPin", label: "Присутствие", value: "Москва · весь мир" }, { icon: "Clock", label: "Режим", value: "24 / 7" } ] },
     footer: { rights: "© 2015–2026 ЧРК «Каскад». Все права защищены.", legal: "Деятельность осуществляется в рамках законодательства РФ.", hint: "Действуем строго в правовом поле РФ и международного права — предлагаем только законные решения." },
   },
   en: {
-    nav: { home: "Home", about: "Company", services: "Services", report: "Report", agent: "Cooperation", contact: "Contact" },
+    nav: { home: "Home", about: "Company", services: "Services", report: "Report", agent: "Cooperation", citizens: "Citizens", contact: "Contact" },
     secure: "Confidential · Your message is protected",
     elite: { tag: "Closed Circuit", line1: "We work with a limited number of residents.", line2: "This is not a matter of price. It is a matter of resource: every circuit is run by a dedicated group, and we do not take on more than we can close with a guaranteed outcome." },
     hero: { tag: "Private Intelligence Company", title: "CASCADE", subtitle: "Confidentiality. Resource. Peace of Mind.", desc: "Reputation and time cost more than money. We accept matters where the price of error is incommensurable with the cost of the work, and run them within a closed circuit — to the result.", btn1: "Our Services", btn2: "Get a Consultation" },
@@ -147,12 +174,34 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     agent: { tag: "Cooperation", title: "BECOME PART OF THE TEAM", desc: "We are looking for people of action around the world — those who hold access, information, special skills, or simply wish to be useful to a greater cause. Military and operational experience, knowledge of closed circles, connections in the right places — all of it is valued. There is a role for everyone. This is not work for money, but a contribution to something larger than ourselves. Take the first step — we will handle the rest.", secure: "Data is sent over a secure channel. We do not store your IP address or metadata — your anonymity is fully protected. Reaching out to us is safe.", fields: { alias: "How to address you", contact: "Secure contact method", skills: "Your experience, access, region and capabilities", motivation: "How you can be useful", btn: "Submit Request" }, consent: "I am ready to assist on a voluntary and unpaid basis", sent: "REQUEST RECEIVED", sentDesc: "Your potential will be reviewed. If you are a fit, we will contact you via the specified channel. Act with discretion." },
     principles: { tag: "Principles", title: "WHAT A RESIDENT RECEIVES", items: [ { icon: "Award", title: "Payment on result", desc: "If the task is not closed, no payment is retained. We open a circuit only where we are confident of the outcome." }, { icon: "Medal", title: "Calibre of the team", desc: "Our methodology is built on security standards of the highest level of complexity. The group assigned to a task is fixed and does not change mid-course." }, { icon: "FileCheck", title: "Documented result", desc: "On completion — a report with supporting materials: photo, video, audio and an analytical summary." }, { icon: "Clock", title: "Response time", desc: "The circuit accepts inquiries around the clock. On urgent matters we respond immediately — here, delay costs more than money." } ] },
     cta: { title: "THE MATTER IS RESOLVED BEFORE IT BECOMES PUBLIC", desc: "A reputational risk is cheaper to prevent than to contain. The first consultation is confidential, carries no charge and places you under no obligation. The earlier the circuit is opened, the wider the range of available solutions.", callBtn: "Call", consultBtn: "Get a Consultation", tgBtn: "Message on Telegram", note: "Secure line · Around the clock · Full confidentiality" },
+    citizens: {
+      tag: "No circuit, no protocol",
+      title: "INTELLIGENCE WORK FOR ORDINARY PEOPLE",
+      lead: "No preamble here.",
+      p1: "Your money is gone. Someone has vanished. A stranger is living in your flat on a forged power of attorney. Their excuses don't interest me — statements, account numbers and addresses do. I work this by hand: pull the records, follow the chain of transfers, put a name and a place to it. What you get at the end is a file an investigator has no grounds to refuse.",
+      cases: [
+        "Money moved out to a card or into crypto. I find who ended up with it.",
+        "A relative is missing. I establish where they were last.",
+        "Property fraud. I dig the deal back up and find the scheme.",
+        "A debtor \"disappeared\". I find the address, the job, the assets.",
+        "A check on a person before a deal, a marriage, a hire.",
+      ],
+      priceLabel: "What it costs",
+      price: "from RUB 50,000",
+      terms: [
+        "Three days minimum. I won't promise faster, I won't lie to you.",
+        "I don't take every case. If it's hopeless, I say so straight away and take no money.",
+        "The assessment is free. After that — under contract.",
+      ],
+      note: "Below that budget I don't take the job — no sense wasting your time or mine.",
+      btn: "Describe your situation",
+    },
     legalSection: { tag: "Legal Status", title: "WITHIN THE LAW. WITH MAXIMUM IMPACT.", p1: "PIC «Cascade» operates in strict compliance with the legislation of the Russian Federation and the norms of international law.", p2: "Every task is handled with regard to the specific jurisdiction. We possess the legal knowledge and resources to find effective and fully lawful solutions even in complex situations.", points: [ { icon: "Scale", text: "Compliance with RF legislation" }, { icon: "Globe2", text: "Norms of international law" }, { icon: "KeyRound", text: "Tailored legal solutions for each jurisdiction" }, { icon: "ShieldCheck", text: "Full confidentiality and legal protection of the client" } ] },
     contact: { tag: "Contact", title: "REQUEST ACCESS PROTOCOL", desc: "Inquiries are handled in closed mode. A 24/7 line for situations that allow no delay.", callBtn: "Call", tgBtn: "Message on Telegram", info: [ { icon: "Phone", label: "Secure line", value: "+7 913 364-57-48" }, { icon: "Send", label: "Telegram", value: "@PIC_STRUNA" }, { icon: "MapPin", label: "Presence", value: "Moscow · worldwide" }, { icon: "Clock", label: "Hours", value: "24 / 7" } ] },
     footer: { rights: "© 2015–2026 PIC «Cascade». All rights reserved.", legal: "Activity is conducted within the laws of the Russian Federation.", hint: "We act strictly within the legal framework of the RF and international law — offering only lawful solutions." },
   },
   fr: {
-    nav: { home: "Accueil", about: "Société", services: "Services", report: "Signaler", agent: "Coopération", contact: "Contact" },
+    nav: { home: "Accueil", about: "Société", services: "Services", report: "Signaler", agent: "Coopération", citizens: "Particuliers", contact: "Contact" },
     secure: "Confidentiel · Votre message est protégé",
     elite: { tag: "Circuit fermé", line1: "Nous travaillons avec un nombre restreint de résidents.", line2: "Ce n’est pas une question de prix. C’est une question de ressource : chaque circuit est conduit par une équipe dédiée, et nous n’acceptons jamais plus d’affaires que nous ne pouvons clore avec un résultat garanti." },
     hero: { tag: "Compagnie de Renseignement Privée", title: "CASCADE", subtitle: "Confidentialité. Ressource. Sérénité.", desc: "La réputation et le temps valent plus que l’argent. Nous acceptons les affaires dont le prix de l’erreur est sans commune mesure avec le coût de l’intervention, et nous les conduisons en circuit fermé — jusqu’au résultat.", btn1: "Nos services", btn2: "Obtenir une consultation" },
@@ -198,12 +247,34 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     agent: { tag: "Coopération", title: "REJOIGNEZ L'ÉQUIPE", desc: "Nous recherchons des hommes d'action partout dans le monde — ceux qui détiennent un accès, des informations, des compétences particulières, ou qui souhaitent simplement être utiles à une grande cause. Expérience militaire et opérationnelle, connaissance des milieux fermés, relations dans les bons cercles — tout cela est apprécié. Chacun trouve son rôle. Ce n'est pas un travail rémunéré, mais une contribution à une cause plus grande que nous. Faites le premier pas — nous nous chargeons du reste.", secure: "Les données sont transmises via un canal sécurisé. Nous ne conservons ni votre adresse IP ni les métadonnées — votre anonymat est totalement protégé. Nous contacter est sûr.", fields: { alias: "Comment vous appeler", contact: "Moyen de contact sécurisé", skills: "Votre expérience, vos accès, votre région et vos possibilités", motivation: "En quoi vous pouvez être utile", btn: "Envoyer la demande" }, consent: "Je suis prêt à contribuer sur une base bénévole et non rémunérée", sent: "DEMANDE REÇUE", sentDesc: "Votre potentiel sera étudié. Si vous correspondez, nous vous contacterons via le canal indiqué. Agissez avec discrétion." },
     principles: { tag: "Principes", title: "CE QUE REÇOIT UN RÉSIDENT", items: [ { icon: "Award", title: "Paiement au résultat", desc: "Si l’affaire n’est pas close, aucun paiement n’est retenu. Nous n’ouvrons un circuit que là où l’issue nous paraît certaine." }, { icon: "Medal", title: "Le calibre de l’équipe", desc: "Notre méthodologie repose sur les standards de sécurité du plus haut degré de complexité. L’équipe affectée à une affaire est fixée et ne change pas en cours de route." }, { icon: "FileCheck", title: "Résultat documenté", desc: "À l’issue — un rapport accompagné de pièces justificatives : photographies, vidéos, enregistrements audio et note analytique." }, { icon: "Clock", title: "Temps de réaction", desc: "Le circuit reçoit les demandes 24 heures sur 24. Sur les affaires urgentes, nous réagissons immédiatement — ici, le retard coûte plus cher que l’argent." } ] },
     cta: { title: "L’AFFAIRE SE RÈGLE AVANT DE DEVENIR PUBLIQUE", desc: "Un risque réputationnel coûte moins cher à prévenir qu’à contenir. La première consultation est confidentielle, sans frais et sans engagement de votre part. Plus le circuit est ouvert tôt, plus l’éventail des solutions disponibles est large.", callBtn: "Appeler", consultBtn: "Obtenir une consultation", tgBtn: "Écrire sur Telegram", note: "Ligne sécurisée · 24 heures sur 24 · Confidentialité absolue" },
+    citizens: {
+      tag: "Sans circuit ni protocole",
+      title: "RENSEIGNEMENT POUR LES PARTICULIERS",
+      lead: "Ici, pas de préambule.",
+      p1: "On vous a pris votre argent. Quelqu’un a disparu. Un inconnu vit dans votre appartement avec une fausse procuration. Leurs excuses ne m’intéressent pas — ce qui m’intéresse, ce sont les relevés, les numéros, les adresses. Je travaille à la main : je remonte les fichiers, je suis la chaîne des virements, j’établis un nom et un lieu. Au bout, vous avez un dossier qu’un enquêteur ne peut pas écarter.",
+      cases: [
+        "Argent parti sur une carte ou en crypto. Je retrouve le destinataire final.",
+        "Un proche a disparu. J’établis son dernier emplacement connu.",
+        "Escroquerie immobilière. Je ressors la transaction et je trouve le montage.",
+        "Un débiteur « s’est volatilisé ». Je trouve l’adresse, l’emploi, les biens.",
+        "Vérification d’une personne avant une transaction, un mariage, une embauche.",
+      ],
+      priceLabel: "Ce que ça coûte",
+      price: "à partir de 50 000 ₽",
+      terms: [
+        "Trois jours au minimum. Je ne promets pas plus vite, je ne vais pas mentir.",
+        "Je ne prends pas tout. Si l’affaire est perdue, je le dis tout de suite et je ne prends pas d’argent.",
+        "L’évaluation est gratuite. Ensuite — sous contrat.",
+      ],
+      note: "En dessous de ce budget, je ne prends pas : inutile de perdre votre temps et le mien.",
+      btn: "Décrire votre situation",
+    },
     legalSection: { tag: "Statut juridique", title: "DANS LE CADRE DE LA LOI. AVEC UNE EFFICACITÉ MAXIMALE.", p1: "CRP « Cascade » exerce son activité en stricte conformité avec la législation de la Fédération de Russie et les normes du droit international.", p2: "Chaque mission est traitée en tenant compte de la juridiction concernée. Nous disposons des connaissances juridiques et des ressources nécessaires pour trouver des solutions efficaces et parfaitement légales, même dans les situations complexes.", points: [ { icon: "Scale", text: "Conformité à la législation de la FR" }, { icon: "Globe2", text: "Normes du droit international" }, { icon: "KeyRound", text: "Solutions juridiques sur mesure pour chaque juridiction" }, { icon: "ShieldCheck", text: "Confidentialité totale et protection juridique du client" } ] },
     contact: { tag: "Contact", title: "DEMANDER LE PROTOCOLE D’ACCÈS", desc: "Les demandes sont traitées en mode fermé. Une ligne disponible 24 h/24 pour les situations qui n’admettent aucun délai.", callBtn: "Appeler", tgBtn: "Écrire sur Telegram", info: [ { icon: "Phone", label: "Ligne sécurisée", value: "+7 913 364-57-48" }, { icon: "Send", label: "Telegram", value: "@PIC_STRUNA" }, { icon: "MapPin", label: "Présence", value: "Moscou · monde entier" }, { icon: "Clock", label: "Disponibilité", value: "24 / 7" } ] },
     footer: { rights: "© 2015–2026 CRP « Cascade ». Tous droits réservés.", legal: "L'activité est exercée dans le cadre de la législation de la Fédération de Russie.", hint: "Nous agissons strictement dans le cadre légal de la FR et du droit international — nous ne proposons que des solutions légales." },
   },
   ar: {
-    nav: { home: "الرئيسية", about: "الشركة", services: "الخدمات", report: "إبلاغ", agent: "تعاون", contact: "اتصل بنا" },
+    nav: { home: "الرئيسية", about: "الشركة", services: "الخدمات", report: "إبلاغ", agent: "تعاون", citizens: "للمواطنين", contact: "اتصل بنا" },
     secure: "سرّي · رسالتك محمية",
     elite: { tag: "الدائرة المغلقة", line1: "نعمل مع عدد محدود من المقيمين.", line2: "ليست المسألة مسألة سعر، بل مسألة موارد: كل دائرة يديرها فريق مخصّص، ولا نقبل من المهام أكثر مما نقدر على إغلاقه بنتيجة مضمونة." },
     hero: { tag: "شركة استخبارات خاصة", title: "كاسكاد", subtitle: "السرّية. الموارد. الطمأنينة.", desc: "السمعة والوقت أثمن من المال. نقبل المسائل التي لا يُقاس فيها ثمن الخطأ بكلفة العمل، وندير كلًّا منها ضمن دائرة مغلقة — حتى تحقيق النتيجة.", btn1: "خدماتنا", btn2: "احصل على استشارة" },
@@ -249,12 +320,34 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     agent: { tag: "تعاون", title: "كن جزءاً من الفريق", desc: "نبحث عن أصحاب الفعل حول العالم — من يمتلكون وصولاً أو معلومات أو مهارات خاصة، أو يرغبون ببساطة في أن يكونوا نافعين لقضية كبرى. الخبرة العسكرية والميدانية، ومعرفة الأوساط المغلقة، والصلات في الدوائر المناسبة — كل ذلك مُقدَّر. لكلٍّ دوره. هذا ليس عملاً مقابل المال، بل إسهام في قضية أكبر منّا. اتخذ الخطوة الأولى — ونحن نتكفّل بالباقي.", secure: "تُنقل البيانات عبر قناة آمنة. لا نحفظ عنوان IP أو البيانات الوصفية — هويتك محمية بالكامل. التواصل معنا آمن.", fields: { alias: "كيف نخاطبك", contact: "وسيلة تواصل آمنة", skills: "خبرتك، وصولك، منطقتك وإمكاناتك", motivation: "كيف يمكنك أن تكون نافعاً" , btn: "إرسال الطلب" }, consent: "أنا مستعد للمساهمة على أساس تطوعي وبدون مقابل", sent: "تم استلام الطلب", sentDesc: "ستتم دراسة إمكاناتك. إن كنت مناسباً — سنتواصل معك عبر القناة المحددة. تصرّف بتكتم." },
     principles: { tag: "المبادئ", title: "ما يحصل عليه المقيم", items: [ { icon: "Award", title: "الدفع مقابل النتيجة", desc: "إن لم تُغلق المهمة، لا يُحتجز أي مبلغ. ولا نفتح دائرة إلا حيث نثق بالنتيجة." }, { icon: "Medal", title: "مستوى الفريق", desc: "تقوم منهجيتنا على معايير أمنية عند أعلى درجات التعقيد. وتُثبَّت تركيبة الفريق المكلّف بالمهمة ولا تتغيّر أثناء العمل." }, { icon: "FileCheck", title: "نتيجة موثّقة", desc: "عند الانتهاء — تقرير مرفق بمواد مثبتة: صور وفيديو وتسجيلات صوتية ومذكرة تحليلية." }, { icon: "Clock", title: "زمن الاستجابة", desc: "تستقبل الدائرة الطلبات على مدار الساعة. وفي المسائل العاجلة نستجيب فورًا — فالتأخير هنا أغلى من المال." } ] },
     cta: { title: "تُحسم المسألة قبل أن تصبح علنية", desc: "درء المخاطر التي تمسّ السمعة أقل كلفة من احتوائها. الاستشارة الأولى سرّية، بلا مقابل ولا تُلزمكم بشيء. وكلما فُتحت الدائرة مبكرًا اتّسع نطاق الحلول المتاحة.", callBtn: "اتصل بنا", consultBtn: "احصل على استشارة", tgBtn: "راسلنا على تيليغرام", note: "خط مؤمّن · على مدار الساعة · سرّية تامة" },
+    citizens: {
+      tag: "بلا دوائر ولا لوائح",
+      title: "استخبارات معلوماتية للأفراد",
+      lead: "هنا بلا مقدمات.",
+      p1: "سُرقت أموالك. اختفى شخص. أحدهم يسكن شقتك بتوكيل مزوّر. أعذارهم لا تعنيني — تعنيني كشوف الحسابات والأرقام والعناوين. أشتغل بيديّ: أنبش السجلات، أتتبّع سلسلة التحويلات، أحدّد الاسم والمكان. وفي النهاية ملف لا يستطيع المحقّق أن يتجاهله.",
+      cases: [
+        "حُوِّلت الأموال إلى بطاقة أو عملة رقمية. أصل إلى المستفيد الأخير.",
+        "اختفى قريب لك. أحدّد آخر مكان وُجد فيه.",
+        "احتيال عقاري. أعيد فتح الصفقة وأكشف الحيلة.",
+        "مدين \"اختفى\". أجد العنوان والعمل والممتلكات.",
+        "التحرّي عن شخص قبل صفقة أو زواج أو توظيف.",
+      ],
+      priceLabel: "الكلفة",
+      price: "من 50 000 ₽",
+      terms: [
+        "المدة ثلاثة أيام على الأقل. لن أعدك بأسرع، ولن أكذب عليك.",
+        "لا آخذ كل قضية. إن كانت ميؤوسًا منها أقولها فورًا ولا آخذ مالًا.",
+        "التقييم مجاني. وما بعده بعقد.",
+      ],
+      note: "بميزانية أقل لا أقبل العمل، حتى لا نضيّع وقتك ووقتي.",
+      btn: "اشرح وضعك",
+    },
     legalSection: { tag: "الوضع القانوني", title: "ضمن إطار القانون. بأقصى قدر من الفعالية.", p1: "تمارس شركة «كاسكاد» نشاطها في التزام صارم بتشريعات الاتحاد الروسي وقواعد القانون الدولي.", p2: "تُعالَج كل مهمة مع مراعاة الولاية القضائية المحددة. نمتلك المعرفة القانونية والموارد اللازمة لإيجاد حلول فعّالة وقانونية بالكامل حتى في المواقف المعقدة.", points: [ { icon: "Scale", text: "الامتثال لتشريعات الاتحاد الروسي" }, { icon: "Globe2", text: "قواعد القانون الدولي" }, { icon: "KeyRound", text: "حلول قانونية مخصصة لكل ولاية قضائية" }, { icon: "ShieldCheck", text: "سرية تامة وحماية قانونية للعميل" } ] },
     contact: { tag: "اتصل بنا", title: "طلب بروتوكول الوصول", desc: "تُعالَج الطلبات في وضع مغلق. خط متاح على مدار الساعة للحالات التي لا تحتمل التأجيل.", callBtn: "اتصل بنا", tgBtn: "راسلنا على تيليغرام", info: [ { icon: "Phone", label: "خط مؤمّن", value: "+7 913 364-57-48" }, { icon: "Send", label: "تيليغرام", value: "@PIC_STRUNA" }, { icon: "MapPin", label: "الحضور", value: "موسكو · العالم أجمع" }, { icon: "Clock", label: "أوقات العمل", value: "24 / 7" } ] },
     footer: { rights: "© 2015–2026 شركة «كاسكاد». جميع الحقوق محفوظة.", legal: "يُمارَس النشاط ضمن تشريعات الاتحاد الروسي.", hint: "نعمل بشكل صارم ضمن الإطار القانوني للاتحاد الروسي والقانون الدولي — ولا نقدّم سوى حلول قانونية." },
   },
   zh: {
-    nav: { home: "首页", about: "公司", services: "服务", report: "举报", agent: "合作", contact: "联系" },
+    nav: { home: "首页", about: "公司", services: "服务", report: "举报", agent: "合作", citizens: "个人服务", contact: "联系" },
     secure: "保密 · 您的信息受保护",
     elite: { tag: "封闭回路", line1: "我们只与数量有限的常驻客户合作。", line2: "这并非价格问题，而是资源问题：每一条回路均由专属小组负责，我们绝不承接超出自身能力、无法以确定结果收束的委托。" },
     hero: { tag: "私人情报公司", title: "瀑布", subtitle: "保密。资源。安心。", desc: "声誉与时间比金钱更昂贵。我们承接那些失误代价远非服务对价所能衡量的事务，并在封闭回路中推进——直至结果达成。", btn1: "我们的服务", btn2: "获取咨询" },
@@ -300,12 +393,34 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     agent: { tag: "合作", title: "成为团队的一员", desc: "我们在全球寻找行动派——拥有渠道、信息、特殊技能，或只是愿意为伟大事业尽一份力的人。军事与行动经验、对封闭领域的了解、在关键圈层的人脉——这些都备受重视。每个人都有自己的角色。这不是为钱工作，而是为比我们更宏大的事业贡献力量。迈出第一步——其余交给我们。", secure: "数据通过安全通道传输。我们不保存您的 IP 地址和元数据——您的匿名性受到完全保护。联系我们是安全的。", fields: { alias: "如何称呼您", contact: "安全的联系方式", skills: "您的经验、渠道、所在地区与能力", motivation: "您能提供怎样的帮助", btn: "提交申请" }, consent: "我愿意以自愿且无偿的方式提供协助", sent: "申请已接收", sentDesc: "我们将评估您的潜力。若您合适，将通过指定渠道与您联系。请保持低调。" },
     principles: { tag: "原则", title: "常驻客户所获得的", items: [ { icon: "Award", title: "按结果付费", desc: "任务未能完结，则不留取任何费用。唯有在对结果有把握之处，我们才开启回路。" }, { icon: "Medal", title: "团队水准", desc: "我们的方法论建立在最高复杂等级的安全标准之上。承接任务的小组一经确定，中途绝不更换。" }, { icon: "FileCheck", title: "可查证的成果", desc: "完成之后——附具佐证材料的报告：照片、视频、录音及分析摘要。" }, { icon: "Clock", title: "响应时效", desc: "回路全天候受理委托。紧急事务即刻响应——在此，迟疑的代价高于金钱。" } ] },
     cta: { title: "在事态公开之前，问题已被解决", desc: "声誉风险，防范远比化解更为经济。首次咨询保密、不收取费用，亦不使您承担任何义务。回路开启得越早，可选方案的范围便越宽。", callBtn: "致电", consultBtn: "获取咨询", tgBtn: "Telegram 联系", note: "加密专线 · 全天候 · 完全保密" },
+    citizens: {
+      tag: "没有回路，也没有规程",
+      title: "面向普通人的信息调查",
+      lead: "这里不讲开场白。",
+      p1: "钱被人卷走了。人不见了。有人拿着假委托书住进了你的房子。他们的借口我不关心——我关心流水、账号、地址。我是自己上手干的：翻底档，顺着转账链条往下追，把名字和位置落实下来。最后交到你手上的，是一份侦查员无法推脱的卷宗。",
+      cases: [
+        "钱转到了银行卡或加密货币。我把最终收款人找出来。",
+        "亲人失踪。我确定他最后出现的位置。",
+        "房产诈骗。我把交易翻出来，把套路找出来。",
+        "欠债的人「消失」了。我找到地址、工作、财产。",
+        "交易、结婚、录用之前，先把人查清楚。",
+      ],
+      priceLabel: "这事值多少钱",
+      price: "5 万 ₽ 起",
+      terms: [
+        "最少三天。更快的话我不答应，也不会骗你。",
+        "不是什么活我都接。没指望的事，我当场就说，钱一分不收。",
+        "评估不收钱。往后按合同来。",
+      ],
+      note: "预算低于这个数我不接——不浪费你的时间，也不浪费我的。",
+      btn: "说说你的情况",
+    },
     legalSection: { tag: "法律地位", title: "在法律框架内。发挥最大成效。", p1: "「瀑布」严格遵守俄罗斯联邦法律及国际法准则开展活动。", p2: "每一项任务都会结合具体司法管辖区加以处理。我们拥有相应的法律知识与资源，即使在复杂情形下也能找到有效且完全合法的解决方案。", points: [ { icon: "Scale", text: "符合俄罗斯联邦法律" }, { icon: "Globe2", text: "国际法准则" }, { icon: "KeyRound", text: "为每个司法管辖区量身定制的法律方案" }, { icon: "ShieldCheck", text: "对客户的完全保密与法律保护" } ] },
     contact: { tag: "联系", title: "申请接入协议", desc: "所有委托均以封闭方式处理。全天候专线，应对不容拖延的情势。", callBtn: "致电", tgBtn: "Telegram 联系", info: [ { icon: "Phone", label: "加密专线", value: "+7 913 364-57-48" }, { icon: "Send", label: "Telegram", value: "@PIC_STRUNA" }, { icon: "MapPin", label: "驻在地", value: "莫斯科 · 全球" }, { icon: "Clock", label: "受理时间", value: "24 / 7" } ] },
     footer: { rights: "© 2015–2026 「瀑布」私人情报公司。版权所有。", legal: "活动在俄罗斯联邦法律框架内开展。", hint: "我们严格在俄罗斯联邦及国际法的法律框架内行事——只提供合法的解决方案。" },
   },
   he: {
-    nav: { home: "ראשי", about: "החברה", services: "שירותים", report: "דיווח", agent: "שיתוף פעולה", contact: "צור קשר" },
+    nav: { home: "ראשי", about: "החברה", services: "שירותים", report: "דיווח", agent: "שיתוף פעולה", citizens: "לאזרחים", contact: "צור קשר" },
     secure: "חסוי · ההודעה שלך מוגנת",
     elite: { tag: "מעגל סגור", line1: "אנו עובדים עם מספר מצומצם של רזידנטים.", line2: "אין זו שאלה של מחיר, אלא שאלה של משאב: כל מעגל מנוהל בידי צוות ייעודי, ואיננו נוטלים על עצמנו יותר משאנו יכולים לסגור בתוצאה מובטחת." },
     hero: { tag: "חברת מודיעין פרטית", title: "קסקאד", subtitle: "חשאיות. משאב. שלוות נפש.", desc: "מוניטין וזמן יקרים מכסף. אנו נוטלים על עצמנו עניינים שמחיר הטעות בהם אינו בר־השוואה לעלות העבודה, ומנהלים אותם במעגל סגור — עד לתוצאה.", btn1: "השירותים שלנו", btn2: "לקבלת ייעוץ" },
@@ -351,12 +466,34 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     agent: { tag: "שיתוף פעולה", title: "הצטרפו לצוות", desc: "אנו מחפשים אנשי מעשה בכל העולם — בעלי גישה, מידע, כישורים מיוחדים, או כאלה שפשוט רוצים להועיל למטרה גדולה. ניסיון צבאי ומבצעי, היכרות עם מעגלים סגורים, קשרים בחוגים הנכונים — כל אלה מוערכים. לכל אחד יש תפקיד. זו אינה עבודה תמורת כסף, אלא תרומה למשהו גדול מאיתנו. עשו את הצעד הראשון — את השאר ניקח על עצמנו.", secure: "הנתונים נשלחים בערוץ מאובטח. איננו שומרים את כתובת ה-IP או את המטא-נתונים — האנונימיות שלכם מוגנת לחלוטין. לפנות אלינו זה בטוח.", fields: { alias: "כיצד לפנות אליך", contact: "אמצעי קשר מאובטח", skills: "הניסיון, הגישות, האזור והיכולות שלך", motivation: "כיצד תוכל להועיל", btn: "שליחת בקשה" }, consent: "אני מוכן לסייע על בסיס התנדבותי וללא תמורה", sent: "הבקשה התקבלה", sentDesc: "הפוטנציאל שלך ייבחן. אם תתאים — ניצור איתך קשר דרך הערוץ שצוין. פעל בדיסקרטיות." },
     principles: { tag: "עקרונות", title: "מה מקבל הרזידנט", items: [ { icon: "Award", title: "תשלום לפי תוצאה", desc: "משימה שלא נסגרה — אין מחזיקים בתשלום. אנו פותחים מעגל רק במקום שבו אנו בטוחים בתוצאה." }, { icon: "Medal", title: "רמת הצוות", desc: "המתודולוגיה שלנו נשענת על תקני אבטחה ברמת המורכבות הגבוהה ביותר. הצוות שהוקצה למשימה נקבע מראש ואינו מתחלף במהלך העבודה." }, { icon: "FileCheck", title: "תוצאה מתועדת", desc: "בסיום — דוח בצירוף חומרים תומכים: תצלומים, וידאו, הקלטות וסקירה אנליטית." }, { icon: "Clock", title: "זמן תגובה", desc: "המעגל קולט פניות מסביב לשעון. בעניינים דחופים אנו מגיבים מיידית — כאן, עיכוב יקר מכסף." } ] },
     cta: { title: "העניין נפתר בטרם יהפוך לפומבי", desc: "סיכון מוניטין זול יותר למנוע מאשר להכיל. הייעוץ הראשון חסוי, ניתן ללא תשלום ואינו מחייב אתכם בדבר. ככל שהמעגל נפתח מוקדם יותר, כך רחב יותר מגוון הפתרונות האפשריים.", callBtn: "להתקשר", consultBtn: "לקבלת ייעוץ", tgBtn: "לכתוב בטלגרם", note: "קו מאובטח · מסביב לשעון · חשאיות מלאה" },
+    citizens: {
+      tag: "בלי מעגלים ובלי נהלים",
+      title: "מודיעין מידע לאנשים פרטיים",
+      lead: "כאן בלי הקדמות.",
+      p1: "גנבו לכם את הכסף. אדם נעלם. מישהו גר בדירה שלכם על סמך ייפוי כוח מזויף. התירוצים שלהם לא מעניינים אותי — מעניינים אותי דפי חשבון, מספרים, כתובות. אני עובד עם הידיים: מוציא רישומים, עוקב אחרי שרשרת ההעברות, מצמיד לזה שם ומקום. בסוף יוצא תיק שחוקר לא יכול לדחות.",
+      cases: [
+        "הכסף הועבר לכרטיס או לקריפטו. אני מוצא מי קיבל אותו בסוף.",
+        "קרוב משפחה נעלם. אני קובע היכן היה לאחרונה.",
+        "הונאת נדל\"ן. אני מוציא את העסקה מחדש ומוצא את השיטה.",
+        "חייב \"נעלם\". אני מוצא כתובת, מקום עבודה, רכוש.",
+        "בדיקה של אדם לפני עסקה, נישואין או קבלה לעבודה.",
+      ],
+      priceLabel: "כמה זה עולה",
+      price: "מ-50,000 ₽",
+      terms: [
+        "שלושה ימים לפחות. מהר יותר לא אבטיח, ולשקר לא אשקר.",
+        "אני לא לוקח כל תיק. אם המקרה אבוד — אומר את זה מיד ולא לוקח כסף.",
+        "ההערכה בחינם. משם והלאה — בחוזה.",
+      ],
+      note: "מתקציב נמוך מזה אני לא נכנס לעבודה, כדי לא לבזבז את הזמן שלכם ואת שלי.",
+      btn: "לתאר את המצב",
+    },
     legalSection: { tag: "מעמד משפטי", title: "במסגרת החוק. עם התועלת המרבית.", p1: "חברת «קסקאד» פועלת בהתאם מחמיר לחקיקת הפדרציה הרוסית ולנורמות המשפט הבינלאומי.", p2: "כל משימה מטופלת תוך התחשבות בתחום השיפוט הספציפי. ברשותנו הידע המשפטי והמשאבים למצוא פתרונות יעילים וחוקיים לחלוטין אף במצבים מורכבים.", points: [ { icon: "Scale", text: "ציות לחקיקת הפדרציה הרוסית" }, { icon: "Globe2", text: "נורמות המשפט הבינלאומי" }, { icon: "KeyRound", text: "פתרונות משפטיים מותאמים לכל תחום שיפוט" }, { icon: "ShieldCheck", text: "חיסיון מלא והגנה משפטית על הלקוח" } ] },
     contact: { tag: "צור קשר", title: "בקשת פרוטוקול גישה", desc: "הפניות מטופלות במתכונת סגורה. קו זמין מסביב לשעון למצבים שאינם סובלים דיחוי.", callBtn: "להתקשר", tgBtn: "לכתוב בטלגרם", info: [ { icon: "Phone", label: "קו מאובטח", value: "+7 913 364-57-48" }, { icon: "Send", label: "טלגרם", value: "@PIC_STRUNA" }, { icon: "MapPin", label: "נוכחות", value: "מוסקבה · ברחבי העולם" }, { icon: "Clock", label: "זמינות", value: "24 / 7" } ] },
     footer: { rights: "© 2015–2026 חברת «קסקאד». כל הזכויות שמורות.", legal: "הפעילות מתבצעת במסגרת חוקי הפדרציה הרוסית.", hint: "אנו פועלים אך ורק במסגרת החוקית של הפדרציה הרוסית והמשפט הבינלאומי — ומציעים פתרונות חוקיים בלבד." },
   },
   ja: {
-    nav: { home: "ホーム", about: "会社", services: "サービス", report: "通報", agent: "協力", contact: "連絡先" },
+    nav: { home: "ホーム", about: "会社", services: "サービス", report: "通報", agent: "協力", citizens: "個人の方", contact: "連絡先" },
     secure: "機密 · あなたのメッセージは保護されています",
     elite: { tag: "クローズド・サーキット", line1: "当社が承るのは、限られた数のレジデントのみです。", line2: "これは価格の問題ではなく、リソースの問題です。各サーキットは専任のチームが担い、確実な結果をもって完結できる以上の案件をお受けすることはありません。" },
     hero: { tag: "民間諜報会社", title: "カスケード", subtitle: "守秘。リソース。静穏。", desc: "評判と時間は金銭に勝ります。当社は、誤りの代償が業務の対価とは比較にならない案件をお引き受けし、クローズド・サーキットのもとで結果に至るまで遂行いたします。", btn1: "サービス一覧", btn2: "ご相談はこちら" },
@@ -402,6 +539,28 @@ export const TRANSLATIONS: Record<Lang, Dict> = {
     agent: { tag: "協力", title: "チームの一員になる", desc: "私たちは世界中で「行動する人」を求めています——アクセス、情報、特別な技能をお持ちの方、あるいは大いなる目的に役立ちたいと願う方へ。軍事・作戦の経験、閉ざされた領域への知見、適切な人脈——そのすべてが評価されます。誰にでも役割があります。これは金銭のための仕事ではなく、私たち自身より大きな目的への貢献です。最初の一歩を——あとは私たちが引き受けます。", secure: "データは安全な経路で送信されます。IPアドレスやメタデータは保存しません——あなたの匿名性は完全に守られます。私たちへの連絡は安全です。", fields: { alias: "お呼びする名前", contact: "安全な連絡手段", skills: "ご経験、アクセス、地域、可能性", motivation: "どのように役立てるか", btn: "申し込む" }, consent: "私は自発的かつ無報酬で協力する用意があります", sent: "申し込みを受領しました", sentDesc: "あなたの可能性を検討します。適任であれば、指定の経路でご連絡します。慎重に行動してください。" },
     principles: { tag: "行動原則", title: "レジデントが得られるもの", items: [ { icon: "Award", title: "結果に対する報酬", desc: "課題が完結しない場合、報酬を留め置くことはございません。結果に確信を持てる案件においてのみ、サーキットを開きます。" }, { icon: "Medal", title: "チームの水準", desc: "当社の方法論は、最高難度のセキュリティ基準に基づいています。案件に充てられるチームは固定され、途中で交代することはありません。" }, { icon: "FileCheck", title: "記録された成果", desc: "完了時には、裏付け資料を添えた報告書をご提出いたします。写真、映像、音声、および分析所見。" }, { icon: "Clock", title: "対応時間", desc: "サーキットは二十四時間体制でご依頼を受け付けます。緊急の案件には即時に対応いたします。ここでは、遅延こそが金銭より高くつくためです。" } ] },
     cta: { title: "問題は、公になる前に解決される", desc: "評判に関わるリスクは、収束させるよりも未然に防ぐほうが小さな代償で済みます。初回のご相談は秘密厳守、費用は発生せず、いかなる義務も生じません。サーキットを開くのが早いほど、選びうる解決策の幅は広がります。", callBtn: "お電話", consultBtn: "ご相談はこちら", tgBtn: "Telegramで連絡", note: "保護回線 · 二十四時間体制 · 完全な守秘" },
+    citizens: {
+      tag: "回路も規程もなし",
+      title: "一般の方のための情報調査",
+      lead: "前置きは抜きだ。",
+      p1: "金を抜かれた。人がいなくなった。偽の委任状で他人が自分の部屋に住んでいる。相手の言い訳に興味はない。こっちが見るのは取引明細、口座番号、住所だ。自分の手で動く。記録を掘り、送金の流れを追い、名前と場所を突き止める。最後に残るのは、捜査官が突き返せない一件の書類だ。",
+      cases: [
+        "カードや暗号資産に金が流れた。最終的な受取人まで辿る。",
+        "身内が行方不明。最後にいた場所を割り出す。",
+        "不動産詐欺。取引を掘り返し、手口を突き止める。",
+        "債務者が「消えた」。住所、勤務先、資産を見つける。",
+        "取引・結婚・採用の前に、相手の身元を調べる。",
+      ],
+      priceLabel: "費用",
+      price: "50,000 ₽ から",
+      terms: [
+        "最短で三日。それより速いとは言わない。嘘はつかない。",
+        "全部は引き受けない。望みがない件ならその場で言う。金は取らない。",
+        "見積もりは無料。その先は契約で。",
+      ],
+      note: "この額を下回る予算では引き受けない。お互いの時間の無駄になるからだ。",
+      btn: "状況を伝える",
+    },
     legalSection: { tag: "法的地位", title: "法の枠内で。最大の成果を。", p1: "「カスケード」はロシア連邦の法令および国際法の規範を厳格に遵守して活動しています。", p2: "あらゆる案件は、対象となる管轄区域を踏まえて対応します。私たちは、複雑な状況においても効果的かつ完全に合法な解決策を見出すための法的知識とリソースを有しています。", points: [ { icon: "Scale", text: "ロシア連邦法令への準拠" }, { icon: "Globe2", text: "国際法の規範" }, { icon: "KeyRound", text: "各管轄区域に合わせた法的ソリューション" }, { icon: "ShieldCheck", text: "依頼者の完全な機密保持と法的保護" } ] },
     contact: { tag: "連絡先", title: "アクセス・プロトコルの申請", desc: "ご依頼はすべて非公開の体制で扱われます。猶予の許されない状況のため、二十四時間対応の回線をご用意しています。", callBtn: "お電話", tgBtn: "Telegramで連絡", info: [ { icon: "Phone", label: "保護回線", value: "+7 913 364-57-48" }, { icon: "Send", label: "Telegram", value: "@PIC_STRUNA" }, { icon: "MapPin", label: "拠点", value: "モスクワ · 全世界" }, { icon: "Clock", label: "受付時間", value: "24 / 7" } ] },
     footer: { rights: "© 2015–2026 民間諜報会社「カスケード」。無断転載禁止。", legal: "活動はロシア連邦法の枠内で行われます。", hint: "私たちはロシア連邦法および国際法の枠内で厳格に活動し——合法な解決策のみをご提案します。" },
