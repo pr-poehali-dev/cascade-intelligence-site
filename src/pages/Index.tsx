@@ -5,7 +5,7 @@ import { useReveal } from "@/hooks/use-reveal";
 import { useAimCursor } from "@/hooks/use-aim-cursor";
 import CountUp from "@/components/CountUp";
 
-type SectionId = "home" | "about" | "services" | "report" | "agent" | "citizens" | "faq" | "contact";
+type SectionId = "home" | "about" | "services" | "proof" | "report" | "agent" | "citizens" | "faq" | "contact";
 
 const HERO_IMG =
   "https://cdn.poehali.dev/projects/b1149f1e-ccbb-4852-b138-f11cd07dfad2/files/65226e92-7c27-4591-a28d-e9eb6ad0495b.jpg";
@@ -82,6 +82,7 @@ export default function Index() {
     { key: "home", label: t.nav.home },
     { key: "about", label: t.nav.about },
     { key: "services", label: t.nav.services },
+    { key: "proof", label: t.nav.proof },
     { key: "agent", label: t.nav.agent },
     { key: "citizens", label: t.nav.citizens },
     { key: "faq", label: t.faq.tag },
@@ -503,7 +504,7 @@ export default function Index() {
             <div className="section-divider" />
             <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 4vw, 3rem)", fontWeight: 700, letterSpacing: "0.02em", lineHeight: 1.05 }}>{t.principles.title}</h2>
           </div>
-          <div className="grid-services" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: 20 }}>
+          <div className="grid-services principles-bento" style={{ display: "grid", gap: 18 }}>
             {t.principles.items.map((p, i) => (
               <div key={i} className="cascade-card spotlight tile-btn reveal" onMouseMove={handleSpotlight} style={{ padding: "1.8rem", position: "relative", overflow: "hidden", transitionDelay: `${(i % 4) * 0.08}s` }}>
                 <div style={{ position: "absolute", top: 0, [isRtl ? "right" : "left"]: 0, width: 3, height: "100%", background: "var(--cascade-red)" }} />
@@ -516,6 +517,46 @@ export default function Index() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ДОКАЗАТЕЛЬСТВА — обезличенные результаты. Снимают главный страх: «а сработает ли» */}
+      <section id="proof" style={{ padding: "5.5rem 0 6.5rem", background: "var(--cascade-charcoal)", position: "relative", borderTop: "1px solid var(--cascade-line)" }}>
+        <div className="pad-section" style={{ maxWidth: 1140, margin: "0 auto", padding: "0 1.5rem" }}>
+          <div className="reveal" style={{ marginBottom: 38, maxWidth: 680 }}>
+            <Tag>{t.proof.tag}</Tag>
+            <div className="section-divider" />
+            <h2 style={{ fontFamily: "Oswald", fontSize: "clamp(1.4rem, 3vw, 2.3rem)", fontWeight: 700, letterSpacing: "0.02em", lineHeight: 1.08, marginBottom: 14 }}>
+              {t.proof.title}
+            </h2>
+            <p style={{ fontFamily: "IBM Plex Sans", fontSize: "0.9rem", color: "var(--text-muted)", lineHeight: 1.8 }}>
+              {t.proof.desc}
+            </p>
+          </div>
+
+          <div className="proof-grid">
+            {t.proof.items.map((it, i) => (
+              <article key={i} className={`proof-card reveal proof-card-${i % 4}`} style={{ transitionDelay: `${(i % 4) * 0.06}s` }}>
+                <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", gap: 12, marginBottom: 14 }}>
+                  <span className="mono-label" style={{ fontSize: "0.7rem", letterSpacing: "0.16em", color: "var(--cascade-gold)" }}>{it.code}</span>
+                  <span className="mono-label" style={{ fontSize: "0.68rem", letterSpacing: "0.1em", color: "var(--text-muted)" }}>{it.time}</span>
+                </div>
+                <div className="mono-label" style={{ fontSize: "0.66rem", letterSpacing: "0.16em", color: "var(--text-muted)", marginBottom: 6 }}>
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <h3 style={{ fontFamily: "Oswald", fontSize: "0.95rem", fontWeight: 500, letterSpacing: "0.03em", color: "var(--cascade-light)", lineHeight: 1.35, marginBottom: 12 }}>
+                  {it.task}
+                </h3>
+                <p style={{ fontFamily: "IBM Plex Sans", fontSize: "0.85rem", color: "#B4B8C0", lineHeight: 1.7, paddingInlineStart: 12, borderInlineStart: "2px solid var(--cascade-red)" }}>
+                  {it.result}
+                </p>
+              </article>
+            ))}
+          </div>
+
+          <p className="reveal" style={{ fontFamily: "IBM Plex Sans", fontSize: "0.76rem", color: "var(--text-muted)", fontStyle: "italic", marginTop: 26, maxWidth: 560 }}>
+            {t.proof.note}
+          </p>
         </div>
       </section>
 
