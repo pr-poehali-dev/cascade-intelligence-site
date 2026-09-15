@@ -264,7 +264,7 @@ export default function Index() {
         position: "fixed", top: 28, left: 0, right: 0, zIndex: 50,
         background: scrolled ? "rgba(16,18,22,0.98)" : "rgba(16,18,22,0.9)",
         borderBottom: "1px solid var(--cascade-line)",
-        backdropFilter: "blur(12px)", height: scrolled ? 52 : 60,
+        height: scrolled ? 52 : 60,
         boxShadow: scrolled ? "0 8px 30px -12px rgba(0,0,0,0.7)" : "none",
         transition: "height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease",
         display: "flex", alignItems: "center", justifyContent: "space-between",
