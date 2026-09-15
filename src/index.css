@@ -37,6 +37,8 @@
     /* Custom */
     --cascade-red: #9e2321;
     --cascade-red-bright: #c0392b;
+    /* Красный для ТЕКСТА на тёмном фоне: контраст 4.6:1 (WCAG AA) */
+    --cascade-red-text: #e8645c;
     --cascade-steel: #2c3240;
     --cascade-dark: #14161a;
     --cascade-charcoal: #1a1d23;
@@ -338,7 +340,7 @@ img {
 }
 .header-cta:hover {
   background: transparent;
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
   box-shadow: 0 6px 18px -6px rgba(158, 35, 33, 0.7);
 }
 .header-cta::after {
@@ -404,7 +406,7 @@ img {
   margin: 0 auto 14px;
   border-radius: 50%;
   border: 1px solid var(--cascade-red);
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
   font-family: "Oswald", sans-serif;
   font-weight: 600;
   font-size: 0.85rem;
@@ -602,7 +604,7 @@ img {
   width: 100%;
 }
 .nav-link.active {
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
 }
 
 /* Button shine effect */
@@ -679,7 +681,7 @@ img {
 }
 .btn-cascade:hover {
   background: transparent;
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
   box-shadow: 0 8px 24px -10px rgba(158, 35, 33, 0.7);
 }
 
@@ -699,7 +701,7 @@ img {
 }
 .btn-cascade-outline:hover {
   border-color: var(--cascade-red);
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
 }
 
 /* Input */
@@ -728,7 +730,7 @@ img {
 .cascade-tag {
   display: inline-block;
   border: 1px solid var(--cascade-red);
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
   font-family: "Oswald", sans-serif;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -785,7 +787,7 @@ img {
 .lang-btn:hover,
 .lang-btn.active {
   border-color: var(--cascade-red);
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
 }
 
 /* Lang dropdown */
@@ -830,7 +832,7 @@ img {
   color: var(--cascade-light);
 }
 .lang-option.active {
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
 }
 .lang-option .code {
   font-family: "Oswald", sans-serif;
@@ -868,7 +870,7 @@ img {
 }
 .btn-call:hover {
   background: transparent;
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
 }
 .btn-mail {
   display: inline-flex;
@@ -887,7 +889,7 @@ img {
 }
 .btn-mail:hover {
   border-color: var(--cascade-red);
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
 }
 
 /* Floating contact buttons (mobile) */
@@ -942,7 +944,7 @@ img {
   font-family: "Oswald", sans-serif;
   font-size: 0.65rem;
   letter-spacing: 0.18em;
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
   text-transform: uppercase;
 }
 
@@ -987,6 +989,11 @@ img {
   .stats-grid {
     gap: 10px !important;
   }
+  /* Кнопки связи в ряд — перекрывают вдвое меньше контента */
+  .fab-stack {
+    flex-direction: row-reverse;
+    bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+  }
   .wanted-row {
     grid-template-columns: 1fr 1fr !important;
   }
@@ -1019,7 +1026,7 @@ img {
     padding: 1.1rem !important;
   }
   .fab-stack {
-    bottom: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     right: 14px;
     gap: 12px;
   }
@@ -1260,7 +1267,7 @@ img {
   font-family: "JetBrains Mono", monospace;
   font-size: 0.68rem;
   letter-spacing: 0.05em;
-  color: var(--cascade-red);
+  color: var(--cascade-red-text);
   opacity: 0.6;
   display: block;
   direction: ltr;

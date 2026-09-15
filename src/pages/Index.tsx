@@ -80,10 +80,10 @@ export default function Index() {
     { key: "home", label: t.nav.home },
     { key: "about", label: t.nav.about },
     { key: "services", label: t.nav.services },
-    { key: "report", label: t.nav.report },
     { key: "agent", label: t.nav.agent },
     { key: "faq", label: t.faq.tag },
     { key: "contact", label: t.nav.contact },
+    { key: "report", label: t.nav.report },
   ];
 
   const scrollTo = (id: SectionId) => {
@@ -358,7 +358,7 @@ export default function Index() {
           </h1>
           <p className="animate-fade-in-up" style={{
             fontFamily: "Oswald", fontSize: "clamp(0.9rem, 2vw, 1.3rem)", letterSpacing: "0.2em",
-            color: "var(--cascade-red)", fontWeight: 300, marginTop: "1.5rem", marginBottom: "1.5rem",
+            color: "var(--cascade-red-text)", fontWeight: 300, marginTop: "1.5rem", marginBottom: "1.5rem",
             animationDelay: "0.4s", opacity: 0,
           }}>
             {t.hero.subtitle}
@@ -374,7 +374,7 @@ export default function Index() {
             <button className="btn-cascade-outline btn-lift" onClick={() => scrollTo("services")}>{t.hero.btn1}</button>
           </div>
           <div className="animate-fade-in-up" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 18, animationDelay: "0.95s", opacity: 0 }}>
-            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
+            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red-text)" }} />
             <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.8rem", color: "#9CA3AF", letterSpacing: "0.02em" }}>{t.reassure}</span>
           </div>
         </div>
@@ -387,7 +387,7 @@ export default function Index() {
           <div className="trust-bar">
             {t.trust.items.map((item, i) => (
               <div key={i} className="trust-item reveal" style={{ transitionDelay: `${(i % 5) * 0.07}s` }}>
-                <Icon name={item.icon} fallback="ShieldCheck" size={22} style={{ color: "var(--cascade-red)", marginBottom: 10 }} />
+                <Icon name={item.icon} fallback="ShieldCheck" size={22} style={{ color: "var(--cascade-red-text)", marginBottom: 10 }} />
                 <CountUp value={item.value} style={{ fontFamily: "Oswald", fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)", fontWeight: 700, color: "var(--cascade-light)", lineHeight: 1, display: "inline-block" }} />
                 <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "var(--text-muted)", marginTop: 6, letterSpacing: "0.04em" }}>{item.label}</div>
               </div>
@@ -409,7 +409,7 @@ export default function Index() {
           <div className="stats-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
             {t.about.stats.map((s, i) => (
               <div key={i} className="cascade-card tile-btn" style={{ padding: "1.6rem" }}>
-                <CountUp value={s.num} style={{ fontFamily: "Oswald", fontSize: "2.6rem", fontWeight: 700, color: "var(--cascade-red)", lineHeight: 1, display: "inline-block" }} />
+                <CountUp value={s.num} style={{ fontFamily: "Oswald", fontSize: "2.6rem", fontWeight: 700, color: "var(--cascade-red-text)", lineHeight: 1, display: "inline-block" }} />
                 <div style={{ fontFamily: "IBM Plex Sans", fontSize: "0.78rem", color: "var(--text-muted)", marginTop: "0.5rem", letterSpacing: "0.05em" }}>{s.label}</div>
               </div>
             ))}
@@ -449,7 +449,7 @@ export default function Index() {
                 onMouseMove={handleSpotlight}
               >
                 <div className="bento-icon">
-                  <Icon name={s.icon} fallback="Circle" size={22} style={{ color: "var(--cascade-red)" }} />
+                  <Icon name={s.icon} fallback="Circle" size={22} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <span className="file-index">DOC.{String(i + 1).padStart(2, "0")}</span>
                 <h3 style={{ fontFamily: "Oswald", fontSize: "1.05rem", fontWeight: 600, letterSpacing: "0.04em", marginBottom: "0.75rem", lineHeight: 1.15 }}>{s.title}</h3>
@@ -483,7 +483,7 @@ export default function Index() {
               <div key={i} className="cascade-card spotlight tile-btn reveal" onMouseMove={handleSpotlight} style={{ padding: "1.8rem", position: "relative", overflow: "hidden", transitionDelay: `${(i % 4) * 0.08}s` }}>
                 <div style={{ position: "absolute", top: 0, [isRtl ? "right" : "left"]: 0, width: 3, height: "100%", background: "var(--cascade-red)" }} />
                 <div className="bento-icon" style={{ width: 48, height: 48, marginBottom: 18, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red)" }} />
+                  <Icon name={p.icon} fallback="ShieldCheck" size={20} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <span className="file-index">§ {String(i + 1).padStart(2, "0")}</span>
                 <h3 style={{ fontFamily: "Oswald", fontSize: "1rem", fontWeight: 600, letterSpacing: "0.06em", marginBottom: "0.6rem", color: "var(--cascade-light)" }}>{p.title}</h3>
@@ -506,11 +506,11 @@ export default function Index() {
               <p className="red-line-left" style={{ color: "#9CA3AF", lineHeight: 1.85, fontSize: "0.95rem" }}>{t.agent.desc}</p>
 
               <div style={{ marginTop: 32 }}>
-                <div style={{ fontFamily: "Oswald", fontSize: "0.78rem", letterSpacing: "0.2em", color: "var(--cascade-red)", marginBottom: 16 }}>{t.safety.title}</div>
+                <div style={{ fontFamily: "Oswald", fontSize: "0.78rem", letterSpacing: "0.2em", color: "var(--cascade-red-text)", marginBottom: 16 }}>{t.safety.title}</div>
                 <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
                   {t.safety.items.map((item, i) => (
                     <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
-                      <Icon name={item.icon} fallback="ShieldCheck" size={17} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                      <Icon name={item.icon} fallback="ShieldCheck" size={17} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                       <p style={{ color: "#9CA3AF", fontSize: "0.82rem", lineHeight: 1.7 }}>{item.text}</p>
                     </div>
                   ))}
@@ -521,7 +521,7 @@ export default function Index() {
             {!agentSubmitted ? (
               <div className="cascade-card" style={{ padding: "2rem", display: "flex", flexDirection: "column", gap: 14 }}>
                 <div style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: "12px 14px", background: "rgba(139,26,26,0.07)", border: "1px solid rgba(139,26,26,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "3px solid var(--cascade-red)" }}>
-                  <Icon name="ShieldCheck" size={18} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                  <Icon name="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                   <p style={{ color: "#9CA3AF", fontSize: "0.8rem", lineHeight: 1.65 }}>{t.agent.secure}</p>
                 </div>
                 <input className="cascade-input" placeholder={t.agent.fields.alias} value={agentAlias} onChange={(e) => setAgentAlias(e.target.value)} />
@@ -534,13 +534,13 @@ export default function Index() {
                 </label>
                 {agentError && (
                   <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(139,26,26,0.1)", border: "1px solid var(--cascade-red)" }}>
-                    <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                    <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                     <p style={{ color: "#D1D5DB", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
                   </div>
                 )}
                 {agentEnc && (
                   <div>
-                    <div style={{ fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.15em", color: "var(--cascade-red)", marginBottom: 6 }}>{t.report.encrypting} {agentEncProgress}%</div>
+                    <div style={{ fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.15em", color: "var(--cascade-red-text)", marginBottom: 6 }}>{t.report.encrypting} {agentEncProgress}%</div>
                     <div style={{ height: 2, background: "var(--cascade-line)" }}>
                       <div style={{ height: "100%", background: "var(--cascade-red)", width: `${agentEncProgress}%`, transition: "width 0.1s" }} />
                     </div>
@@ -555,7 +555,7 @@ export default function Index() {
             ) : (
               <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center" }}>
                 <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(139,26,26,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Icon name="Fingerprint" size={28} style={{ color: "var(--cascade-red)" }} />
+                  <Icon name="Fingerprint" size={28} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.agent.sent}</p>
                 <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.agent.sentDesc}</p>
@@ -578,7 +578,7 @@ export default function Index() {
               <div key={i} className="step-item reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
                 <div className="step-num">{i + 1}</div>
                 <div style={{ width: 48, height: 48, margin: "0 auto 16px", background: "rgba(158,35,33,0.1)", border: "1px solid rgba(158,35,33,0.28)", borderRadius: 10, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  <Icon name={step.icon} fallback="Circle" size={22} style={{ color: "var(--cascade-red)" }} />
+                  <Icon name={step.icon} fallback="Circle" size={22} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <h3 style={{ fontFamily: "Oswald", fontSize: "1.05rem", fontWeight: 600, letterSpacing: "0.03em", marginBottom: "0.6rem", color: "var(--cascade-light)" }}>{step.title}</h3>
                 <p style={{ color: "#9CA3AF", fontSize: "0.86rem", lineHeight: 1.75 }}>{step.desc}</p>
@@ -588,7 +588,7 @@ export default function Index() {
           <div className="reveal" style={{ textAlign: "center", marginTop: 44, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
             <a href={`tel:${PHONE}`} className="btn-call cta-pulse btn-lift" style={{ padding: "14px 34px" }}><Icon name="Phone" size={17} />{t.cta.callBtn}</a>
             <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-              <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
+              <Icon name="Lock" size={13} style={{ color: "var(--cascade-red-text)" }} />
               <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#9CA3AF" }}>{t.reassure}</span>
             </div>
           </div>
@@ -613,7 +613,7 @@ export default function Index() {
                     style={{ width: "100%", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "20px 24px", background: "none", border: "none", cursor: "pointer", textAlign: isRtl ? "right" : "left" }}
                   >
                     <span style={{ fontFamily: "Oswald", fontSize: "1.02rem", fontWeight: 500, letterSpacing: "0.02em", color: isOpen ? "var(--cascade-red)" : "var(--cascade-light)", transition: "color 0.3s" }}>{item.q}</span>
-                    <Icon name="ChevronDown" size={20} style={{ color: "var(--cascade-red)", flexShrink: 0, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.3s" }} />
+                    <Icon name="ChevronDown" size={20} style={{ color: "var(--cascade-red-text)", flexShrink: 0, transform: isOpen ? "rotate(180deg)" : "none", transition: "transform 0.3s" }} />
                   </button>
                   <div style={{ maxHeight: isOpen ? 400 : 0, overflow: "hidden", transition: "max-height 0.4s ease" }}>
                     <p style={{ padding: "0 24px 22px", color: "#9CA3AF", fontSize: "0.92rem", lineHeight: 1.8 }}>{item.a}</p>
@@ -642,7 +642,7 @@ export default function Index() {
             <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail btn-lift" style={{ padding: "16px 36px" }}><Icon name="Send" size={18} />{t.cta.tgBtn}</a>
           </div>
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, marginTop: 18 }}>
-            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
+            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red-text)" }} />
             <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#D1D5DB", letterSpacing: "0.02em" }}>{t.reassure}</span>
           </div>
         </div>
@@ -662,7 +662,7 @@ export default function Index() {
             {t.legalSection.points.map((p, i) => (
               <div key={i} className="cascade-card tile-btn" style={{ padding: "1.1rem 1.3rem", display: "flex", alignItems: "center", gap: 16 }}>
                 <div className="bento-icon" style={{ width: 42, height: 42, background: "rgba(139,26,26,0.1)", border: "1px solid rgba(139,26,26,0.25)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
-                  <Icon name={p.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red)" }} />
+                  <Icon name={p.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
                 <span style={{ fontSize: "0.9rem", color: "var(--cascade-light)", lineHeight: 1.5 }}>{p.text}</span>
               </div>
@@ -689,7 +689,7 @@ export default function Index() {
             <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-mail btn-lift"><Icon name="Send" size={16} />{t.contact.tgBtn}</a>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 18 }}>
-            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red)" }} />
+            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red-text)" }} />
             <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.82rem", color: "#9CA3AF", letterSpacing: "0.02em" }}>{t.reassure}</span>
           </div>
         </div>
@@ -705,16 +705,16 @@ export default function Index() {
           </div>
 
           <div style={{ display: "flex", alignItems: "flex-start", gap: 16, padding: 20, marginBottom: 32, background: "rgba(139,26,26,0.07)", border: "1px solid rgba(139,26,26,0.22)", [isRtl ? "borderRight" : "borderLeft"]: "4px solid var(--cascade-red)" }}>
-            <Icon name="ShieldCheck" size={20} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+            <Icon name="ShieldCheck" size={20} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
             <p style={{ color: "#9CA3AF", fontSize: "0.87rem", lineHeight: 1.75 }}>{t.report.warning}</p>
           </div>
 
           <div style={{ marginBottom: 40 }}>
-            <div style={{ fontFamily: "Oswald", fontSize: "0.78rem", letterSpacing: "0.2em", color: "var(--cascade-red)", marginBottom: 18 }}>{t.safety.title}</div>
+            <div style={{ fontFamily: "Oswald", fontSize: "0.78rem", letterSpacing: "0.2em", color: "var(--cascade-red-text)", marginBottom: 18 }}>{t.safety.title}</div>
             <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
               {t.safety.items.map((item, i) => (
                 <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: 12, padding: 16, background: "var(--cascade-dark)", border: "1px solid var(--cascade-line)" }}>
-                  <Icon name={item.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                  <Icon name={item.icon} fallback="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                   <p style={{ color: "#9CA3AF", fontSize: "0.82rem", lineHeight: 1.7 }}>{item.text}</p>
                 </div>
               ))}
@@ -745,19 +745,22 @@ export default function Index() {
                 <div>
                   <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "var(--text-muted)", marginBottom: 8 }}>{t.report.form.message}</label>
                   <textarea className="cascade-input" rows={6} value={reportMsg} onChange={(e) => setReportMsg(e.target.value)} style={{ resize: "vertical" }} />
-                  <div style={{ fontSize: "0.72rem", color: reportMsg.length >= 50 ? "var(--cascade-red)" : "#374151", marginTop: 4 }}>{reportMsg.length} / 50</div>
+                  <div style={{ fontSize: "0.75rem", color: reportMsg.length >= 50 ? "#4ade80" : "var(--text-muted)", marginTop: 6, display: "flex", alignItems: "center", gap: 6 }}>
+                    {reportMsg.length >= 50 && <Icon name="Check" size={13} />}
+                    {reportMsg.length} / 50
+                  </div>
                 </div>
                 <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={reportHp} onChange={(e) => setReportHp(e.target.value)} style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
                 <p style={{ fontSize: "0.73rem", color: "#4B5563", fontStyle: "italic" }}>{t.report.form.hint}</p>
                 {reportError && (
                   <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(139,26,26,0.1)", border: "1px solid var(--cascade-red)" }}>
-                    <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red)", flexShrink: 0, marginTop: 2 }} />
+                    <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                     <p style={{ color: "#D1D5DB", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
                   </div>
                 )}
                 {encrypting && (
                   <div>
-                    <div style={{ fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.15em", color: "var(--cascade-red)", marginBottom: 6 }}>{t.report.encrypting} {encryptProgress}%</div>
+                    <div style={{ fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.15em", color: "var(--cascade-red-text)", marginBottom: 6 }}>{t.report.encrypting} {encryptProgress}%</div>
                     <div style={{ height: 2, background: "var(--cascade-line)" }}>
                       <div style={{ height: "100%", background: "var(--cascade-red)", width: `${encryptProgress}%`, transition: "width 0.1s" }} />
                     </div>
@@ -772,7 +775,7 @@ export default function Index() {
           ) : (
             <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center", maxWidth: 440 }}>
               <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(139,26,26,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                <Icon name="ShieldCheck" size={28} style={{ color: "var(--cascade-red)" }} />
+                <Icon name="ShieldCheck" size={28} style={{ color: "var(--cascade-red-text)" }} />
               </div>
               <p style={{ fontFamily: "Oswald", fontSize: "1.1rem", letterSpacing: "0.1em" }}>{t.report.sent}</p>
               <p style={{ color: "var(--text-muted)", fontSize: "0.85rem", lineHeight: 1.75 }}>{t.report.sentDesc}</p>
@@ -785,7 +788,7 @@ export default function Index() {
       {/* FOOTER */}
       <footer role="contentinfo" style={{ background: "#060606", borderTop: "1px solid var(--cascade-line)", padding: "2.5rem 1.5rem 2.5rem" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto 1.75rem", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, paddingBottom: "1.75rem", borderBottom: "1px solid var(--cascade-line)", textAlign: "center" }}>
-          <Icon name="Scale" size={14} style={{ color: "var(--cascade-red)", flexShrink: 0 }} />
+          <Icon name="Scale" size={14} style={{ color: "var(--cascade-red-text)", flexShrink: 0 }} />
           <p style={{ fontSize: "0.78rem", color: "#9CA3AF", letterSpacing: "0.02em", fontStyle: "italic", lineHeight: 1.6 }}>{t.footer.hint}</p>
         </div>
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
