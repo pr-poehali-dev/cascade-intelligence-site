@@ -3,6 +3,8 @@ import Icon from "@/components/ui/icon";
 import { TRANSLATIONS, LANGS, type Lang } from "@/data/translations";
 import { useReveal } from "@/hooks/use-reveal";
 import CountUp from "@/components/CountUp";
+import { Link } from "react-router-dom";
+import CookieNotice from "@/components/CookieNotice";
 
 type SectionId = "home" | "about" | "services" | "proof" | "report" | "agent" | "citizens" | "faq" | "contact";
 
@@ -51,6 +53,7 @@ export default function Index() {
 
   const [agentSubmitted, setAgentSubmitted] = useState(false);
   const [agentConsent, setAgentConsent] = useState(false);
+  const [agentPd, setAgentPd] = useState(false);
   const [agentAlias, setAgentAlias] = useState("");
   const [agentContact, setAgentContact] = useState("");
   const [agentSkills, setAgentSkills] = useState("");
@@ -442,7 +445,7 @@ export default function Index() {
       </section>
 
       {/* ELITE */}
-      <section style={{ position: "relative", padding: "5rem 0", background: "#080808", overflow: "hidden", borderTop: "1px solid var(--cascade-line)", borderBottom: "1px solid var(--cascade-line)" }}>
+      <section style={{ position: "relative", padding: "5rem 0", background: "#0e0c09", overflow: "hidden", borderTop: "1px solid var(--cascade-line)", borderBottom: "1px solid var(--cascade-line)" }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 22px, rgba(107, 18, 32,0.06) 22px, rgba(107, 18, 32,0.06) 24px)" }} />
         <div style={{ position: "absolute", top: 0, bottom: 0, [isRtl ? "right" : "left"]: 0, width: 5, background: "var(--cascade-red)" }} />
         <div className="pad-section" style={{ position: "relative", maxWidth: 1100, margin: "0 auto", padding: "0 1.5rem" }}>
@@ -588,13 +591,32 @@ export default function Index() {
                   <Icon name="ShieldCheck" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                   <p style={{ color: "var(--text-muted)", fontSize: "0.8rem", lineHeight: 1.65 }}>{t.agent.secure}</p>
                 </div>
-                <input className="cascade-input" placeholder={t.agent.fields.alias} value={agentAlias} onChange={(e) => setAgentAlias(e.target.value)} />
-                <input className="cascade-input" placeholder={t.agent.fields.contact} value={agentContact} onChange={(e) => setAgentContact(e.target.value)} />
-                <input className="cascade-input" placeholder={t.agent.fields.skills} value={agentSkills} onChange={(e) => setAgentSkills(e.target.value)} />
-                <textarea className="cascade-input" rows={4} placeholder={t.agent.fields.motivation} value={agentMotivation} onChange={(e) => setAgentMotivation(e.target.value)} style={{ resize: "vertical" }} />
+                <div>
+                  <label htmlFor="ag-alias" style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.16em", color: "var(--text-muted)", marginBottom: 6 }}>{t.agent.fields.alias}</label>
+                  <input id="ag-alias" className="cascade-input" autoComplete="nickname" value={agentAlias} onChange={(e) => setAgentAlias(e.target.value)} />
+                </div>
+                <div>
+                  <label htmlFor="ag-contact" style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.16em", color: "var(--text-muted)", marginBottom: 6 }}>{t.agent.fields.contact}</label>
+                  <input id="ag-contact" className="cascade-input" value={agentContact} onChange={(e) => setAgentContact(e.target.value)} />
+                </div>
+                <div>
+                  <label htmlFor="ag-skills" style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.16em", color: "var(--text-muted)", marginBottom: 6 }}>{t.agent.fields.skills}</label>
+                  <input id="ag-skills" className="cascade-input" value={agentSkills} onChange={(e) => setAgentSkills(e.target.value)} />
+                </div>
+                <div>
+                  <label htmlFor="ag-motiv" style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.16em", color: "var(--text-muted)", marginBottom: 6 }}>{t.agent.fields.motivation}</label>
+                  <textarea id="ag-motiv" className="cascade-input" rows={4} value={agentMotivation} onChange={(e) => setAgentMotivation(e.target.value)} style={{ resize: "vertical" }} />
+                </div>
                 <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer", color: "var(--text-muted)", fontSize: "0.82rem", lineHeight: 1.5 }}>
                   <input type="checkbox" checked={agentConsent} onChange={(e) => setAgentConsent(e.target.checked)} style={{ accentColor: "var(--cascade-red)", marginTop: 3, flexShrink: 0 }} />
                   {t.agent.consent}
+                </label>
+                <label style={{ display: "flex", alignItems: "flex-start", gap: 10, cursor: "pointer", color: "var(--text-muted)", fontSize: "0.82rem", lineHeight: 1.5 }}>
+                  <input type="checkbox" checked={agentPd} onChange={(e) => setAgentPd(e.target.checked)} style={{ accentColor: "var(--cascade-red)", marginTop: 3, flexShrink: 0 }} />
+                  <span>
+                    {t.legal.pdConsent}{" "}
+                    <Link to="/consent" target="_blank" style={{ color: "var(--cascade-red-text)" }}>{t.legal.consentLink}</Link>
+                  </span>
                 </label>
                 {agentError && (
                   <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(107, 18, 32,0.1)", border: "1px solid var(--cascade-red)" }}>
@@ -611,7 +633,7 @@ export default function Index() {
                   </div>
                 )}
                 <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={agentHp} onChange={(e) => setAgentHp(e.target.value)} style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
-                <button className="btn-cascade btn-lift" onClick={handleAgent} disabled={!agentConsent || agentAlias.length < 2 || agentEnc} style={{ opacity: !agentConsent || agentAlias.length < 2 ? 0.35 : 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%" }}>
+                <button className="btn-cascade btn-lift" onClick={handleAgent} disabled={!agentConsent || !agentPd || agentAlias.length < 2 || agentEnc} style={{ opacity: !agentConsent || !agentPd || agentAlias.length < 2 ? 0.35 : 1, display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%" }}>
                   <Icon name="Fingerprint" size={15} />
                   {t.agent.fields.btn}
                 </button>
@@ -831,6 +853,15 @@ export default function Index() {
             <p style={{ color: "var(--text-muted)", fontSize: "0.87rem", lineHeight: 1.75 }}>{t.report.warning}</p>
           </div>
 
+          <div role="note" style={{ display: "flex", alignItems: "center", gap: 12, padding: "14px 18px", marginTop: -16, marginBottom: 32, border: "1px solid var(--cascade-line)", background: "var(--cascade-dark)" }}>
+            <Icon name="Siren" fallback="TriangleAlert" size={18} style={{ color: "var(--cascade-gold)", flexShrink: 0 }} />
+            <p style={{ color: "var(--cascade-light)", fontSize: "0.87rem", lineHeight: 1.6 }}>
+              {t.legal.emergency.split("112")[0]}
+              <a href="tel:112" style={{ color: "var(--cascade-gold)", fontWeight: 600 }}>112</a>
+              {t.legal.emergency.split("112").slice(1).join("112")}
+            </p>
+          </div>
+
           <div style={{ marginBottom: 40 }}>
             <div style={{ fontFamily: "Oswald", fontSize: "0.78rem", letterSpacing: "0.2em", color: "var(--cascade-red-text)", marginBottom: 18 }}>{t.safety.title}</div>
             <div className="grid-2" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
@@ -849,7 +880,7 @@ export default function Index() {
                 <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "var(--text-muted)", marginBottom: 10 }}>{t.report.form.category}</label>
                 <div style={{ display: "flex", flexDirection: "column", gap: 6 }}>
                   {t.report.categories.map((cat, i) => (
-                    <button key={i} onClick={() => setReportCategory(i)} style={{
+                    <button key={i} type="button" aria-pressed={reportCategory === i} onClick={() => setReportCategory(i)} style={{
                       textAlign: isRtl ? "right" : "left", padding: "10px 16px",
                       background: reportCategory === i ? "rgba(107, 18, 32,0.14)" : "var(--cascade-charcoal)",
                       border: `1px solid ${reportCategory === i ? "var(--cascade-red)" : "var(--cascade-line)"}`,
@@ -861,19 +892,23 @@ export default function Index() {
               </div>
               <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                 <div>
-                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "var(--text-muted)", marginBottom: 8 }}>{t.report.form.region}</label>
-                  <input className="cascade-input" value={reportRegion} onChange={(e) => setReportRegion(e.target.value)} />
+                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "var(--text-muted)", marginBottom: 8 }} htmlFor="rp-region">{t.report.form.region}</label>
+                  <input id="rp-region" className="cascade-input" value={reportRegion} onChange={(e) => setReportRegion(e.target.value)} />
                 </div>
                 <div>
-                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "var(--text-muted)", marginBottom: 8 }}>{t.report.form.message}</label>
-                  <textarea className="cascade-input" rows={6} value={reportMsg} onChange={(e) => setReportMsg(e.target.value)} style={{ resize: "vertical" }} />
+                  <label style={{ display: "block", fontFamily: "Oswald", fontSize: "0.72rem", letterSpacing: "0.18em", color: "var(--text-muted)", marginBottom: 8 }} htmlFor="rp-msg">{t.report.form.message}</label>
+                  <textarea id="rp-msg" className="cascade-input" rows={6} value={reportMsg} onChange={(e) => setReportMsg(e.target.value)} style={{ resize: "vertical" }} />
                   <div style={{ fontSize: "0.75rem", color: reportMsg.length >= 50 ? "#4ade80" : "var(--text-muted)", marginTop: 6, display: "flex", alignItems: "center", gap: 6 }}>
                     {reportMsg.length >= 50 && <Icon name="Check" size={13} />}
                     {reportMsg.length} / 50
                   </div>
                 </div>
                 <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" value={reportHp} onChange={(e) => setReportHp(e.target.value)} style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
-                <p style={{ fontSize: "0.73rem", color: "#6B6357", fontStyle: "italic" }}>{t.report.form.hint}</p>
+                <p style={{ fontSize: "0.75rem", color: "var(--text-muted)", fontStyle: "italic" }}>{t.report.form.hint}</p>
+                <p style={{ fontSize: "0.75rem", color: "var(--text-muted)" }}>
+                  {t.legal.reportNote}{" "}
+                  <Link to="/privacy" target="_blank" style={{ color: "var(--cascade-red-text)" }}>{t.legal.policyLink}</Link>
+                </p>
                 {reportError && (
                   <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(107, 18, 32,0.1)", border: "1px solid var(--cascade-red)" }}>
                     <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
@@ -908,7 +943,7 @@ export default function Index() {
       </main>
 
       {/* FOOTER */}
-      <footer role="contentinfo" style={{ background: "#060606", borderTop: "1px solid var(--cascade-line)", padding: "2.5rem 1.5rem 2.5rem" }}>
+      <footer role="contentinfo" style={{ background: "#0e0c09", borderTop: "1px solid var(--cascade-line)", padding: "2.5rem 1.5rem 2.5rem" }}>
         <div style={{ maxWidth: 1200, margin: "0 auto 1.75rem", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, paddingBottom: "1.75rem", borderBottom: "1px solid var(--cascade-line)", textAlign: "center" }}>
           <Icon name="Scale" size={14} style={{ color: "var(--cascade-red-text)", flexShrink: 0 }} />
           <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", letterSpacing: "0.02em", fontStyle: "italic", lineHeight: 1.6 }}>{t.footer.hint}</p>
@@ -916,11 +951,15 @@ export default function Index() {
         <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: 20 }}>
           <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
             <div style={{ width: 28, height: 28, background: "var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Oswald", fontWeight: 700, fontSize: 11, color: "white" }}>ЧРК</div>
-            <span style={{ fontFamily: "Oswald", fontSize: "0.8rem", letterSpacing: "0.22em", color: "#8A93A0" }}>КАСКАД</span>
+            <span style={{ fontFamily: "Oswald", fontSize: "0.8rem", letterSpacing: "0.22em", color: "var(--text-muted)" }}>КАСКАД</span>
           </div>
           <div style={{ textAlign: "center" }}>
             <p style={{ fontSize: "0.72rem", color: "var(--text-muted)" }}>{t.footer.rights}</p>
-            <p style={{ fontSize: "0.68rem", color: "#7B8492", marginTop: 2 }}>{t.footer.legal}</p>
+            <p style={{ fontSize: "0.68rem", color: "var(--text-muted)", marginTop: 2 }}>{t.footer.legal}</p>
+            <p style={{ fontSize: "0.7rem", marginTop: 8, display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap" }}>
+              <Link to="/privacy" style={{ color: "var(--text-label)" }}>{t.legal.policyLink}</Link>
+              <Link to="/consent" style={{ color: "var(--text-label)" }}>{t.legal.consentDoc}</Link>
+            </p>
           </div>
           <nav aria-label="Навигация в подвале" style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
             {navItems.slice(0, 4).map((item) => (
@@ -929,6 +968,8 @@ export default function Index() {
           </nav>
         </div>
       </footer>
+
+      <CookieNotice text={t.legal.cookie} ok={t.legal.cookieOk} more={t.legal.more} />
 
       {/* Floating contact buttons */}
       <div className="fab-stack">

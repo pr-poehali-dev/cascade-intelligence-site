@@ -7,6 +7,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import PageNotFound from "./pages/PageNotFound";
+import Privacy from "./pages/Privacy";
+import Consent from "./pages/Consent";
 
 const queryClient = new QueryClient();
 
@@ -20,7 +22,7 @@ const useCopyProtection = () => {
         e.preventDefault();
         return;
       }
-      if ((e.ctrlKey || e.metaKey) && ["c", "x", "s", "u", "p", "a"].includes(key)) {
+      if ((e.ctrlKey || e.metaKey) && ["s", "u"].includes(key)) {
         e.preventDefault();
         return;
       }
@@ -30,10 +32,7 @@ const useCopyProtection = () => {
     };
 
     document.addEventListener("contextmenu", prevent);
-    document.addEventListener("copy", prevent);
-    document.addEventListener("cut", prevent);
     document.addEventListener("dragstart", prevent);
-    document.addEventListener("selectstart", prevent);
     document.addEventListener("keydown", onKeyDown);
 
     // Anti-tracking: strip referrer & suppress console output in production
@@ -60,10 +59,7 @@ const useCopyProtection = () => {
 
     return () => {
       document.removeEventListener("contextmenu", prevent);
-      document.removeEventListener("copy", prevent);
-      document.removeEventListener("cut", prevent);
       document.removeEventListener("dragstart", prevent);
-      document.removeEventListener("selectstart", prevent);
       document.removeEventListener("keydown", onKeyDown);
       if (consoleTimer) window.clearInterval(consoleTimer);
     };
@@ -80,6 +76,8 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/privacy" element={<Privacy />} />
+          <Route path="/consent" element={<Consent />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<PageNotFound />} />
         </Routes>
