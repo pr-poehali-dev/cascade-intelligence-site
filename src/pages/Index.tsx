@@ -299,7 +299,7 @@ export default function Index() {
         padding: "0 1.5rem",
       }} className="pad-section glass-header">
         <button onClick={scrollTop} aria-label="Наверх" style={{ display: "flex", alignItems: "center", gap: 12, background: "none", border: "none", cursor: "pointer" }}>
-          <div style={{ width: 34, height: 34, background: "var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "Oswald", fontWeight: 700, fontSize: 12, color: "white" }}>ЧРК</div>
+          <div className="brand-mark">ЧРК</div>
           <span style={{ fontFamily: "Oswald", fontWeight: 600, fontSize: "1rem", letterSpacing: "0.22em", color: "var(--cascade-light)" }}>КАСКАД</span>
         </button>
 
@@ -348,64 +348,85 @@ export default function Index() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div role="dialog" aria-modal="true" aria-label="Меню навигации" style={{ position: "fixed", inset: 0, zIndex: 49, background: "rgba(18,15,12,0.98)", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 28, paddingTop: 96, paddingBottom: 32, overflowY: "auto" }}>
-          {navItems.map((item) => (
-            <button key={item.key} onClick={() => scrollTo(item.key)} className="nav-link" style={{ fontSize: "1.2rem", background: "none", border: "none", cursor: "pointer" }}>{item.label}</button>
-          ))}
+        <div role="dialog" aria-modal="true" aria-label="Меню навигации" className="mobile-menu-v2">
+          <nav>
+            {navItems.map((item, i) => (
+              <button key={item.key} onClick={() => scrollTo(item.key)} className={activeSection === item.key ? "active" : ""}>
+                {item.label}
+                <span className="mono-label">{String(i + 1).padStart(2, "0")}</span>
+              </button>
+            ))}
+          </nav>
+          <div className="mobile-menu-v2-actions">
+            <a href={`tel:${PHONE}`} className="btn-call"><Icon name="Phone" size={16} />{t.contact.callBtn}</a>
+            <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-ghost-gold"><Icon name="Send" size={16} />Telegram</a>
+          </div>
         </div>
       )}
 
       {/* HERO */}
       <main id="main-content" tabIndex={-1}>
-      <section id="home" className="seamless-fade" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", paddingTop: 88 }}>
-        <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.15) grayscale(0.5)" }} />
-        <div className="living-gradient" style={{ position: "absolute", inset: 0 }} />
-        <div style={{ position: "absolute", inset: 0, backgroundImage: "linear-gradient(rgba(107, 18, 32,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(107, 18, 32,0.05) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
-        <div style={{ position: "absolute", inset: 0, background: isRtl ? "radial-gradient(circle at 80% 50%, rgba(107, 18, 32,0.28), transparent 55%)" : "radial-gradient(circle at 20% 50%, rgba(107, 18, 32,0.28), transparent 55%)" }} />
-        <div style={{ position: "absolute", inset: 0, boxShadow: "inset 0 0 200px rgba(0,0,0,0.9)" }} />
-        <div className="hero-edge-pulse" style={{ position: "absolute", [isRtl ? "right" : "left"]: 0, top: 0, bottom: 0, width: 4, background: "var(--cascade-red)" }} />
+      <section id="home" className="hero-v2">
+        <picture className="hero-v2-photo" aria-hidden="true">
+          <source media="(max-width: 760px)" srcSet="/hero-desk-m.webp" />
+          <img src="/hero-desk.webp" alt="" fetchPriority="high" decoding="async" />
+        </picture>
+        <div className="hero-v2-shade" />
+        <div className="hero-v2-glow" />
 
-        <div className="pad-section" style={{ position: "relative", maxWidth: 1200, margin: "0 auto", padding: "5rem 1.5rem", width: "100%" }}>
-          <div className="animate-fade-in-up" style={{ opacity: 0 }}>
-            <Tag trend>{t.hero.tag}</Tag>
-          </div>
-          <h1 className="cascade-line-anim hero-title" style={{
-            fontFamily: "Oswald", fontWeight: 700, lineHeight: 0.88,
-            fontSize: "clamp(3.5rem, 13vw, 10rem)", letterSpacing: "0.05em", color: "white",
-            marginBottom: "0.75rem",
-          }}>
-            {Array.from(t.hero.title).map((ch, i) => (
-              <span
-                key={`${lang}-${i}`}
-                className="hero-letter"
-                style={{ animationDelay: `${0.2 + i * 0.08}s` }}
-              >
-                {ch === " " ? "\u00A0" : ch}
+        <div className="pad-section hero-v2-inner">
+          <div className="hero-v2-copy">
+            <div className="animate-fade-in-up" style={{ opacity: 0 }}>
+              <span className="hero-v2-kicker mono-label">
+                <span className="live-dot" />
+                {t.hero.tag}
               </span>
-            ))}
-          </h1>
-          <p className="animate-fade-in-up" style={{
-            fontFamily: "Oswald", fontSize: "clamp(0.9rem, 2vw, 1.3rem)", letterSpacing: "0.2em",
-            color: "var(--cascade-red-text)", fontWeight: 300, marginTop: "1.5rem", marginBottom: "1.5rem",
-            animationDelay: "0.4s", opacity: 0,
-          }}>
-            {t.hero.subtitle}
-          </p>
-          <p className="animate-fade-in-up" style={{
-            fontFamily: "IBM Plex Sans", fontSize: "0.95rem", color: "var(--text-muted)", lineHeight: 1.8,
-            maxWidth: 560, animationDelay: "0.6s", opacity: 0, marginBottom: "2.5rem",
-          }}>
-            {t.hero.desc}
-          </p>
-          <div className="animate-fade-in-up" style={{ display: "flex", gap: 16, flexWrap: "wrap", animationDelay: "0.8s", opacity: 0 }}>
-            <a href={`tel:${PHONE}`} className="btn-call cta-pulse btn-lift" style={{ padding: "14px 32px" }}><Icon name="Phone" size={17} />{t.contact.callBtn}</a>
-            <button className="btn-cascade-outline btn-lift" onClick={() => scrollTo("services")}>{t.hero.btn1}</button>
+            </div>
+            <h1 className="hero-title hero-v2-title">
+              {Array.from(t.hero.title).map((ch, i) => (
+                <span key={`${lang}-${i}`} className="hero-letter" style={{ animationDelay: `${0.15 + i * 0.06}s` }}>
+                  {ch === " " ? "\u00A0" : ch}
+                </span>
+              ))}
+            </h1>
+            <p className="animate-fade-in-up hero-v2-sub" style={{ animationDelay: "0.4s", opacity: 0 }}>{t.hero.subtitle}</p>
+            <p className="animate-fade-in-up hero-v2-desc" style={{ animationDelay: "0.55s", opacity: 0 }}>{t.hero.desc}</p>
+            <div className="animate-fade-in-up hero-v2-actions" style={{ animationDelay: "0.7s", opacity: 0 }}>
+              <a href={`tel:${PHONE}`} className="btn-call btn-lift"><Icon name="Phone" size={17} />{t.contact.callBtn}</a>
+              <a href={TELEGRAM} target="_blank" rel="noopener noreferrer" className="btn-ghost-gold btn-lift"><Icon name="Send" size={16} />Telegram</a>
+            </div>
+            <div className="animate-fade-in-up hero-v2-reassure" style={{ animationDelay: "0.85s", opacity: 0 }}>
+              <Icon name="Lock" size={13} />
+              <span>{t.reassure}</span>
+            </div>
           </div>
-          <div className="animate-fade-in-up" style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 18, animationDelay: "0.95s", opacity: 0 }}>
-            <Icon name="Lock" size={13} style={{ color: "var(--cascade-red-text)" }} />
-            <span style={{ fontFamily: "IBM Plex Sans", fontSize: "0.8rem", color: "var(--text-muted)", letterSpacing: "0.02em" }}>{t.reassure}</span>
-          </div>
+
+          <aside className="hero-v2-panel animate-fade-in-up" style={{ animationDelay: "0.9s", opacity: 0 }} aria-label={t.steps.title}>
+            <div className="hero-v2-panel-head mono-label">
+              <span>{t.steps.tag}</span>
+              <span className="hero-v2-panel-status"><span className="live-dot" />24/7</span>
+            </div>
+            <ol className="hero-v2-steps">
+              {t.steps.items.slice(0, 3).map((st, i) => (
+                <li key={i}>
+                  <span className="hero-v2-step-num mono-label">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <div className="hero-v2-step-title">{st.title}</div>
+                    <div className="hero-v2-step-desc">{st.desc}</div>
+                  </div>
+                </li>
+              ))}
+            </ol>
+            <button type="button" className="hero-v2-panel-link" onClick={() => scrollTo("services")}>
+              {t.hero.btn1}
+              <Icon name="ArrowDown" size={15} />
+            </button>
+          </aside>
         </div>
+
+        <button type="button" className="hero-v2-scroll" onClick={() => scrollTo("about")} aria-label={t.hero.btn1}>
+          <span />
+        </button>
       </section>
 
       {/* TRUST BAR */}
