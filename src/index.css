@@ -69,6 +69,11 @@
   html {
     scroll-behavior: smooth;
   }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
 
   section[id] {
     scroll-margin-top: 96px;
@@ -79,8 +84,8 @@
   input:focus-visible,
   textarea:focus-visible,
   [tabindex]:focus-visible {
-    outline: 2px solid var(--cascade-red-bright);
-    outline-offset: 2px;
+    outline: 2px solid var(--cascade-gold);
+    outline-offset: 3px;
     border-radius: 2px;
   }
 
@@ -744,19 +749,26 @@ img {
   border-radius: 5px;
   color: var(--cascade-light);
   font-family: "IBM Plex Sans", sans-serif;
+  font-size: 16px;
   padding: 13px 16px;
   width: 100%;
+  min-height: 48px;
   transition:
-    border-color 0.3s,
-    box-shadow 0.3s;
+    border-color 0.2s,
+    box-shadow 0.2s;
   outline: none;
 }
-.cascade-input:focus {
-  border-color: var(--cascade-red);
-  box-shadow: 0 0 0 3px rgba(107, 18, 32, 0.15);
+.cascade-input:hover {
+  border-color: #4a4238;
+}
+.cascade-input:focus,
+.cascade-input:focus-visible {
+  border-color: var(--cascade-gold);
+  box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.18);
+  outline: none;
 }
 .cascade-input::placeholder {
-  color: #6b7280;
+  color: #7a7266;
 }
 
 /* Tag */
@@ -1474,4 +1486,116 @@ img {
     align-items: flex-start;
     gap: 10px;
   }
+}
+
+
+/* ==========================================================================
+   Доступность и спокойное движение — тренд 2026: сайт уважает настройки
+   системы пользователя, а не навязывает эффекты.
+   ========================================================================== */
+
+/* Ссылка «к содержимому» — видна только при навигации с клавиатуры */
+.skip-link {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 10001;
+  padding: 12px 18px;
+  background: var(--cascade-gold);
+  color: #16130f;
+  font-family: "Oswald", sans-serif;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  transform: translateY(-160%);
+  transition: transform 0.2s;
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* Выделение текста — в палитре бренда, а не системный синий */
+::selection {
+  background: rgba(201, 162, 39, 0.32);
+  color: #fff;
+}
+
+/* Полоса прокрутки в тон */
+html {
+  scrollbar-color: #3a342b var(--cascade-dark);
+  scrollbar-width: thin;
+}
+
+/* Цифры не прыгают при счёте и в таблицах сроков */
+.mono-label,
+.count-num {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Заголовки ровнее по строкам, абзацы без «висячих» слов */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+p,
+li {
+  text-wrap: pretty;
+}
+
+/* Зона нажатия на телефоне не меньше 44px */
+@media (pointer: coarse) {
+  .btn-cascade,
+  .btn-call,
+  .btn-mail,
+  .btn-cascade-outline,
+  .lang-btn {
+    min-height: 44px;
+  }
+}
+
+/* Глобально гасим бесконечные пульсации и мерцания для тех,
+   кто включил «уменьшить движение» */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Сканлайны в режиме повышенной контрастности не нужны */
+@media (prefers-contrast: more) {
+  body::before,
+  body::after {
+    display: none;
+  }
+  :root {
+    --text-muted: #cfc7b8;
+    --cascade-line: #5a5246;
+  }
+}
+
+/* Печать: только текст, без фона и эффектов */
+@media print {
+  body::before,
+  body::after,
+  header,
+  .cookie-notice,
+  .fab-call,
+  .fab-tg {
+    display: none !important;
+  }
+  body,
+  section,
+  .legal-page {
+    background: #fff !important;
+    color: #000 !important;
+  }
+}
+
+/* Плавный переход между страницами (браузеры с поддержкой View Transitions) */
+@view-transition {
+  navigation: auto;
 }

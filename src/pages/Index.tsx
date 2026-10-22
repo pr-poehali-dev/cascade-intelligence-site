@@ -218,9 +218,9 @@ export default function Index() {
           });
           return 100;
         }
-        return p + 5;
+        return p + 25;
       });
-    }, 70);
+    }, 40);
   };
 
   const handleAgent = () => {
@@ -263,9 +263,9 @@ export default function Index() {
           });
           return 100;
         }
-        return p + 5;
+        return p + 25;
       });
-    }, 70);
+    }, 40);
   };
 
   const Tag = ({ children, trend = true }: { children: React.ReactNode; trend?: boolean }) => (
@@ -287,6 +287,7 @@ export default function Index() {
       </div>
 
       {/* NAVBAR */}
+      <a href="#main-content" className="skip-link">{lang === "ru" ? "К содержимому" : "Skip to content"}</a>
       <header role="banner" style={{
         position: "fixed", top: 28, left: 0, right: 0, zIndex: 50,
         background: scrolled ? "rgba(22,19,15,0.98)" : "rgba(22,19,15,0.92)",
@@ -355,7 +356,7 @@ export default function Index() {
       )}
 
       {/* HERO */}
-      <main id="main-content">
+      <main id="main-content" tabIndex={-1}>
       <section id="home" className="seamless-fade" style={{ minHeight: "100vh", display: "flex", alignItems: "center", position: "relative", paddingTop: 88 }}>
         <div style={{ position: "absolute", inset: 0, backgroundImage: `url(${HERO_IMG})`, backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.15) grayscale(0.5)" }} />
         <div className="living-gradient" style={{ position: "absolute", inset: 0 }} />
@@ -619,7 +620,7 @@ export default function Index() {
                   </span>
                 </label>
                 {agentError && (
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(107, 18, 32,0.1)", border: "1px solid var(--cascade-red)" }}>
+                  <div role="alert" style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(107, 18, 32,0.1)", border: "1px solid var(--cascade-red)" }}>
                     <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                     <p style={{ color: "var(--text-label)", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
                   </div>
@@ -639,7 +640,7 @@ export default function Index() {
                 </button>
               </div>
             ) : (
-              <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center" }}>
+              <div role="status" className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center" }}>
                 <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(107, 18, 32,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                   <Icon name="Fingerprint" size={28} style={{ color: "var(--cascade-red-text)" }} />
                 </div>
@@ -910,7 +911,7 @@ export default function Index() {
                   <Link to="/privacy" target="_blank" style={{ color: "var(--cascade-red-text)" }}>{t.legal.policyLink}</Link>
                 </p>
                 {reportError && (
-                  <div style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(107, 18, 32,0.1)", border: "1px solid var(--cascade-red)" }}>
+                  <div role="alert" style={{ display: "flex", alignItems: "flex-start", gap: 10, padding: 14, background: "rgba(107, 18, 32,0.1)", border: "1px solid var(--cascade-red)" }}>
                     <Icon name="TriangleAlert" size={18} style={{ color: "var(--cascade-red-text)", flexShrink: 0, marginTop: 2 }} />
                     <p style={{ color: "var(--text-label)", fontSize: "0.82rem", lineHeight: 1.6 }}>{t.report.error}</p>
                   </div>
@@ -930,7 +931,7 @@ export default function Index() {
               </div>
             </div>
           ) : (
-            <div className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center", maxWidth: 440 }}>
+            <div role="status" className="cascade-card" style={{ padding: 40, display: "flex", flexDirection: "column", alignItems: "center", gap: 20, textAlign: "center", maxWidth: 440 }}>
               <div className="pulse-red" style={{ width: 64, height: 64, background: "rgba(107, 18, 32,0.12)", border: "1px solid var(--cascade-red)", display: "flex", alignItems: "center", justifyContent: "center" }}>
                 <Icon name="ShieldCheck" size={28} style={{ color: "var(--cascade-red-text)" }} />
               </div>
